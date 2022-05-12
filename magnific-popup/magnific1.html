@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>manific</title>
+	<!-- Magnific Popup core CSS file -->
+	<link rel="stylesheet" href="magnific-popup.css">
+
+	<!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Magnific Popup core JS file -->
+	<script src="magnific-popup.min.js"></script>
+	<style>
+		
+		body>div{
+			margin-top: 30px;
+			padding-bottom: 20px;
+			border-bottom: 1px solid black;
+		}
+
+		body {
+			  -webkit-overflow-scrolling: touch;
+			}
+
+			  body.mfp-zoom-out-cur {
+			    overflow: hidden;
+			    -webkit-overflow-scrolling: auto;
+			  }
+
+			.mfp-wrap {
+			  position: fixed;
+			  overflow: auto;
+			}
+
+
+	</style>
+
+</head>
+<body>
+<!-- khong nen dung khi responsive khong overflow hidden body -->
+
+
+<script type="text/javascript">
+	
+
+
+
+	$('.my-popup').magnificPopup({
+		type : 'ajax',
+		callbacks: {
+			beforeOpen: function() {
+				$('body').addClass('mfp-active');
+			},
+			beforeClose: function() {
+				$('body').removeClass('mfp-active');
+			}
+		}
+	});
+</script>
+
+<style type="text/css">	
+	body {
+	-webkit-overflow-scrolling: touch;
+	}
+	body.mfp-active {
+		overflow: hidden;
+		-webkit-overflow-scrolling: auto;
+		width: 100%;
+		position: fixed;
+		overflow: auto;
+	}
+	body .mfp-wrap {
+		position: fixed;
+		overflow: auto;
+		top: 0 !important;
+	}
+
+
+</style>
+
+	<div>
+		<button class="btn_open1">oppen</button>
+	</div>
+	<script type="text/javascript">
+		
+		$('.btn_open1').on('click', function(){
+			$.magnificPopup.open({
+				// closeMarkup: 'flatsomeVars.lightbox.close_markup',
+				// closeBtnInside: 'flatsomeVars.lightbox.close_btn_inside',
+			  items: {
+			    src: '<div class="white-popup">Dynamically created popup</div>', // can be a HTML string, jQuery object, or CSS selector
+			    type: 'inline'
+			  }
+			});
+		})
+
+
+
+	</script>
+
+
+
+	<h1>1</h1>
+	<div>
+		<a class="mag1" href="path-to-image.jpg">Open popup</a>
+	</div>
+
+
+
+
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('.mag1').magnificPopup({
+		  type: 'image'
+		  // other options
+		});
+
+	})
+</script>
+
+
+<h1>2</h1>
+<div>
+	<div class="parent-container">
+	  <a href="path-to-image-1.jpg">Open popup 1</a>
+	  <a href="path-to-image-2.jpg">Open popup 2</a>
+	  <a href="path-to-image-3.jpg">Open popup 3</a>
+	</div>
+</div>	
+
+<script type="text/javascript">
+	$('.parent-container').magnificPopup({
+  delegate: 'a', // child items selector, by clicking on it popup will open
+  type: 'image'
+  // other options
+});
+</script>
+
+<h1>3</h1>
+<div>
+	
+	<button id="open-popup">Open popup</button>
+
+<div id="my-popup" class="mfp-hide white-popup">
+  Inline popup
+</div>
+</div>
+
+<style>
+	#open-popup {padding:20px}
+	.white-popup {
+	  position: relative;
+	  background: #FFF;
+	  padding: 40px;
+	  width: auto;
+	  max-width: 200px;
+	  margin: 20px auto;
+	  text-align: center;
+	}
+</style>
+
+<script type="text/javascript">
+
+$('#open-popup').magnificPopup({
+    items: [
+      {
+        src: 'http://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Peter_%26_Paul_fortress_in_SPB_03.jpg/800px-Peter_%26_Paul_fortress_in_SPB_03.jpg',
+        title: 'Peter & Paul fortress in SPB'
+      },
+      {
+        src: 'https://vimeo.com/123123',
+        type: 'iframe' // this overrides default type
+      },
+      {
+        src: $('<div class="white-popup">Dynamically created element</div>'), // Dynamically created element
+        type: 'inline'
+      },
+      {
+        src: '<div class="white-popup">Popup from HTML string</div>', // HTML string
+        type: 'inline'
+      },
+      {
+        src: '#my-popup', // CSS selector of an element on page that should be used as a popup
+        type: 'inline'
+      }
+    ],
+    gallery: {
+      enabled: true
+    },
+    type: 'image' // this is a default type
+});
+
+</script>
+
+
+<h1>content Types </h1>
+<div>
+	<a class="content-type" href="some-image.jpg" data-mfp-src="http://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Peter_%26_Paul_fortress_in_SPB_03.jpg/800px-Peter_%26_Paul_fortress_in_SPB_03.jpg">Open image</a>
+</div>
+
+<script type="text/javascript">
+	
+$('.content-type').magnificPopup({
+	image: {
+	  markup: '<div class="mfp-figure">'+
+	            '<div class="mfp-close"></div>'+
+	            '<div class="mfp-img"></div>'+
+	            '<div class="mfp-bottom-bar">'+
+	              '<div class="mfp-title"></div>'+
+	              '<div class="mfp-counter"></div>'+
+	            '</div>'+
+	          '</div>', // Popup HTML markup. `.mfp-img` div will be replaced with img tag, `.mfp-close` by close button
+
+	  cursor: 'mfp-zoom-out-cur', // Class that adds zoom cursor, will be added to body. Set to null to disable zoom out cursor.
+
+	  titleSrc: 'title', // Attribute of the target element that contains caption for the slide.
+	  // Or the function that should return the title. For example:
+	  // titleSrc: function(item) {
+	  //   return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';
+	  // }
+
+	  verticalFit: true, // Fits image in area vertically
+
+	  tError: '<a href="%url%">The image</a> could not be loaded.' // Error message
+	},
+	// items: [
+	// 	{
+	// 		src: '<div>aabccdd</div>', // HTML string
+	//         type: 'inline'
+	// 	}
+	// ],
+	type: 'image'
+})
+
+
+
+</script>
+
+<h1>Inline Type</h1>
+<div>
+	<!-- Like so: -->
+<a href="#test-popup" class="open-popup-link">Show inline popup</a>
+
+<!-- Or like so: -->
+<a href="mobile-friendly-page.html" data-mfp-src="#test-popup" class="open-popup-link">Show inline popup</a>
+</div>
+
+<script type="text/javascript">
+	$('.open-popup-link').magnificPopup({
+	  type:'inline',
+	  midClick: true // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+	});
+</script>
+
+
+<!-- Retina hiển thị hình ảnh cao trên màn hình -->
+
+<!-- lazyloading -->
+
+<!-- zoom  -->
+
+<h1>zoom</h1>
+<div>
+	<a class="zoom1" href="http://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Peter_%26_Paul_fortress_in_SPB_03.jpg/800px-Peter_%26_Paul_fortress_in_SPB_03.jpg" class="image-link">
+	   <img src="thumbnails.jpg" />
+	</a>
+</div>
+
+<script type="text/javascript">
+	
+	// Initialize popup as usual
+	$('.zoom1').magnificPopup({
+	  type: 'image',
+	  mainClass: 'mfp-with-zoom111', // this class is for CSS animation below
+
+	  zoom: {
+	    enabled: true, // By default it's false, so don't forget to enable it
+
+	    duration: 300, // duration of the effect, in milliseconds
+	    easing: 'ease-in-out', // CSS transition easing function
+
+	    // The "opener" function should return the element from which popup will be zoomed in
+	    // and to which popup will be scaled down
+	    // By defailt it looks for an image tag:
+	    opener: function(openerElement) {
+	      // openerElement is the element on which popup was initialized, in this case its <a> tag
+	      // you don't need to add "opener" option if this code matches your needs, it's defailt one.
+	      return openerElement.is('img') ? openerElement : openerElement.find('img');
+	    }
+	  }
+
+	});
+</script>
+
+<style>
+	.mfp-with-zoom .mfp-container,
+.mfp-with-zoom.mfp-bg {
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  /* ideally, transition speed should match zoom duration */
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.mfp-with-zoom.mfp-ready .mfp-container {
+    opacity: 1;
+}
+.mfp-with-zoom.mfp-ready.mfp-bg {
+    opacity: 0.8;
+}
+
+.mfp-with-zoom.mfp-removing .mfp-container,
+.mfp-with-zoom.mfp-removing.mfp-bg {
+  opacity: 0;
+}
+</style>	
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

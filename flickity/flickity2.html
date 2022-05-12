@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>flickity</title>
+	<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+	<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+	<style>
+		
+		.wrapper{
+			max-width: 400px;
+			margin: auto;
+		}
+
+		img{
+			width: 100%;
+		}
+
+		.slider-item{
+			width: 100%;
+		}
+
+		.slider-main{
+			min-height: 300px;
+		}
+
+
+
+	</style>
+</head>
+<body>
+
+<!-- asNavFor: '.image-main',
+groupCells: 4,
+contain: true,
+pageDots: false,
+prevNextButtons:true,
+wrapAround: true,
+lazyLoad: true,
+cellAlign: "left" -->
+
+<!-- <div class="carousel" data-flickity='{
+    "prevNextButtons":true,
+    "adaptiveHeight": true,
+    "wrapAround": true,
+    "lazyLoad": true,
+    "cellAlign": "center"
+
+
+	bgLazyLoad: 1,
+	 asNavFor: '.carousel-main',
+
+}'> -->
+
+<!-- run use js -->
+<!-- var elem = document.querySelector('.main-carousel');
+var flkty = new Flickity( elem, {
+  // options
+  cellAlign: 'left',
+  contain: true
+});
+
+// element argument can be a selector string
+//   for an individual element
+var flkty = new Flickity( '.main-carousel', {
+  // options
+}); -->
+
+<div class="wrapper">
+
+	<div class="slider-main " data-flickity='{ "wrapAround": true, "lazyLoad": true }' >
+		<div class="slider-item">
+			<img data-flickity-lazyload="https://via.placeholder.com/400x400">
+		</div>
+		<div class="slider-item">
+			<img data-flickity-lazyload="https://via.placeholder.com/400x400">
+		</div>
+		<div class="slider-item">
+			<img data-flickity-lazyload="https://via.placeholder.com/400x400">
+		</div>
+		<div class="slider-item">
+			<img data-flickity-lazyload="https://via.placeholder.com/400x400">
+		</div>
+		<div class="slider-item">
+			<img data-flickity-lazyload="https://via.placeholder.com/400x400">
+		</div>
+		<div class="slider-item">
+			<img data-flickity-lazyload="https://via.placeholder.com/400x400">
+		</div>
+	</div>
+
+	<style>
+		
+	</style>
+
+	<div class="slider-nav" data-flickity='{ 
+												"asNavFor": ".slider-main", 
+												"pageDots": false,
+												"prevNextButtons":true,
+												"groupCells": 3,
+												"wrapAround": true, 
+												"lazyLoad": 2 
+											}' >
+		<div class="slider-item">
+			<img data-flickity-lazyload="https://via.placeholder.com/400x400">
+		</div>
+		<div class="slider-item">
+			<img data-flickity-lazyload="https://via.placeholder.com/400x400">
+		</div>
+		<div class="slider-item">
+			<img data-flickity-lazyload="https://via.placeholder.com/400x400">
+		</div>
+		<div class="slider-item">
+			<img data-flickity-lazyload="https://via.placeholder.com/400x400">
+		</div>
+		<div class="slider-item">
+			<img data-flickity-lazyload="https://via.placeholder.com/400x400">
+		</div>
+		<div class="slider-item">
+			<img data-flickity-lazyload="https://via.placeholder.com/400x400">
+		</div>
+	</div>
+
+	<style>
+		.slider-nav{
+			margin-top: 30px;
+		}
+
+		.slider-nav .slider-item{
+			width: 30%;
+			margin-right: 30px;
+		}
+
+
+	</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.editor-wrapper {
+	/*color: #999999;*/
+}
+
+.editor-shield {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+.editor-menu {
+    height: 48px;
+    overflow: hidden;
+    min-width: 380px;
+    /*position: absolute;*/
+    width: 100%;
+    top: 99px;
+    background-color: #E7E9EB;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #999999;
+}
+
+.editor-menu-left {
+	display: flex;
+	height: 100%;
+	align-items: center;
+}
+
+.editor-menu-left>a {
+	font-size: 24px;
+	padding: 10px;
+	color: #999999;
+}
+
+.editor-menu-left>a:hover {
+	color: #757575 !important;
+	background-color: #ccc!important;
+}
+
+.btn-menu {
+    background-color: #04AA6D;
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    word-spacing: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.editor-body{
+    display: flex;
+    height: 500px;
+    max-height: calc(100vh - 50px);
+    border: 10px solid #E7E9EB;
+    border-top: none;
+}
+
+
+.editor-content{
+    outline: none;
+    width: 50%;
+    height: 100%;
+    padding: 10px;
+    overflow-y: auto;
+    min-width: 50px;
+    min-height: 50px;
+}
+
+.editor-content:focus {
+    /*border: none;*/
+}
+
+.editor-bar {
+    width: 10px;
+    height: 100%;
+    background-color: #eee;
+    cursor: col-resize;
+}
+
+.editor-iframe {
+    flex: 1;
+    /*overflow-y: auto;*/
+}
+
+.editor-iframe>iframe {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* horizontal */
+.editor-horizontal .editor-body{
+    flex-direction: column;
+}
+
+
+.editor-horizontal .editor-content{
+    height: 50%;
+    width: 100%;
+}
+
+.editor-horizontal .editor-iframe{
+    height: 50px;
+    width: 100%;
+}
+
+.editor-horizontal .editor-bar{
+    width: 100%;
+    height: 10px;
+    cursor: row-resize;
+}

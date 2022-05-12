@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>valdiate</title>
+	<script rel="stylesheet" src="E:\quantrong\desktop\file-plugin\js\jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="validate.min.js"></script>
+</head>
+<body>
+
+
+<form id="validate-form" action="">
+	<div class="form-group required-field">
+        <label>First Name </label>
+        <input type="text" class="form-control" name="FirstNameInput" data-rule-required="true" minlength="2" aria-required="true">
+    </div><!-- End .form-group -->
+    <button type="submit">submit</button>
+</form>
+
+<style type="text/css">
+    .has-error{
+
+    }
+
+    .has-error input, .has-error select{
+        outline-color: #dc3545;
+        border: 2px solid #dc3545;
+    }
+
+    .has-error .help-block{
+        color: #dc3545;
+    }
+</style>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+        $("#validate-form").validate({
+            ignore: ":hidden",
+            highlight: function (element) {
+                //khi error
+                $(element).closest(".form-group").addClass("has-error")
+            }, unhighlight: function (element) {
+                // khi not error
+                $(element).closest(".form-group").removeClass("has-error")
+            }, errorElement: "span", errorClass: "help-block", errorPlacement: function (element, e) {
+                //them element when error
+                e.parent(".input-group").length ? element.insertAfter(e.parent()) : e.parent("label").length ? element.insertBefore(e.parent()) : element.insertAfter(e)
+
+                //them elemnt error ben ngoai
+                // element.insertAfter(e.parent())
+
+
+            },
+            submitHandler: function (form) {
+                // $.ajax({
+                //     type: "POST",
+                //     url: "/themes/<?= $dir_theme ?>/ajax/checkout-review.php",
+                //     data: $(form).serialize(),
+                //     success: function (smg) {
+                //         $('main.main').html(smg);
+                //         $('#scroll-top').click();
+                //     }
+                // });
+                return false;
+                console.log(222);
+            }
+        });
+    })
+
+    var ab=1;
+    jQuery(function($){
+        var ab= 2;
+    })
+
+    jQuery(function($){
+        console.log(ab);
+    })
+
+    
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

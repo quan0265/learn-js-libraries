@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<!-- <script type="text/javascript" src="https://github.com/quan0265/lazyload/blob/2.x/lazyload.js"></script> -->
+
+
+	<style>
+		/*.sb-lazy:not(.progressive)[lazy=loading] {
+		    background-color: #dbdbdb;
+		    background-image: url(https://assets.btdmp.com/themes/2/v/2/assets/images/rolling.svg);
+		    background-repeat: no-repeat;
+		    background-position: center;
+		    transition: .375s opacity ease;
+		}	*/
+
+
+		.loading{
+			background: red;
+		}
+
+		img {
+			background-position: center;
+			background-size: contain;
+		}
+
+
+
+
+	</style>	
+</head>
+<body>
+
+<!-- 
+
+	- https://github.com/tuupola/lazyload
+
+
+
+ -->
+
+<img src="rolling.svg" data-src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=1753&q=80" width="753" height="500" class="lazyload">
+<img src="rolling.svg" data-src="https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=1753&q=80" width="753" height="500" class="lazyload">
+<img src="rolling.svg" data-src="https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=1753&q=80" width="753" height="500" class="lazyload">
+<img src="rolling.svg" data-src="https://images.unsplash.com/photo-1487349384428-12b47aca925e?w=1753&q=80" width="753" height="500" class="lazyload">
+<img src="rolling.svg" data-src="https://images.unsplash.com/photo-1527437934671-61474b530017?w=1753&q=80" width="753" height="500" class="lazyload">
+<img src="rolling.svg" data-src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=1753&q=80" width="753" height="500" class="lazyload">
+<img src="rolling.svg" data-src="https://images.unsplash.com/photo-1495954484750-af469f2f9be5?w=1753&q=80" width="753" height="500" class="lazyload">
+<img src="rolling.svg" data-src="https://images.unsplash.com/photo-1587502536900-baf0c55a3f74?w=1753&q=80" width="753" height="500" class="lazyload">
+<img src="rolling.svg" data-src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=1753&q=80" width="753" height="500" class="lazyload">
+<img src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-src="https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=1753&q=80" width="753" height="500" class="lazyload">
+
+
+
+<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://images.unsplash.com/photo-1471922694854-ff1b63b20054?w=1753&q=80"  class="lazyload" alt="" width="753" height="500" > 
+
+
+<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+
+
+
+
+<script type="text/javascript">
+	
+
+let images = document.querySelectorAll("img.lazyload");
+lazyload(images);
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

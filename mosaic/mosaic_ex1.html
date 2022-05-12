@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Basic example</title><!-- omitOnExampleSource -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="jquery.mosaic.css">
+	<script type="text/javascript" src="jquery.mosaic.js"></script>
+</head>
+<body>
+
+<div id="mosaic" class="mosaic">
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1467348733814-f93fc480bec6.jpg" width="640" height="411" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1467173572719-f14b9fb86e5f.jpg" width="640" height="426" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1465328610639-388f315eb31b.jpg" width="640" height="427" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1462733441571-9312d0b53818.jpg" width="640" height="494" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1467094568967-95f87ee9c873.jpg" width="640" height="426" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1464740042629-b78a46b310ae.jpg" width="640" height="457" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1466220666686-90bdba318c9a.jpg" width="640" height="354" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1463003416389-296a1ad37ca0.jpg" width="640" height="480" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1463412855783-af97e375664b.jpg" width="640" height="427" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1465158753229-aa725fff85a1.jpg" width="640" height="425" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1468476775582-6bede20f356f.jpg" width="640" height="418" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1461770354136-8f58567b617a.jpg" width="640" height="426" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1467321638755-7246fd0dc1f3.jpg" width="618" height="640" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1464822759023-fed622ff2c3b.jpg" width="640" height="426" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1462146449396-2d7d4ba877d7.jpg" width="640" height="577" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1465441494912-68f5747c3fe0.jpg" width="640" height="423" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1458668383970-8ddd3927deed.jpg" width="640" height="428" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1451479456262-b94f205059be.jpg" width="538" height="640" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1465415513839-55341da57a98.jpg" width="640" height="383" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1463595373836-6e0b0a8ee322.jpg" width="640" height="426" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1465152251391-e94453ee3f5a.jpg" width="640" height="558" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1462910211773-a9847b1f0e40.jpg" width="640" height="485" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1462524500090-89443873e2b4.jpg" width="640" height="426" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1465101162946-4377e57745c3.jpg" width="640" height="527" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1464800959563-472c0567132f.jpg" width="640" height="596" />
+	<img src="https://jquery-mosaic.tin.cat/res/images/assorted/lowres/photo-1470434151738-dc5f4474c239.jpg" width="640" height="356" />
+</div>
+
+<script>
+	// maxRowHeightPolicy: skip | crop | oversize | tail https://jquery-mosaic.tin.cat/example_maxrowheightpolicy.php
+   $(function() {
+		$('#mosaic').Mosaic({
+			innerGap: 15,
+			maxRowHeight: 500,
+		    highResImagesWidthThreshold: 500,
+		    maxRowHeightPolicy: 'tail'
+		});
+   });
+</script>
+
+</div><!-- omitOnExampleSource -->
+</body>
+</html>

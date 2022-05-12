@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>w3chools.com</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
+	<link rel="stylesheet" href="editor.css">
+</head>
+<body>
+	
+
+<section class="editor-wrapper">
+	<div class="editor-shield" style="display: none;"></div>
+	<div class="editor-menu">
+		<div class="editor-menu-left">
+			<a href="/"><i class="fa fa-home"></i></a>
+			<!-- <a href="javascript:void(0)"><i class="fa fa-bars"></i></a> -->
+			<a href="javascript:void(0)" class="btn-sync"><i class="fas fa-sync-alt"></i></a>
+			<a href="javascript:void(0)" class="btn-change-theme"><i class="fa fa-adjust"></i></a>
+			<button class="btn-menu btn-run">Run <i class="fas fa-caret-right"></i></button>
+		</div>
+		<div class="editor-menu-right">
+			<!-- <button class="btn-menu">Run <i class="fas fa-caret-right"></i></button> -->
+		</div>
+	</div>
+	<div class="editor-body">
+		<!-- <div id="editor" class="editor-content" contenteditable=""> -->
+		<div id="editor" class="editor-content">
+			
+		</div>
+		<div class="editor-bar" title="Click and Drag"></div>
+		<div class="editor-iframe">
+			<iframe src="" frameborder="0"></iframe>
+		</div>
+	</div>
+
+</section>
+
+<script src="../../ace-editor/ace/src/ace.js" ></script>
+<script src="../../ace-editor/ace/src/ext-language_tools.js" ></script>
+
+<script type="text/javascript">
+	var editor_wrapper = document.querySelector('section.editor-wrapper');
+	var editor_shield = document.querySelector('.editor-shield');
+	var btn_change_theme = document.querySelector('.btn-change-theme');
+	var btn_sync = document.querySelector('.btn-sync');
+	var editor_bar = document.querySelector('.editor-bar');
+	var editor_content = document.querySelector('.editor-content');
+	var iframe = document.querySelector('.editor-iframe>iframe');
+	var btn_run = document.querySelector('.btn-run');
+
+	// set editor
+	var editor = ace.edit("editor");
+	function setEditor(value='') {
+		if (!localStorage.getItem('editor_theme')) {
+			localStorage.setItem('editor_theme', 'ace/theme/monokai');
+		}
+
+		var editor_theme = localStorage.getItem('editor_theme');
+	    editor.setTheme(editor_theme);
+	    editor.session.setMode("ace/mode/html");
+	    editor.setOptions({
+	    	wrap: true,
+	    	showGutter: false,
+	        displayIndentGuides: false,
+	        fontSize: 14,
+	        printMargin: false,
+	        tabSize: 2,
+	        highlightActiveLine: false,
+	    	enableBasicAutocompletion: true,
+	        enableSnippets: true,
+	        enableLiveAutocompletion: false
+	    });
+	    editor.setAutoScrollEditorIntoView(true);
+	    // editor.setOption("maxLines", 20);
+	    if (value) {
+		    editor.setValue(value);
+	    }
+	    else {
+	    	editor.setValue('');
+	    }
+	    // editor.renderer.setScrollMargin(10, 10, 0, 0);
+	    // editor.renderer.setMargin(50, 160, 0, 0);
+	}
+	var value_html = `<!DOCTYPE html>\r\n<html>\r\n<style>\r\nh2 {\r\n  color: green;\r\n}\r\n</style>\r\n<body>\r\n  \r\n<h2>My First Web Page</h2>\r\n<p id="demo"></p>\r\n\r\n<\script>\r\ndocument.getElementById("demo").innerHTML = "My First Paragraph.";\r\n<\/script>\r\n\r\n</body>\r\n\r\n</html>`;
+	setEditor(value_html);
+
+	function showButtonSync() {
+		if (document.querySelector('body').offsetWidth < 576) {
+			btn_sync.style.display = 'none';
+			if (!editor_wrapper.classList.contains('editor-horizontal')) {
+				editor_wrapper.classList.add('editor-horizontal');
+			}
+		}
+		else {
+			btn_sync.style.display = '';
+			editor_wrapper.classList.remove('editor-horizontal');
+		}
+	}
+	showButtonSync();
+	window.onresize = showButtonSync;
+
+	btn_sync.onclick = function(e) {
+		e.preventDefault();
+		if (editor_wrapper.classList.contains('editor-horizontal')) {
+			editor_wrapper.classList.remove('editor-horizontal');
+			editor_content.style.width = '50%';
+			editor_content.style.height = '100%';
+		}
+		else {
+			editor_wrapper.classList.add('editor-horizontal');
+			editor_content.style.height = '50%';
+			editor_content.style.width = '100%';
+		}
+		setEditor(editor.getValue());
+	}
+
+	function dragMove(e) {
+		// document.selection ? document.selection.empty() : window.getSelection().removeAllRanges();
+		// if horizontal 
+		if (editor_wrapper.classList.contains('editor-horizontal')) {
+			var min_height = 50;
+			var space_top = document.querySelector('.editor-body').offsetTop;
+
+			editor_content.style.height = e.pageY - space_top - editor_bar.offsetHeight/2 + 'px';
+		}
+		else {
+			var min_width = 50;
+			editor_content.style.width = e.pageX - 10 - editor_bar.offsetWidth/2 + 'px';
+		}
+
+		// setEditor(editor.getValue());
+	}
+
+	editor_bar.addEventListener('mousedown', function(e) {
+		e.preventDefault();
+		editor_shield.style.display = 'block';
+		document.addEventListener('mousemove', dragMove);
+	});
+
+	editor_shield.addEventListener('mouseup', function(e) {
+		e.preventDefault();
+		document.removeEventListener('mousemove', dragMove);
+		setEditor(editor.getValue());
+		editor_shield.style.display = 'none';
+	});
+
+	editor_bar.addEventListener('touchstart', function(e) {
+		e.preventDefault();
+		editor_shield.style.display = 'block';
+		document.addEventListener('touchmove', dragMove);
+	});
+
+	editor_shield.addEventListener('touchend', function(e) {
+		e.preventDefault();
+		document.removeEventListener('touchmove', dragMove);
+		setEditor(editor.getValue());
+		editor_shield.style.display = 'none';
+	});
+
+	
+
+    function liveCode1() {
+		var content = editor_content.textContent;
+		var ifrw = (iframe.contentWindow) ? iframe.contentWindow : (iframe.contentDocument.document) ? iframe.contentDocument.document : iframe.contentDocument;
+	    ifrw.document.open();
+	    ifrw.document.write(content);  
+	    ifrw.document.close();
+	}
+
+	function liveCode() {
+		// var content = editor_content.textContent;
+		var content = editor.getValue();
+		iframe.src = "data:text/html;charset=utf-8," + encodeURI(content);
+	}
+
+	// run code
+	liveCode();
+	btn_run.onclick = liveCode;
+
+	editor_content.addEventListener('input', liveCode);
+	// editor_content.addEventListener('change', liveCode);
+	editor_content.addEventListener('paste', liveCode);
+
+	btn_change_theme.onclick = function() {
+		var editor_theme = localStorage.getItem('editor_theme');
+		if (editor_theme == 'ace/theme/monokai') {
+			editor_theme = 'ace/theme/dreamweaver';
+		}
+		else {
+			editor_theme = 'ace/theme/monokai';
+		}
+		localStorage.setItem('editor_theme', editor_theme);
+		setEditor(editor.getValue());
+	}
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

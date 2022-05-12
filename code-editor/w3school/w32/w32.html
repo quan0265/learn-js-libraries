@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Build A Code Editor Like W3schools With Html Css And Javascript</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+<!-- https://www.youtube.com/watch?v=i2Dw5fSKzWk&t=2391s -->
+
+<div class="editor-menu">
+	<button class="btn btn-dark">Dark Mode</button>
+	<button class="btn btn-light">Light Mode</button>
+	<button class="btn btn-run"><i class="fa fa-play"></i>Run</button>
+	<div class="live">
+		<label for="live">Live-</label>
+		<input type="checkbox" id="live">
+	</div>
+</div>
+
+<div class="container">
+	<div class="left">
+		<div class="editor" contenteditable="">
+			Write your code...
+		</div>
+	</div>
+	<div class="bar" title="Click and Drag"></div>
+	<div class="right">
+		<iframe src="" frameborder="0" class="iframe"></iframe>
+	</div>
+</div>
+
+
+
+
+<script type="text/javascript">
+	const left = document.querySelector('.left'),
+		right = document.querySelector('.right'),
+		bar = document.querySelector('.bar'),
+		editor = document.querySelector('.editor'),
+		iframe = document.querySelector('.iframe'),
+		darkMode = document.querySelector('.btn-dark'),
+		lightMode = document.querySelector('.btn-light'),
+		run = document.querySelector('.btn-run');
+
+	const drag = function(e) {
+		e.preventDefault();
+		document.selection ? document.selection.empty() : window.getSelection().removeAllRanges();
+		left.style.width = (e.pageX - bar.offsetWidth /3) + "px";
+	}
+
+	bar.addEventListener('mousedown', function() {
+		document.addEventListener('mousemove', drag);
+	})
+
+	bar.addEventListener('mouseup', function() {
+		document.removeEventListener('mousemove', drag);
+	})
+
+	// Run btn event listener
+	run.addEventListener('click', function() {
+		const html = editor.textContent;
+		iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
+	})
+
+	// Set dark mode
+	darkMode.addEventListener('click', function() {
+		editor.style.backgroundColor = '#363836';
+		editor.style.color = '#eee';
+	})
+
+	// Set light mode
+	lightMode.addEventListener('click', function() {
+		editor.style.backgroundColor = '';
+		editor.style.color = '';
+	})
+
+	// Live code
+	const liveCode = function() {
+		const html = editor.textContent;
+		iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
+	}
+	document.querySelector('#live').onclick = function() {
+		if (this.checked) {
+			editor.addEventListener('input', liveCode);
+		}
+		else {
+			editor.removeEventListener('input', liveCode);
+		}
+	}
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

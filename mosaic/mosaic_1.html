@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>mosaic</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="jquery.mosaic.css">
+	<script type="text/javascript" src="jquery.mosaic.js"></script>
+</head>
+<body>
+	
+<style>
+	.mosaic img{
+		width: 100%;
+		height: 100%;
+	}
+</style>	
+<div id="mosaic" class="posts mosaic">
+	<a href="#abc" class="item post-item" width="300" height="400">
+		<img src="https://picsum.photos/300/400"  alt="">
+	</a>
+	<a href="#abc" class="item post-item" width="300" height="350">
+		<img src="https://picsum.photos/300/350"  alt="">
+	</a>
+	<a href="#abc" class="item post-item" width="500" height="400">
+		<img src="https://picsum.photos/500/400"  alt="">
+	</a>
+	<a href="#abc" class="item post-item" width="400" height="500">
+		<img src="https://picsum.photos/400/500"  alt="">
+	</a>
+	<a href="#abc" class="item post-item" width="500" height="400">
+		<img src="https://picsum.photos/500/400"  alt="">
+	</a>
+	<a href="#abc" class="item post-item" width="300" height="400">
+		<img src="https://picsum.photos/300/400"  alt="">
+	</a>
+	<a href="#abc" class="item post-item" width="300" height="350">
+		<img src="https://picsum.photos/300/350"  alt="">
+	</a>
+	<a href="#abc" class="item post-item" width="500" height="400">
+		<img src="https://picsum.photos/500/400"  alt="">
+	</a>
+	<a href="#abc" class="item post-item" width="400" height="500">
+		<img src="https://picsum.photos/400/500"  alt="">
+	</a>
+	<a href="#abc" class="item post-item" width="500" height="400">
+		<img src="https://picsum.photos/500/400"  alt="">
+	</a>
+</div>
+
+<!-- <div id="mosaic" class="posts mosaic">
+	<img src="https://picsum.photos/300/400" width="300" height="400" alt="">
+	<img src="https://picsum.photos/300/350" width="300" height="350" alt="">
+	<img src="https://picsum.photos/500/400" width="500" height="400" alt="">
+	<img src="https://picsum.photos/400/500" width="400" height="500" alt="">
+	<img src="https://picsum.photos/500/400" width="500" height="400" alt="">
+	<img src="https://picsum.photos/300/400" width="300" height="400" alt="">
+	<img src="https://picsum.photos/300/350" width="300" height="350" alt="">
+	<img src="https://picsum.photos/500/400" width="500" height="400" alt="">
+	<img src="https://picsum.photos/400/500" width="400" height="500" alt="">
+	<img src="https://picsum.photos/500/400" width="500" height="400" alt="">
+</div> -->
+
+<script>
+$(function() {
+
+	
+	
+    $('#mosaic').Mosaic({
+        refitOnResize: true,
+    	innerGap: 12,
+	    maxRowHeightPolicy: 'tail',
+		maxRowHeight: 350,
+        responsiveWidthThreshold: 400,
+	    highResImagesWidthThreshold: 1200
+    });
+});
+</script>
+
+
+</body>
+</html>

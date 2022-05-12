@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>apexcharts</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.0/apexcharts.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.0/apexcharts.min.js"></script>
+</head>
+<body>
+
+<style type="text/css">
+	#chart {
+		margin: auto;
+		margin-top: 100px;
+		width: 600px;
+		max-height: 400px;
+	}
+</style>
+	
+<div id="chart"></div>
+
+<script type="text/javascript">
+
+	function number_format(number, decimals=2, dec_point='.', thousands_sep=',') {
+        // *     example: number_format(1234.56, 2, ',', ' ');
+        // *     return: '1 234,56'
+        number = (number + '').replace(',', '').replace(' ', '');
+        var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            s = '',
+            toFixedFix = function(n, prec) {
+                var k = Math.pow(10, prec);
+                return '' + Math.round(n * k) / k;
+            };
+        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+        if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+        }
+        return s.join(dec);
+    }
+
+    var obj_charts = {
+        all: '',
+        one: '',
+        two: '',
+        three: ''
+    }
+
+    function barChart(key, selector, data_chart, title='') {
+        var options = {
+            series: data_chart.data,
+            chart: {
+                type: 'bar',
+                height: 380,
+                stacked: true,
+                zoom: {
+                    enabled: false
+                },
+                toolbar: {
+                    show: true,
+                }
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 0,
+                    horizontal: false,
+                    dataLabels: {
+                        position: 'top', // top, center, bottom
+                    },
+                }
+            },
+            dataLabels: {
+                enabled: false,
+                offsetY: -20,
+                style: {
+                    fontSize: '13px',
+                    colors: ["#304758"]
+                },
+    			//  enabledOnSeries: [1],
+    			//  formatter: function (_val, opt) {
+				// 	let series = opt.w.config.series
+				// 	let idx = opt.dataPointIndex
+				// 	const total = series.reduce((total, self) => total + self.data[idx], 0)
+				// 	return total + " tỷ"
+				// },
+            },
+            stroke: {
+                width: 0,
+                // colors: ['#008FFB', '#A8CBFE'],
+                curve: 'smooth'
+            },
+            legend: {
+                show: true,
+                position: 'top',
+                horizontalAlign: 'left',
+                fontSize: '13px',
+                fontFamily: 'Open Sans,sans-serif',
+                fontWeight: 400,
+                labels: {
+                    colors: '#6C757D',
+                },
+                markers: {
+                    width: 12,
+                    height: 12,
+                    strokeWidth: 0,
+                    strokeColor: '#fff',
+                    // fillColors: ['#0D6EFD', '#A8CBFE'],
+                    radius: 12,
+                },
+            },
+            grid: {
+                show: true,
+                borderColor: '#E9ECEF',
+                xaxis: {
+                    lines: {
+                        show: false
+                    }
+                },
+                row: {
+                    colors: undefined,
+                    opacity: 0
+                },
+            },
+            tooltip: {
+                enabled: true,
+                marker: {
+                    // fillColors: ['#008FFB', '#A8CBFE'],
+                },
+                x: {
+                    show: true,
+                    formatter: function(val) {
+                    	// console.log(this)
+                        return `${val}`
+                    }
+                },
+                y: {
+                    show: true,
+                    formatter: function(val) {
+                        return `${number_format(val)} tỷ`
+                    }
+                }
+            },
+            markers: {
+                // colors: ['#008FFB', '#A8CBFE'],
+            },
+            yaxis: {
+                show: true,
+                title: {
+                    text: '(tỷ)',
+                    style: {
+                        colors: '#6C757D',
+                        fontSize: '13px',
+                        fontFamily: 'Open Sans,sans-serif',
+                        fontWeight: 400
+                    }
+                },
+                labels: {
+                    style: {
+                        colors: '#6C757D',
+                        fontSize: '13px',
+                        fontFamily: 'Open Sans,sans-serif',
+                        fontWeight: 400,
+                    },
+                    formatter: function(val) {
+                        return `${number_format(val, 0)}`
+                    }
+                },
+            },
+            xaxis: {
+                categories: data_chart.labels,
+                labels: {
+                    show: true,
+                    style: {
+                        colors: '#6C757D',
+                        fontSize: '13px',
+                        fontFamily: 'Open Sans,sans-serif',
+                        fontWeight: 400,
+                    }
+                },
+                axisTicks: {
+                    show: false,
+                },
+                axisBorder: {
+                    show: false,
+                },
+                stroke: {
+                    width: 0,
+                },
+                tooltip: {
+                    enabled: false,
+                }
+            }
+        };
+        obj_charts[key] = new ApexCharts(document.querySelector(selector), options);
+        obj_charts[key].render();
+    }
+
+    var data = {
+    	data: [{
+		  name: 'PRODUCT A',
+		  data: [44, 55, 41, 67, 22, 43]
+		}, {
+		  name: 'PRODUCT B',
+		  data: [13, 23, 20, 8, 13, 27]
+		}],
+    	labels: ['01/04', '02/04', '03/04', '04/04', '05/04'],
+    	total: 4.72
+    }
+    barChart('all', '#chart', data)
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

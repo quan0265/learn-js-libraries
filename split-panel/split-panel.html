@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>split panel</title>
+    <style>
+        .gutter {
+		    background-color: #eee;
+
+		    background-repeat: no-repeat;
+		    background-position: 50%;
+		}
+
+		.gutter.gutter-vertical {
+		    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
+		}
+
+		.gutter.gutter-horizontal {
+		    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+		}
+		.split {
+		    -webkit-box-sizing: border-box;
+		    -moz-box-sizing: border-box;
+		    box-sizing: border-box;
+		}
+		.split,
+		.gutter.gutter-horizontal {
+		    float: left;
+		}
+		.split {
+		    overflow-y: auto;
+		    overflow-x: hidden;
+		}
+	</style>
+</head>
+
+<body>
+    <!-- 
+	- https://github.com/nathancahill/split/tree/master/packages/splitjs#installation
+
+ -->
+    <style>
+        #block1 {
+			display: flex;
+			flex-direction: row;
+			height: 500px;
+		}
+	</style>
+    <div id="block1">
+        <div id="one">content one</div>
+        <div id="two">content two</div>
+        <div id="three">content three</div>
+    </div>
+    <hr>
+    <style>
+        #block-h {
+			display: flex;
+			flex-direction: column;
+			height: 500px;
+		}
+	</style>
+    <div id="block-h">
+        <div id="block_h_one">content one</div>
+        <div id="block_h_two">content two</div>
+        <div id="block_h_three">content three</div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.6.0/split.min.js"></script>
+    <script type="text/javascript">
+    Split(['#one', '#two', '#three'], {
+        minSize: [0, 0, 0],
+    })
+
+    Split(['#block_h_one', '#block_h_two', '#block_h_three'], {
+        direction: 'vertical',
+        sizes: [33, 33, 33],
+        minSize: [0, 0, 0],
+        onDragEnd: function (sizes) {
+            // ...
+        }
+    })
+    </script>
+</body>
+
+</html>

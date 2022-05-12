@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>session</title>
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css"> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+		<script type="text/javascript" src="jquery.session.js"></script>
+</head>
+<body>
+
+<div class="abc"></div>
+
+<script type="text/javascript">
+	
+// $.session.set('some key', 'a value');
+
+// $.session.get('some key');
+// > "a value"
+
+// $.session.clear();
+
+// $.session.get('some key');
+// > undefined
+
+// $.session.set('some key', 'a value').get('some key');
+// > "a value"
+
+// $.session.remove('some key');
+
+// $.session.get('some key');
+// > undefined
+
+
+
+// console.log($.session.get('some'));
+
+// if($.session.get('some')==undefined){
+// 	alert(22);
+// }
+
+if($('.abc').eq(0).attr('data-id')){
+	console.log(22);
+}
+
+try {
+	// statements
+	console.log(document.querySelector('fdsafdsad').getAttribute('abcd'));
+
+} catch(e) {
+	// statements
+	console.log(e);
+}
+
+if($('.abdcc').attr('data-id')){
+	 console.log(333)
+}
+
+console.log($('.abc').attr('data-id'));
+// undefined
+console.log($('.abccss').attr('data-id'));
+// undefined
+
+console.log(document.querySelector('.abc').getAttribute('data-id'));
+// undefined
+console.log(document.querySelector('.abcsss').getAttribute('data-id'));
+//Uncaught TypeError: Cannot read property 'getAttribute' of null
+
+if(document.querySelector('.abc').getAttribute('data-id')){
+	 console.log(333)
+}
+
+// console.log(document.querySelector('fdsafdsad').getAttribute('abcd'));
+
+
+if(typeof abc=='undefined'){
+	// alert(222);
+}
+
+
+var cart={
+	"product_id": 12,
+	"var_id": 13,
+	"title": "name1",
+	"image": "a.com",
+	"quantity": 15,
+	"price": 12
+
+}
+
+var carts= [];
+carts.push(cart);
+carts.push(cart);
+carts.push(cart);
+
+var cart2={
+	"product_id": "12",
+	"product_id": 12
+
+}
+
+var cart1= [121,2342];
+cart1['product_id']= "12";
+
+cart3=[];
+cart3['id']= 3;
+
+//not use array save;
+$.session.set('cart', JSON.stringify(cart3));
+// result []
+
+console.log(JSON.parse($.session.get('cart')));
+
+
+$.session.set('carts', '');
+
+
+if(typeof a == 'undefined') console.log(22);
+
+
+// var cart={
+// 	"product_id": 12,
+// 	"var_id": 13,
+// 	"title": "name1",
+// 	"image": "a.com",
+// 	"quantity": 15,
+// 	"price": 12
+
+// }
+
+// var carts= [];
+// carts.push(cart);
+// carts.push(cart);
+// carts.push(cart);
+function hasCart(carts=[], cart={}){
+	if(carts.length==0){
+		return false;
+	}
+
+	for(let i=0; i<carts.length; i++){
+		if(cart.var_id==0){
+			if(cart.product_id==carts[i].product_id) return true;
+		}
+		else{
+			if(cart.var_id==carts[i].var_id) return true;
+		}
+	}
+	return false;
+}
+
+// console.log(hasCart([], cart));
+
+if(!hasCart([], cart)) carts.push(cart);
+
+console.log(carts);
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

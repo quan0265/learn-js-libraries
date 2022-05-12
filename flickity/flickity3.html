@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>flickity groupcell responsive</title>
+
+	<link rel="stylesheet" href="https://npmcdn.com/flickity@2/dist/flickity.css">
+	<script type="text/javascript" src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
+
+	<style>
+		/* external css: flickity.css */
+
+* { box-sizing: border-box; }
+
+body { font-family: sans-serif; }
+
+.carousel {
+  background: #EEE;
+}
+
+.carousel-cell {
+  /* 2 cells in group */
+  width: calc( ( 100% - 10px ) / 2);
+  height: 200px;
+  margin-right: 10px;
+  background: #8C8;
+  border-radius: 5px;
+  counter-increment: carousel-cell;
+}
+
+.carousel-cell.is-selected {
+  background: #ED2;
+}
+
+/* cell number */
+.carousel-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(carousel-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+
+@media ( min-width: 768px ) {
+  .carousel-cell {
+    /* 3 cells in group */
+    width: calc( ( 100% - 20px ) / 3);
+  } 
+}
+
+@media ( min-width: 1024px ) {
+  .carousel-cell {
+    /* 4 cells in group */
+    width: calc( ( 100% - 30px ) / 4);
+  } 
+}
+	</style>
+</head>
+<body>
+<h1>Flickity - groupCells, media queries</h1>
+
+<!-- Flickity HTML init -->
+<div class="carousel" data-flickity='{ "groupCells": true }'>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

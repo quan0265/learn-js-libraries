@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>valdiate</title>
+	<script rel="stylesheet" src="E:\quantrong\desktop\file-plugin\js\jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="validate.js"></script>
+</head>
+<body>
+
+
+<form id="validate-form" action="">
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-control" name="email">
+    </div>
+
+	<div class="form-group">
+        <label>First Name </label>
+        <input type="text" class="form-control" name="first_name" minlength="2" required>
+    </div>
+    <div class="form-group">
+        <label>Url</label>
+        <input type="url" class="form-control" name="url" required>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="text" class="form-control" name="password" minlength="6" required>
+    </div>
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="text" class="form-control" name="confirm_password" equalTo="#validate-form [name=password]" required>
+    </div>
+    <button type="submit">submit</button>
+</form>
+
+<style type="text/css">
+    .has-error{
+
+    }
+
+    .has-error input, .has-error select{
+        outline-color: #dc3545;
+        border: 2px solid #dc3545;
+    }
+
+    .has-error .help-block{
+        color: #dc3545;
+    }
+</style>
+
+<!-- 
+    - View all method, check validaate file validate.js : defaults :
+    messages: {
+        required: "This field is required.",
+        remote: "Please fix this field.",
+        email: "Please enter a valid email address.",
+        url: "Please enter a valid URL.",
+        date: "Please enter a valid date.",
+        dateISO: "Please enter a valid date (ISO).",
+        number: "Please enter a valid number.",
+        digits: "Please enter only digits.",
+        equalTo: "Please enter the same value again.",
+        maxlength: $.validator.format( "Please enter no more than {0} characters." ),
+        minlength: $.validator.format( "Please enter at least {0} characters." ),
+        rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
+        range: $.validator.format( "Please enter a value between {0} and {1}." ),
+        max: $.validator.format( "Please enter a value less than or equal to {0}." ),
+        min: $.validator.format( "Please enter a value greater than or equal to {0}." ),
+        step: $.validator.format( "Please enter a multiple of {0}." )
+    }
+
+
+ -->
+
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+        $("#validate-form").validate({
+
+            messages: {
+                password: {
+                    required: "Please provide a password",
+                    minlength: "Your password must be at least 6 characters long"
+                }
+            },
+            ignore: ":hidden",
+            highlight: function (element) {
+                //khi error
+                $(element).closest(".form-group").addClass("has-error")
+            }, 
+            unhighlight: function (element) {
+                // khi not error
+                $(element).closest(".form-group").removeClass("has-error")
+            }, 
+            errorElement: "span", errorClass: "help-block", errorPlacement: function (element, e) {
+                //them element when error
+                e.parent(".input-group").length ? element.insertAfter(e.parent()) : e.parent("label").length ? element.insertBefore(e.parent()) : element.insertAfter(e)
+
+                //them elemnt error ben ngoai
+                // element.insertAfter(e.parent())
+
+            },
+            submitHandler: function (form) {
+                // $.ajax({
+                //     type: "POST",
+                //     url: "/themes/<?= $dir_theme ?>/ajax/checkout-review.php",
+                //     data: $(form).serialize(),
+                //     success: function (smg) {
+                //         $('main.main').html(smg);
+                //         $('#scroll-top').click();
+                //     }
+                // });
+                console.log(222);
+                // Không submit form
+                return false;
+            }
+            
+        });
+    })
+    
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

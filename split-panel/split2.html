@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>split panel</title>
+    <style>
+        .gutter {
+		    background-color: #eee;
+
+		    background-repeat: no-repeat;
+		    background-position: 50%;
+		}
+
+		.gutter.gutter-vertical {
+		    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
+		}
+
+		.gutter.gutter-horizontal {
+		    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+		}
+		.split {
+		    -webkit-box-sizing: border-box;
+		    -moz-box-sizing: border-box;
+		    box-sizing: border-box;
+		}
+		.split,
+		.gutter.gutter-horizontal {
+		    float: left;
+		}
+		.split {
+		    overflow-y: auto;
+		    overflow-x: hidden;
+		}
+	</style>
+</head>
+
+<body>
+    <!-- 
+	- https://github.com/nathancahill/split/tree/master/packages/splitjs#installation
+
+ -->
+    <style>
+        .block1--layout1 {
+			display: flex;
+			flex-direction: column;
+			height: 500px;
+		}
+		.block1--layout1 #block1-left, .block1--layout1 #block1-right {
+			display: flex;
+			flex-direction: row
+		}
+
+		.block1--layout2 {
+			display: flex;
+			flex-direction: row;
+			height: 500px;
+		}
+		.block1--layout2 #block1-left, .block1--layout2 #block1-right {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.block1--layout3 {
+			display: flex;
+			flex-direction: row;
+			height: 500px;
+		}
+		.block1--layout3 #block1-left, .block1--layout3 #block1-right {
+			display: flex;
+			flex-direction: row;
+		}
+
+		.block1--layout4 {
+			display: flex;
+			flex-direction: column;
+			height: 500px;
+		}
+		.block1--layout4 #block1-left, .block1--layout4 #block1-right {
+			display: flex;
+			flex-direction: column;
+		}
+	</style>
+    <div id="block1" class="block1--layout4">
+        <div id="block1-left">
+        	<div id="html">html</div>
+        	<div id="css">css</div>
+        </div>
+        <div id="block1-right">
+        	<div id="js">js</div>
+        	<div id="iframe">iframe</div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.6.0/split.min.js"></script>
+    <script type="text/javascript">
+    	var layout = 4;
+
+    	if (layout == 1) {
+    		// layout 1
+	    	// html css
+	    	// js   iframe
+		    Split(['#block1-left', '#block1-right'], {
+		        direction: 'vertical',
+		        // sizes: [50, 50],
+		        minSize: [0, 0],
+		    })
+		    Split(['#html', '#css'], {
+		        // direction: 'vertical',
+		        minSize: [0, 0]
+		    })
+		    Split(['#js', '#iframe'], {
+		        // direction: 'vertical',
+		        minSize: [0, 0]
+		    })
+    	}
+    	else if (layout == 2) {
+    		// layout 2
+	    	// html js
+	    	// css   iframe
+		    Split(['#block1-left', '#block1-right'], {
+		        // direction: 'vertical',
+		        // sizes: [50, 50],
+		        minSize: [0, 0],
+		    })
+		    Split(['#html', '#css'], {
+		        direction: 'vertical',
+		        minSize: [0, 0]
+		    })
+		    Split(['#js', '#iframe'], {
+		        direction: 'vertical',
+		        minSize: [0, 0]
+		    })
+    	}
+    	else if (layout == 3) {
+			// layout 3
+	    	// html css js iframe
+		    Split(['#block1-left', '#block1-right'], {
+		        minSize: [0, 0],
+		    })
+		    Split(['#html', '#css'], {
+		        minSize: [0, 0]
+		    })
+		    Split(['#js', '#iframe'], {
+		        minSize: [0, 0]
+		    })
+    	}
+    	else {
+    		// layout 4
+    		// html
+    		// css
+    		// js
+    		// iframe
+    		Split(['#block1-left', '#block1-right'], {
+		        direction: 'vertical',
+		        minSize: [0, 0],
+		    })
+		    Split(['#html', '#css'], {
+		        direction: 'vertical',
+		        minSize: [0, 0]
+		    })
+		    Split(['#js', '#iframe'], {
+		        direction: 'vertical',
+		        minSize: [0, 0]
+		    })
+    	}
+
+	    	
+
+		    
+
+
+
+
+    </script>
+</body>
+
+</html>

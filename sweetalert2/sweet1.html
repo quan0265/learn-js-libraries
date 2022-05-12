@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>sweet alert</title>
+	<link rel="stylesheet" href="sweetalert2/sweetalert2.min.css">
+</head>
+<body>
+	
+<button class="btn-click1">button1</button>
+
+<button class="btn-click2">button2</button>
+
+<button class="btn-click3">button3</button>
+
+
+<script type="text/javascript" src="sweetalert2/sweetalert2.min.js"></script>
+
+<!-- <script type="text/javascript" src="sweetalert2/sweetalert2.all.min.js"></script> -->
+<script type="text/javascript">
+
+	document.querySelector('.btn-click1').onclick = function() {
+		Swal.fire({
+			position: 'center-center',
+			icon: 'success',
+			title: 'Success',
+			showConfirmButton: false,
+			timer: 1000
+		}).then(function(res) {
+			console.log(res);
+		})
+	}
+
+	document.querySelector('.btn-click2').onclick = function() {
+		Swal.fire({
+			position: 'center-center',
+			icon: 'success',
+			title: 'Success',
+			// timer: 1000,
+			showCloseButton: true,
+			showDenyButton: true,
+			showCancelButton: true,
+			confirmButtonText: 'Save',
+			denyButtonText: `Don't save`,
+			cancelButtonText: 'Canel save',
+			showConfirmButton: false
+		}).then(function(res) {
+			console.log(res);
+
+			if (res.isConfirmed) {
+				console.log('is confirm');
+			}
+
+			if (res.isDenied) {
+				console.log('is denied');
+			}
+
+			if (res.isDismissed) {
+				console.log('is cancel');
+			}
+
+		})
+	}
+
+	document.querySelector('.btn-click3').onclick = function() {
+		Swal.fire({
+			position: 'center-center',
+			icon: 'question',
+			title: 'Are you sure you want to delete',
+			// timer: 1000,
+			showCloseButton: true,
+			showCancelButton: true,
+			confirmButtonText: 'Delete',
+			cancelButtonText: 'Canel',
+			showConfirmButton: true
+		}).then(function(res) {
+			console.log(res);
+
+			if (res.isConfirmed) {
+				console.log('is confirm');
+				Swal.fire({
+					position: 'center-center',
+					icon: 'success',
+					title: 'Success',
+					showConfirmButton: false,
+					timer: 1000
+				}).then(function(res) {
+					// console.log(res);
+					window.location.reload();
+				})
+			}
+
+			if (res.isDismissed) {
+				console.log('is cancel');
+			}
+
+		})
+	}
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

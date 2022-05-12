@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>chart.js</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+</head>
+
+<body>
+<div id="container" style="width: 75%;">
+    <canvas id="canvas"></canvas>
+</div>
+
+
+<script type="text/javascript">
+var barChartData = {
+    labels: [
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+    ],
+    datasets: [{
+            label: 'line 1',
+            yAxisID: "line",
+            backgroundColor: "red",
+            borderColor: "red",
+            type: 'line',
+            fill: false,
+            data: [80, 0, 100, 140, 138, 125, 110, 145],
+        },
+        {
+            label: 'line 2',
+            yAxisID: "line",
+            backgroundColor: "lightgreen",
+            borderColor: "lightgreen",
+            type: 'line',
+            fill: false,
+            data: [170, 175, 130, 115, 205, 157],
+        },
+        {
+            label: "VPbank",
+            yAxisID: 'bar-stack',
+            backgroundColor: "pink",
+            borderColor: "pink",
+            borderWidth: 1,
+            stack: 'a',
+            data: [30, 50, 60, 70, 30, 50, 60, 70]
+        },
+        {
+            label: "Mastercard",
+            yAxisID: 'bar-stack',
+            backgroundColor: "lightblue",
+            borderColor: "lightblue",
+            borderWidth: 1,
+            stack: 'now',
+            data: [40, 70, 30, 60, 100, 70, 40, 60]
+        },
+        {
+            label: "Paypal",
+            yAxisID: 'bar-stack',
+            backgroundColor: "green",
+            borderColor: "green",
+            borderWidth: 1,
+            stack: 'now',
+            data: [100, 70, 40, 60, 90, 70]
+        },
+        {
+            label: "Visa",
+            yAxisID: "bar-stack",
+            backgroundColor: "yellow",
+            borderColor: "yellow",
+            borderWidth: 1,
+            stack: 'now',
+            data: [60, 90, 70, 30, 100, 70]
+        }
+    ]
+};
+
+var chartOptions = {
+    responsive: true,
+    scales: {
+        xAxes: [
+            {
+                time: {
+                    unit: 'date'
+                },
+                gridLines: {
+                    display: false,
+                    drawBorder: false
+                },
+                ticks: {
+                    maxTicksLimit: 14
+                }
+            }
+        ],
+        yAxes: [
+            {
+                id: "bar-stack",
+                position: "left",
+                stacked: true,
+                ticks: {
+                    beginAtZero: true,
+                    // maxTicksLimit: 5,
+                    padding: 10,
+                    // Include a dollar sign in the ticks
+                    callback: function(value, index, values) {
+                        return `${value} tỷ`;
+                    }
+                }
+            },
+            {
+                id: "line",
+                position: "right",
+                stacked: false,
+                ticks: {
+                    beginAtZero: true,
+                    callback: function(value, index, values) {
+                        return `${value} triệu`;
+                    },
+                },
+                    
+                gridLines: {
+                    drawOnChartArea: false,
+                },
+            }
+        ]
+    },
+    legend: {
+        display: true
+    },
+    tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        titleMarginBottom: 10,
+        titleFontColor: '#6e707e',
+        titleFontSize: 14,
+        bodyFontSize: 14,
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: true,
+        intersect: true,
+        mode: 'index',
+        // caretPadding: 10,
+        // callbacks: {
+        //     label: function(tooltipItem, chart) {
+        //         var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+        //         return datasetLabel + ': $' + (tooltipItem.yLabel);
+        //         // return (tooltipItem.yLabel);
+        //     }
+        // }
+    }
+}
+
+window.onload = function() {
+    // var ctx = document.getElementById("canvas").getContext("2d");
+    window.myBar = new Chart(document.querySelector('#canvas'), {
+        type: "bar",
+        data: barChartData,
+        options: chartOptions
+    });
+};
+</script>
+</body>
+
+</html>

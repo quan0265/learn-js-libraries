@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>upvote</title>
+	<link rel="stylesheet" href="upvotejs/dist/upvotejs/upvotejs.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script type="text/javascript" src="upvotejs/dist/upvotejs/upvotejs.vanilla.js"></script>
+	<script type="text/javascript" src="upvotejs/dist/upvotejs/upvotejs.jquery.js"></script>
+
+</head>
+<body>
+	
+	<div id="topic" class="upvotejs">
+	    <a class="upvote"></a>
+	    <span class="count">0</span>
+	    <a class="downvote"></a>
+	    <a class="star"></a>
+	</div>
+
+	<script type="text/javascript">
+
+		// Upvote.create('topic');
+		// $('#topic').upvote();
+		// var ab = Upvote.create('topic', { id: 'topic', action: 'upvote' } );
+
+		// $('#topic').upvote(); 
+		// Upvote.create('topic', {count: 5, upvoted: (true)});
+
+		var handleVote = function (data) {
+			console.log(data);
+		}
+
+
+
+		// Upvote.create('topic', {count: 5} );
+
+		// khởi tạo upvote với giá trị 5, bật downvoted, bật star
+		Upvote.create('topic', {id_answer: 'ddd', count: 5, downvoted: true, starred: true, callback: handleVote});
+		// $('#topic').upvote({count: 5, downvoted: true, starred: true, callback: handleVote});
+
+
+
+
+
+		console.log(Upvote);
+
+
+		// document.querySelector('#topic .upvote').addEventListener('click', function(e) {
+		// 	console.log(222);
+		// });
+
+
+
+
+
+	</script>
+
+</body>
+</html>

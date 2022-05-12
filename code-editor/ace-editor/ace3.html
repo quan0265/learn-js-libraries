@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ACE in Action</title>
+<style type="text/css" media="screen">
+    .ace_editor {
+        border: 1px solid lightgray;
+        margin: auto;
+        /*height: 100px;*/
+        /*width: 80%;*/
+    }
+    /*.scrollmargin {
+        height: 80px;
+        text-align: center;
+    }*/
+
+    #editor {
+        /*height: 100px;*/
+    }
+</style>
+</head>
+<body>
+
+<!-- <div id="editor">function foo(items) {
+    var x = "All this is syntax highlighted";
+    return x;
+}</div> -->
+<style type="text/css" media="screen">
+    #editor { 
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        /*height: 100px;*/
+    }
+</style>
+
+<div id="editor">
+    
+</div>
+
+<hr>
+<div id="temerial">
+    
+</div>
+
+
+<textarea id="textarea_editor" style="display: block;" cols="30" rows="10"></textarea>
+
+<button class="btn-coppy">coppy</button>
+    
+<!-- <script src="ace/src/ace.js" type="text/javascript" charset="utf-8"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="ace/src/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="ace/src/ace_edit.js" type="text/javascript" charset="utf-8"></script> -->
+<!-- <script src="ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script> -->
+<!-- <script src="ace/src/snippets/php.js"></script> -->
+<script>
+
+    
+</script>
+
+<script type="text/javascript">
+    console.log(222);
+    // console.log($_);
+
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/textmate");
+    editor.session.setMode({
+        path: "ace/mode/javascript",
+        inline: true
+    });
+    editor.setOptions({
+        wrap: true,
+        // showGutter: false,
+        displayIndentGuides: false,
+        tabSize: 2,
+        highlightActiveLine: true,
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true,
+        fontFamily: "monospace",
+        fontSize: '14px',
+        maxLines: 20,
+        minLines: 2,
+        printMargin: false
+    });
+    editor.renderer.setScrollMargin(10, 10, 0, 0);
+    editor.container.style.lineHeight = 1.5;
+    editor.getSession().setValue('console.log(22)');
+
+    var textarea_editor = document.querySelector('#textarea_editor');
+    editor.getSession().on('change', function() {
+        textarea_editor.value = editor.getValue();
+    });
+
+    var c = ace.edit('temerial')
+    c.setTheme("ace/theme/textmate")
+    // c.getSession().setMode("ace/mode/programiz_terminal")
+    c.setOptions({
+        fontFamily: "droid_sans_monoregular",
+        fontSize: "14px",
+        showGutter: !1,
+        highlightActiveLine: !1,
+        behavioursEnabled: !1,
+        wrapBehavioursEnabled: !1,
+        wrap: !0,
+        useWorker: !0,
+        overwrite: !1,
+        maxLines: 5,
+        dragEnabled: !1,
+        cursorStyle: "slim",
+        showPrintMargin: !1,
+    }),
+    c.container.style.lineHeight = 1.5;
+    // editor.commands.removeCommands(["gotoline", "find"]);
+    // editor.focus();
+    // editor.execCommand("gotolineend");
+
+
+    
+    // document.querySelector('select').onchange = function () {
+    //     console.log(this.value);
+
+    //     let mode = "ace/mode/" + this.value;
+
+    //     editor = ace.edit("editor");
+    //     editor.setTheme("ace/theme/monokai");
+    //     editor.session.setMode(mode);
+    //     editor.setShowPrintMargin(false);
+    //     editor.setFontSize(14);
+    //     editor.setHighlightActiveLine(false);
+    //     // editor.setAutoScrollEditorIntoView(true);
+    //     editor.setOption("maxLines", 10);
+    //     // editor.setValue("");
+    //     editor.renderer.setScrollMargin(10, 10, 0, 0);
+    //     editor.setOptions({
+    //         enableBasicAutocompletion: true,
+    //         enableSnippets: true,
+    //         enableLiveAutocompletion: true,
+    //         fontFamily: "monospace",
+    //         fontSize: '14px'
+    //     });
+    //     editor.container.style.lineHeight = 1.5;
+    //     editor.commands.removeCommands(["gotoline", "find"]);
+    //     console.log(editor.renderer);
+
+    //     // set value of code
+    //     // editor.setValue()
+
+    //     // get value of code
+    //     // editor.getValue()
+
+
+    // }
+
+
+    // coppy
+    document.querySelector('.btn-coppy').addEventListener('click', function() {
+        console.log(editor.getValue());
+    })
+
+
+
+</script>
+
+
+
+</body>
+</html>
+

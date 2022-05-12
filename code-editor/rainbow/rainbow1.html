@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>rainbow</title>
+	<link rel="stylesheet" href="assets/themes/css/monokai.css">
+</head>
+<body>
+	
+<pre><code data-language="php">def openFile(path):
+    echo 222</code></pre>
+
+<button id="btn-change" >change code</button>
+
+<div id="code1"></div>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/rainbow.min.js"></script> -->
+<!-- <script src="https://codeinu.com/assets/js/rainbow-custom.min.js"></script> -->
+
+<!-- <script type="text/javascript" src="assets/src/rainbow.js"></script> -->
+<script type="text/javascript" src="assets/dist/rainbow.js"></script>
+<script type="text/javascript" src="assets/src/language/generic.js"></script>
+
+<script type="text/javascript" src="assets/src/language/php.js"></script>
+<!-- <script type="text/javascript" src="assets/src/language/php_edit.js"></script> -->
+
+<script>
+	
+	// link https://www.javascripting.com/view/rainbow#rainbowcolor
+
+	// create element rồi mới highlight code
+	var div = document.createElement('div');
+	div.innerHTML = '<pre><code data-language="php">var foo = true;</code></pre>';
+
+	Rainbow.color(div, function() {
+	     document.getElementById('code1').appendChild(div)
+	});
+
+	Rainbow.color('var foo = true;', 'php', function(highlightedCode) {
+	    console.log(highlightedCode);
+	});
+
+
+	// click button change element after highlight code
+	document.querySelector('#btn-change').onclick = function() {
+		var codeEl = document.querySelector('pre>code')
+		var value_code = 'echo 333';
+
+		Rainbow.color(value_code, 'php', function(highlightedCode) {
+		    console.log(highlightedCode);
+		    codeEl.innerHTML = highlightedCode;
+		});
+
+	}
+
+
+</script>
+
+
+
+</body>
+</html>

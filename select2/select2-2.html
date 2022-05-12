@@ -1,0 +1,108 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>select 2</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+<style type="text/css">
+.select2-container {
+    display: block;
+    min-width: 100%;
+}
+</style>
+<!-- api test: https://api.github.com/search/repositories?term=sel&_type=query&q=sel  -->
+
+<body>
+    <!-- 
+		
+    	- ajax, muilti select, template result, template selection 
+		- return results: data.items, có thể là return data tùy thuộc vào data api trả về, phải có id
+
+    -->
+    <div class="s2-example">
+        <select id="select-2" class="js-states form-control" multiple="multiple">
+            <option data-id="1" value="1">name 1</option>
+            <option data-id="2" value="2">name 2</option>
+            <option data-id="3" value="3">name 3</option>
+            <option data-id="4" value="4">name 4</option>
+            <option data-id="5" value="1">name 1</option>
+            <option data-id="6" value="2">name 2</option>
+            <option data-id="7" value="3">name 3</option>
+            <option data-id="8" value="4">name 4</option>
+        </select>
+    </div>
+    <pre data-fill-from="#js-code-example-basic-hide-search-multi"></pre>
+    <script type="text/javascript" id="js-code-example-basic-hide-search-multi">
+    function formatState(state) {
+        if (!state.id) {
+            return state.text;
+        }
+        // console.log(state);
+        // console.log(state.element.getAttribute('data-id'));
+
+        var baseUrl = "/user/pages/images/flags";
+        var $state = $(
+            '<span><img class="img-flag" /> <span></span></span>'
+        );
+
+        // Use .text() instead of HTML string concatenation to avoid script injection issues
+        $state.find("span").text(state.text);
+        $state.find("img").attr("src", baseUrl + "/" + state.element.value.toLowerCase() + ".png");
+
+        return $state;
+    };
+
+    function formatResponse(res) {
+        console.log(res);
+        // console.log(res.name);
+        var html = $(
+            '<span><span></span></span>'
+        );
+        html.find('span').text(res.name);
+        return html;
+    }
+
+    // serch với url?q=text_serch
+    $('#select-2').select2({
+        ajax: {
+            url: "https://api.github.com/search/repositories",
+            dataType: 'json',
+            delay: 250,
+            data: function(params) {
+            	console.log(params);
+            	return {
+            		q: params.term,
+            		age: 12
+            	}
+            },
+            processResults: function (data) {
+		      // Transforms the top-level key of the response object from 'items' to 'results'
+		      console.log(data);
+		      return {
+		        results: data.items
+		      };
+		    }
+        },
+        placeholder: 'Search for a repository',
+        minimumInputLength: 1,
+        templateResult: formatResponse,
+        templateSelection: formatState
+    });
+
+
+    // get value of select2 when select
+    $("#select-2").on("select2:select", function (e) { 
+		var select_val = $(e.currentTarget).val();
+		console.log(select_val)
+	});
+
+    </script>
+</body>
+
+</html>

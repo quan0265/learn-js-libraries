@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>select 2</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+<style type="text/css">
+.select2-container {
+    display: block;
+    min-width: 100%;
+}
+</style>
+
+
+<!-- api test: https://api.github.com/search/repositories?term=sel&_type=query&q=sel  -->
+
+<body>
+    <!-- multi select, template result, templage  -->
+    <div class="s2-example">
+        <select id="js-example-basic-hide-search-multi" class="js-states form-control" name="select[]" multiple="multiple">
+            <option data-id="1" value="1">name 1</option>
+            <option data-id="2" value="2">name 2</option>
+            <option data-id="3" value="3">name 3</option>
+            <option data-id="4" value="4">name 4</option>
+            <option data-id="5" value="1">name 1</option>
+            <option data-id="6" value="2">name 2</option>
+            <option data-id="7" value="3">name 3</option>
+            <option data-id="8" value="4">name 4</option>
+        </select>
+    </div>
+    <pre data-fill-from="#js-code-example-basic-hide-search-multi"></pre>
+    <script type="text/javascript" id="js-code-example-basic-hide-search-multi">
+	    function formatState(state) {
+	        if (!state.id) {
+	            return state.text;
+	        }
+	        console.log(state);
+	        console.log(state.element.getAttribute('data-id'));
+
+	        var baseUrl = "/user/pages/images/flags";
+	        var $state = $(
+	            '<span><img class="img-flag" /> <span></span></span>'
+	        );
+
+	        // Use .text() instead of HTML string concatenation to avoid script injection issues
+	        $state.find("span").text(state.text);
+	        $state.find("img").attr("src", baseUrl + "/" + state.element.value.toLowerCase() + ".png");
+
+	        return $state;
+	    };
+
+	    function formatResponse(res) {
+	    	console.log(res);
+	    	console.log(res.text);
+	    	var html = $(
+	    			'<span><span></span></span>'
+	    		);
+	    	html.find('span').text(res.text);
+	    	return html;
+	    }
+
+	    $('#js-example-basic-hide-search-multi').select2({
+	    	minimumInputLength: 2,
+			templateResult: formatResponse,
+	    	templateSelection: formatState
+	    });
+
+	    // $('#js-example-basic-hide-search-multi').on('select2:opening select2:closing', function(event) {
+	    //     var $searchfield = $(this).parent().find('.select2-search__field');
+	    //     $searchfield.prop('disabled', true);
+	    // });
+
+    </script>
+</body>
+
+</html>
