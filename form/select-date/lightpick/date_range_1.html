@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>lightpick</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.2.5/css/lightpick.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightpick@1.2.5/lightpick.js"></script>
+</head>
+<body>
+	
+<!-- https://wakirin.github.io/Lightpick/#configuration -->
+<input type="text" id="demo-2" class="form-control form-control-sm"/>
+
+<hr>
+
+<input type="text" id="demo-11_1" class="form-control form-control-sm"/>
+<input type="text" id="demo-11_2" class="form-control form-control-sm"/>
+
+<script type="text/javascript">
+
+function getDaysInMonth(year, month) {
+ 	return new Date(year, month, 0).getDate();
+}
+var date = new Date();
+var current_year = date.getFullYear();
+var current_month = date.getMonth() + 1;
+
+var picker = new Lightpick({
+    field: document.getElementById('demo-2'),
+    singleDate: false,
+    startDate: moment().startOf('month').add(0, 'day'),
+    endDate: moment().add(0, 'month').endOf('month').subtract(0, 'day'),
+    // onSelect: function(start, end){
+    //         var str = '';
+    //         str += start ? start.format('Do MMMM YYYY') + ' to ' : '';
+    //         str += end ? end.format('Do MMMM YYYY') : '...';
+    //         // document.getElementById('result-2').innerHTML = str;
+    //         console.log(end.format('MMMM YYYY'))
+    //     },
+    onClose: function() {
+    	if (this.getStartDate() && this.getEndDate()) {
+    		var date_start = this.getStartDate().format('YYYY-M-D')
+	    	var date_end = this.getEndDate().format('YYYY-M-D')
+	    	console.log(date_start)
+	    	console.log(date_end)
+    	}
+
+    }
+});
+
+console.log(picker)
+
+var picker = new Lightpick({
+    field: document.getElementById('demo-11_1'),
+    secondField: document.getElementById('demo-11_2'),
+    repick: true,
+    startDate: moment().startOf('month').add(7, 'day'),
+    endDate: moment().add(1, 'month').endOf('month').subtract(7, 'day'),
+    // startDate: moment('2022-01-01'), 
+    // endDate: moment('2022-01-30'),
+    onSelect: function(start, end){
+        var str = '';
+        str += start ? start.format('Do MMMM YYYY') + ' to ' : '';
+        str += end ? end.format('Do MMMM YYYY') : '...';
+        // document.getElementById('result-11').innerHTML = str;
+    }
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

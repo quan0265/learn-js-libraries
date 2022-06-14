@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>date range - daterangepicker</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</head>
+
+<body>
+
+	<!-- https://www.daterangepicker.com/ -->
+
+
+    <!-- <input type="text" name="daterange" value="2022/01/01 - 2022/01/30" /> // error -->
+    <!-- <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" /> -->
+    <input type="text" name="daterange" value="" />
+
+    <script>
+	function daysInMonth (month, year) {
+		// daysInMonth(7,2009); // 31
+	    return new Date(year, month, 0).getDate();
+	}
+
+    $(function() {
+
+        // startDate: moment().startOf('month').add(0, 'day'), // + day
+        // endDate: moment().add(0, 'month').endOf('month').subtract(0, 'day'), // - day
+        
+        // startDate: moment().year(year).month(month - 1).date('1'),
+        // endDate: moment().year(year).month(month - 1).endOf('month'),
+
+        // startDate: moment('2022-01-01'), 
+        // endDate: moment('2022-01-30'),
+        $('input[name="daterange"]').daterangepicker({
+            opens: 'left',
+            // autoUpdateInput: false,
+            // startDate: moment().startOf('months'), // dau thang
+            // endDate: moment().endOf('months'), // cuoi thang
+            startDate: moment('2022-01-01'), 
+            endDate: moment('2022-01-30'),
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        }, function(start, end, label) {
+            console.log("A new date selection was made: " + start.format('YYYY-MM-01') + ' to ' + end.format('YYYY-MM-DD'));
+        });
+    });
+    </script>
+</body>
+
+</html>
