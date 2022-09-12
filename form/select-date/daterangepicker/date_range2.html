@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>date range - daterangepicker</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</head>
+
+<body>
+
+	<!-- https://www.daterangepicker.com/ -->
+
+    <!-- <input type="text" name="range" value="2022/01/01 - 2022/01/30" /> // error -->
+    <!-- <input type="text" name="range" value="01/01/2018 - 01/15/2018" /> -->
+    <input type="text" name="range" value="2022-01-01 - 2022-06-01" placeholder="All time" />
+
+    <!-- single -->
+    <input type="text" name="date_end" value="" placeholder="All time" />
+
+    <script>
+	function daysInMonth (month, year) {
+		// daysInMonth(7,2009); // 31
+	    return new Date(year, month, 0).getDate();
+	}
+
+    $(function() {
+
+        // Date mặc định là hiển thị theo value input ban đầu
+        var obj_date = {
+            opens: 'left',
+            autoUpdateInput: false,
+            // singleDatePicker: true,
+            // startDate: moment().startOf('month').format('DD/MM/YYYY'),
+            // endDate: moment().endOf('month').format('DD/MM/YYYY'),
+            locale: {
+                format: 'YYYY-MM-DD'
+            },
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }
+        // $('body [name=range]').val("2022-01-01 - 2022-06-01")
+        $('body [name=range]').daterangepicker(obj_date, function(start, end, label) {
+            // var range_value = start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD')
+            // $('body [name=range]').val(range_value)
+        })
+        // change date
+        $('body [name=range]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+        });
+
+
+
+        // Signle date
+        var obj_date = {
+            opens: 'left',
+            autoUpdateInput: false,
+            singleDatePicker: true,
+            // startDate: moment().startOf('month').format('DD/MM/YYYY'),
+            // endDate: moment().endOf('month').format('DD/MM/YYYY'),
+            locale: {
+                format: 'YYYY-MM-DD'
+            }
+        }
+        // $('body [name=range]').val("2022-01-01")
+        $('body [name=date_end]').daterangepicker(obj_date, function(start, end, label) {
+            // var range_value = start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD')
+            // $('body [name=range]').val(range_value)
+        })
+        // change date
+        $('body [name=date_end]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        });
+
+    });
+    </script>
+</body>
+
+</html>
