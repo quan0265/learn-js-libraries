@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>tinymce</title>
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/4/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+<body>
+	
+
+
+
+<form action="">
+	<textarea name="content">
+		
+	</textarea>
+</form>
+
+
+
+
+
+
+
+<script type="text/javascript">
+	tinymce.init({
+        selector: "textarea[name=content]", theme: "modern", width: '100%', height: '680px',
+        language: "vi_VN",
+        content_style: "img {max-width: 100%;}",
+        plugins: [
+            "advlist autolink fullscreen link image lists charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+            "table contextmenu directionality emoticons paste textcolor responsivefilemanager code"
+        ],
+        menubar: true,
+        toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
+        toolbar2: "| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | print preview code | fullscreen",
+        image_advtab: true,
+
+        relative_urls: false,
+        browser_spellcheck: true,
+        external_filemanager_path: "/themes/adminlte242/bower_components/rfm/",
+        filemanager_title: "Duyệt tài liệu",
+        file_picker_types: 'file image media',
+        external_plugins: {
+            "filemanager": "/themes/adminlte242/bower_components/rfm/plugin.min.js"
+        },
+        filemanager_sort_by: 'date',
+        filemanager_descending: 1,
+        entity_encoding: "raw",
+        code_dialog_width: 1000,
+        code_dialog_height: 500
+
+    });
+</script>
+
+</body>
+</html>
