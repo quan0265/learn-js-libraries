@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jquery ui</title>
+    <link rel="stylesheet" href="D://assets/vendor/jquery-ui/theme.min.css">
+    <script type="text/javascript" src="D://assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="D://assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+    <style type="text/css">
+    #sortable {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 60%;
+    }
+
+    #sortable li {
+        margin: 0 3px 3px 3px;
+        padding: 0.4em;
+        padding-left: 1.5em;
+        font-size: 1.4em;
+        height: 18px;
+    }
+
+    #sortable li span {
+        position: absolute;
+        margin-left: -1.3em;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- <ul id="sortable">
+        <li class="ui-state-default">Item a</li>
+        <li class="ui-state-default">Item b</li>
+        <li class="ui-state-default">Item c</li>
+        <li class="ui-state-default">Item d</li>
+    </ul> -->
+
+    <style type="text/css">
+    	#sortable>div {
+    		padding: 8px 16px;
+    		border: 1px solid #ccc;
+    		margin-bottom: 4px;
+    		background: #fff;
+    	}
+    </style>
+    <div id="sortable">
+    	<div>item a</div>
+    	<div>item b</div>
+    	<div>item c</div>
+    	<div>item d</div>
+    </div>
+
+    <div>
+    	<br>
+    	<button id="btn_add">Add item</button>
+    </div>
+    <script type="text/javascript">
+        var sortable = $("#sortable").sortable({
+        	delay: 150,
+        	start: function (e, ui) {
+
+        	},
+        	change: function (e, ui) {
+
+        	},
+        	update: function (e, ui) {
+        		// console.log(ui)
+        	},
+        	stop: function (e, ui) {
+        		console.log(ui)
+        		console.log(e)
+        	}
+        });
+
+        $('#btn_add').on('click', function () {
+        	// $("#sortable").append('<li class="ui-state-default">item e</li>')
+        	$("#sortable").append('<div>item e</div>')
+        	$("#sortable").sortable('refresh')
+        })
+
+    </script>
+</body>
+
+</html>
