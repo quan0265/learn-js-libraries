@@ -27,9 +27,9 @@ html
     -->
     <div class="s2-example">
         <select id="select-2" class="js-states form-control" multiple="multiple">
-            <option data-id="1" value="1">name 1</option>
-            <option data-id="2" value="2">name 2</option>
-            <option data-id="3" value="3">name 3</option>
+            <option selected data-id="1" value="1">name 1</option>
+            <option selected data-id="2" value="2">name 2</option>
+            <option selected data-id="3" value="3">name 3</option>
             <option data-id="4" value="4">name 4</option>
             <option data-id="5" value="1">name 1</option>
             <option data-id="6" value="2">name 2</option>
@@ -75,7 +75,7 @@ html
             dataType: 'json',
             delay: 250,
             data: function(params) {
-            	console.log(params);
+            	// console.log(params);
             	return {
             		q: params.term,
             		age: 12
@@ -100,6 +100,15 @@ html
 		var select_val = $(e.currentTarget).val();
 		console.log(select_val)
 	});
+
+    // 
+    $('#select-2').on('change', function (e) {
+        this.querySelectorAll('option').forEach(function (item, index) {
+            if (item.selected) {
+                console.log(item)
+            }
+        })
+    });
 
     </script>
 </body>
