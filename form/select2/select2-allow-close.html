@@ -32,9 +32,9 @@
 	<!-- multi select, template result, templage  -->
     <div class="s2-example">
         <select class="js-states form-control form-select" name="name" placeholder="Chọn khu vực" >
-            <option selected="" data-id="" value="">Chọn khu vực</option>
+            <option data-id="" value="">Chọn khu vực</option>
             <option data-id="1" value="1">name 1</option>
-            <option selected="" data-id="2" value="2">name 2</option>
+            <option data-id="2" value="2">name 2</option>
             <option data-id="3" value="3">name 3</option>
             <option data-id="4" value="4">Lorem ipsum dolor sit amet consectetur adipisicing elit.</option>
         </select>
@@ -85,23 +85,18 @@
 
     $('.form-select').each(function() {
         var placeholder = this.getAttribute('placeholder') ? this.getAttribute('placeholder') : ''
-        if (placeholder) {
-            $(this).select2({
-                minimumInputLength: 0,
-                allowClear: true,
-                placeholder: placeholder,
-                // templateResult: formatResponse,
-                // templateSelection: formatState
-            });
+        var select2_obj = {
+            minimumInputLength: 0,
+            // templateResult: formatResponse,
+            // templateSelection: formatState
         }
-        else {
-            $(this).select2({
-                minimumInputLength: 0,
-                // templateResult: formatResponse,
-                // templateSelection: formatState
-            });
-        } 
-
+        select2_obj.allowClear = true
+        select2_obj.placeholder = placeholder
+        if (placeholder) {
+            select2_obj.allowClear = true
+            select2_obj.placeholder = placeholder
+        }
+        $(this).select2(select2_obj)
     })
 
     // $('#select1').on('select2:opening select2:closing', function(event) {
