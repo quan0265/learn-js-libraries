@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>leaflet</title>
+	<link rel="stylesheet" type="text/css" href="D://assets/vendor/leaflet/leaflet.css">
+	<script type="text/javascript" src="D://assets/vendor/leaflet/leaflet.js"></script>
+
+
+</head>
+<body>
+	
+
+
+<div id="map" style="height: 500px;">
+	
+
+
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+	var map = L.map('map').setView([21.0245, 105.8412], 15);
+	L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+	    maxZoom: 20,
+	    subdomains:['mt0','mt1','mt2','mt3']
+	}).addTo(map);
+
+	var marker = L.marker([21.0245, 105.8412], {
+		draggable: true
+	}).addTo(map);
+	marker.on('dragend', function(event) {
+	    var position = marker.getLatLng();
+	    marker.setLatLng(position, {
+	    	draggable: 'true'
+	    }).bindPopup(position).update();
+	    console.log(position)
+	  });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
