@@ -25,11 +25,19 @@
 
 <script type="text/javascript">
 
-	var map = L.map('map').setView([21.0245, 105.8412], 15);
-	L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
-	    maxZoom: 20,
+	var map = L.map('map', {
+		fullscreenControl: {
+	        pseudoFullscreen: true
+	    }
+	}).setView([21.0245, 105.8412], 15);
+	// L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+	//     maxZoom: 20,
+	//     subdomains:['mt0','mt1','mt2','mt3']
+	// }).addTo(map);
+	L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+	    maxZoom: 18,
 	    subdomains:['mt0','mt1','mt2','mt3']
-	}).addTo(map);
+	}).addTo(map);;
 
 	var current_marker = L.marker([21.0245, 105.8412]).addTo(map);
 	map.on('click', function(e) {
