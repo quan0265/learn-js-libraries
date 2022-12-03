@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropzone</title>
+</head>
+
+<body>
+
+	<div class="form-group row">
+        <div class="col-md-12">
+            <p>Cập nhật hình ảnh rõ ràng sẽ cho thuê nhanh hơn</p>
+            <div class="form-group">
+                <div for="browse_photos" class="browse_photos js-dropzone"><i data-feather="upload" style="width: 50px; height: 50px; display: block; margin: 0 auto; pointer-events: none;"></i><span class="js-btn-chon-anh">Thêm Ảnh</span></div>
+            </div>
+            <div class="list_photos row dropzone-previews" id="list-photos-dropzone-previews">
+                                                <div class="photo_item col-md-2 col-3 js-photo-manual">
+                        <div class="photo"><img src="https://pt123.cdn.static123.com/images/thumbs/450x300/fit/2022/12/01/sd-9-1667961891-7356_1669885519.jpg"/></div>
+                        <div class="dz-progress"><span class="dz-upload"></span></div>
+                        <div class="bottom clearfix">
+                            <span class="photo_delete" data-dz-remove><i data-feather="trash-2"></i> Xóa</span>
+                        </div> 
+                        <input name="image_linked[4272395]" value="2022/12/01/sd-9-1667961891-7356_1669885519.jpg" type="hidden"/>
+                    </div>
+                                        </div>
+            <div id="tpl" style="display:none">
+                <div class="photo_item col-md-2 col-3 js-photo-manual">
+                    <div class="photo"><img data-dz-thumbnail /></div>
+                    <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                    <div class="bottom clearfix">
+                        <span class="photo_delete" data-dz-remove><i data-feather="trash-2"></i> Xóa</span>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+	
+    <!-- xem ví dụ dropzone + sort jquery ui: https://phongtro123.com/quan-ly/sua-tin-dang/611721 -->
+    <script type="text/javascript">
+    var manage_post = manage_post || {};
+    manage_post = {
+        form: '.js-frm-manage-post',
+        dl_package_price: '.js-package-price',
+        dl_package_day: '.js-package-days',
+        dl_package_deadline: '.js-package-deadline',
+        dl_package_grand_total: '.js-package-grand-total',
+        dl_package_use_label: '.js-use-label',
+        dl_package_title: '.js-package-title',
+        dl_package_title_ck: '.js-package-title-ck',
+        dl_package_time_type: '.js-time-type',
+        dl_package_time_type_ck: '.js-time-type-ck',
+        dl_package_time_type_so_luong: '.js-time-type-so-luong',
+        dl_package_label_price: '.js-package-label-price',
+        constant_day: 'ngĂ y',
+        constant_week: 'tuáº§n',
+        constant_month: 'thĂ¡ng',
+        constant_vnd: 'Ä‘',
+        package_type: 'day',
+        return_url: '',
+        post: {},
+        packages: {},
+        total_time: 10,
+        total_day: 10,
+        amount: 0,
+        package: false,
+        use_label: 0,
+        label_price: 0,
+        payment_method: 'account',
+        images: [],
+        formatNumber(number, n = 0, x = 3, s = '.', c = ',') {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+                num = Number.parseFloat(number).toFixed(Math.max(0, ~~n));
+            return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+        },
+        findPackageById: function(package_id) {
+            for (var i = 0; i < this.packages.length; i++) {
+                if (this.packages[i].id == package_id)
+                    return this.packages[i];
+            }
+            return false;
+        },
+        renderHtmlPrice: function() {
+            if (!this.package) return;
+
+            this.total_day = this.total_day || $(this.dl_package_day).attr('data-total-day') || this.package.minday;
+            if (this.payment_method == 'account') {
+                if (this.amount > account_balance_number) {
+                    $('.js-note-outofmoney').removeClass('hidden');
+                    $(this.form).find('button[type="submit"]').addClass('disabled');
+                    $(this.form).find('button[type="submit"]').prop('disabled', true);
+                } else {
+                    $('.js-note-outofmoney').addClass('hidden');
+                    $(this.form).find('button[type="submit"]').removeClass('disabled');
+                    $(this.form).find('button[type="submit"]').prop('disabled', false);
+                }
+            } else {
+                $(this.form).find('button[type="submit"]').removeClass('disabled');
+                $(this.form).find('button[type="submit"]').prop('disabled', false);
+            }
+
+            if ($(this.form).find('#action').val() == 'up_top') {
+                var price_up = this.package.price_up;
+                //price_up = 0;
+                $(this.dl_package_price).html(this.formatNumber(price_up) + ' Ä‘á»“ng');
+                $(this.dl_package_grand_total).html(this.formatNumber(price_up) + ' Ä‘á»“ng');
+                return;
+            }
+
+            // label
+            $(this.dl_package_label_price).html(this.formatNumber(this.label_price));
+
+            if (this.package_type == 'day') {
+                $(this.dl_package_price).html(this.formatNumber(this.package.price) + '/' + this.constant_day);
+                $(this.dl_package_time_type).html("ÄÄƒng theo ngĂ y");
+                // $(this.dl_package_time_type_ck).html("Dang theo ngay");
+                $(this.dl_package_time_type_so_luong).html(this.total_time + ' ngay');
+            }
+            if (this.package_type == 'week') {
+                $(this.dl_package_price).html(this.formatNumber(this.package.price_week) + '/' + this.constant_week);
+                $(this.dl_package_time_type).html("ÄÄƒng theo tuáº§n");
+                // $(this.dl_package_time_type_ck).html("Dang theo tuan");
+                $(this.dl_package_time_type_so_luong).html(this.total_time + ' tuan');
+            }
+            if (this.package_type == 'month') {
+                $(this.dl_package_price).html(this.formatNumber(this.package.price_month) + '/' + this.constant_month);
+                $(this.dl_package_time_type).html("ÄÄƒng theo thĂ¡ng");
+                // $(this.dl_package_time_type_ck).html("Dang theo thang");
+                $(this.dl_package_time_type_so_luong).html(this.total_time + ' thang');
+            }
+
+            $(this.dl_package_day).html(this.total_day);
+            $(this.dl_package_title).html(this.package.title);
+            $(this.dl_package_title_ck).html(this.package.slug);
+
+            $(this.dl_package_grand_total).html(this.formatNumber(this.amount) + this.constant_vnd);
+
+            var d = $(this.dl_package_deadline).attr('data-current-expired') ? new Date($(this.dl_package_deadline).attr('data-current-expired').replace(/-/g, '/')) : new Date();
+            if ($(this.form).find('#action').val() == 'add_label') {
+                d.setDate(d.getDate() + parseInt(this.total_day) + 1);
+            } else {
+                d.setDate(d.getDate() + parseInt(this.total_day));
+            }
+            $(this.dl_package_deadline).html(d.getHours() + ":" + d.getMinutes() + ', ' + d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear());
+
+        },
+        calculatorPrice: function() {
+            if (!this.package) return;
+
+            if ($(this.form).find('#action').val() == 'up_top') {
+                this.amount = this.package.price_up;
+                //this.amount = 0;
+                //return;
+            }
+            if (this.package_type == 'day') {
+                // if(typeof this.total_time === 'undefined' || !this.total_time){
+                // 	this.total_time = $(this.form).find('select[name="total_day"]').val();
+                // 	console.log('select', $(this.form).find('select[name="total_day"]').val());
+                // }
+                this.amount = this.total_time * this.package.price;
+                this.total_day = this.total_time;
+            }
+            if (this.package_type == 'week') {
+                this.amount = this.total_time * this.package.price_week;
+                this.total_day = this.total_time * 7;
+            }
+            if (this.package_type == 'month') {
+                this.amount = this.total_time * this.package.price_month;
+                this.total_day = this.total_time * 30;
+            }
+
+
+            // if(this.use_label > 0){
+            // 	this.total_day = this.total_day || $(this.dl_package_day).attr('data-total-day');
+            //     this.amount += this.label_price * this.total_day;
+            // }
+
+            if (this.use_label > 0) {
+                if ($(this.form).find('#action').val() == 'add_label') {
+                    this.amount = 0;
+                    this.total_day = $(this.dl_package_day).attr('data-total-day') || this.total_day;
+                } else {
+                    this.total_day = this.total_day || $(this.dl_package_day).attr('data-total-day');
+                }
+                // this.total_day = this.total_day || $(this.dl_package_day).attr('data-total-day');
+                this.amount += this.label_price * this.total_day;
+            }
+
+            this.renderHtmlPrice();
+        },
+        changeTotalDay: function() {
+            var self = this;
+            if (!self.package) return;
+
+            if (self.package_type == 'day') {
+                self.total_time = $(self.form).find('select[name="total_day"]').length ? $(self.form).find('select[name="total_day"]').val() : 10;
+                if (self.total_time < self.package.minday) {
+                    self.total_time = self.package.minday;
+                }
+                if ($(this.form).find('#action').val() != 're_new_vip') {
+                    if (self.package.minday >= 10) {
+                        for (var i = 5; i < self.package.minday; i++) {
+                            $('select[name="total_day"] option[value="' + i + '"]').attr("disabled", true);
+                        }
+                    } else {
+                        for (var i = 5; i <= 10; i++) {
+                            $('select[name="total_day"] option[value="' + i + '"]').removeAttr("disabled");
+                        }
+                    }
+                } else {
+
+                    for (var i = 3; i < 5; i++) {
+                        $('select[name="total_day"] option[value="' + i + '"]').attr("disabled", true);
+                    }
+
+                    for (var i = 3; i < 5; i++) {
+                        $('select[name="total_day"] option[value="' + i + '"]').removeAttr("disabled");
+                    }
+                }
+                $(self.form).find('select[name="total_day"]').val(self.total_time).trigger('change');
+            }
+            if (self.package_type == 'week') {
+                self.total_time = $(self.form).find('select[name="total_week"]').length ? $(self.form).find('select[name="total_week"]').val() : 1;
+                if (self.package.code == 'normal' && self.total_time < 2) {
+                    self.total_time = 2;
+                }
+            }
+            if (self.package_type == 'month') {
+                self.total_time = $(self.form).find('select[name="total_month"]').length ? $(self.form).find('select[name="total_month"]').val() : 1;
+            }
+            $(self.form).find('select[name="total_day"]').on('change', function() {
+                self.total_time = $(this).val();
+                self.calculatorPrice();
+            });
+            $(self.form).find('select[name="total_week"]').on('change', function() {
+                if (self.package.code == 'normal' && self.package_type == 'week' && $(this).val() == 1) {
+                    Swal.fire({
+                        title: 'ThĂ´ng bĂ¡o',
+                        html: 'Báº¡n pháº£i chá»n tá»‘i thiá»ƒu 2 tuáº§n cho gĂ³i tin nĂ y',
+                        type: 'info'
+                    });
+                    $(self.form).find('select[name="total_week"]').val(2).trigger('change');
+                    return;
+                }
+                self.total_time = $(this).val();
+
+                self.calculatorPrice();
+            });
+            $(self.form).find('select[name="total_month"]').on('change', function() {
+                self.total_time = $(this).val();
+                self.calculatorPrice();
+            });
+        },
+        changePackageTime: function() {
+            var self = this;
+            $(self.form).find('select[name="package_type"]').on('change', function() {
+                self.package_type = $(this).val();
+
+                $('.js-package-type').addClass('hidden');
+                $('.js-package-type-' + self.package_type).removeClass('hidden');
+                if (self.package.code == 'normal' && self.package_type == 'week') {
+                    $(self.form).find('select[name="total_week"]').val(2).trigger('change');
+                } else {
+                    $(self.form).find('select[name="total_week"]').val(1).trigger('change');
+                }
+
+                self.changeTotalDay();
+                self.calculatorPrice();
+                $(self.form).find('select[name="package"] option').each(function(index, el) {
+                    $(el).text($(el).attr('data-title') + ' ' + $(el).attr('data-price-' + self.package_type));
+                });
+            });
+        },
+        changePackage: function() {
+            var self = this;
+            $(self.form).find('select[name="package"]').on('change', function() {
+                self.package = self.findPackageById($(this).val());
+                self.label_price = self.package.price_label;
+                // self.total_time = self.package.minday;
+                $(self.form).find('select[name="total_day"]').val(self.package.minday).trigger('change');
+                if (self.package.price == 0) {
+                    $('.js-group-type-date').addClass('hidden');
+                    $('.js-group-package-type').addClass('hidden');
+                    $('.js-group-type-label').addClass('hidden');
+                    $('.js-payment-item').addClass('hidden');
+                    $('.js-payment-account').removeClass('hidden');
+                } else {
+                    $('.js-group-type-date').removeClass('hidden');
+                    $('.js-group-package-type').removeClass('hidden');
+                    $('.js-group-type-label').removeClass('hidden');
+                    $('.js-payment-item').removeClass('hidden');
+
+                    if (self.package.code == 'normal' && self.package_type == 'week') {
+                        $(self.form).find('select[name="total_week"]').val(2).trigger('change');
+                    } else {
+                        $(self.form).find('select[name="total_week"]').val(1).trigger('change');
+                    }
+                }
+
+                self.changeTotalDay();
+                self.calculatorPrice();
+            });
+        },
+        changePaymentMethod: function() {
+            var self = this;
+            $(self.form).find('input[name="payment_method"]').on('change', function() {
+                self.payment_method = $(this).val();
+
+                self.calculatorPrice();
+            });
+        },
+        changePostLabel: function() {
+            var self = this;
+            $(self.form).find('input[name="post_label"]').on('change', function() {
+                self.use_label = $(self.form).find('input[name="post_label"]:checked').val() ? parseInt($(self.form).find('input[name="post_label"]:checked').val()) : 0;
+                if (self.use_label > 0) {
+                    $(self.dl_package_use_label).removeClass('hidden');
+                } else {
+                    $(self.dl_package_use_label).addClass('hidden');
+                }
+
+                self.calculatorPrice();
+            });
+
+            self.use_label = $(self.form).find('input[name="post_label"]:checked').val() ? parseInt($(self.form).find('input[name="post_label"]:checked').val()) : 0;
+            self.calculatorPrice();
+
+        },
+        upPost: function() {
+            var self = this;
+            $(self.form).on('submit', function(e) {
+                e.preventDefault();
+                var action = $(this).find('#action').val();
+                self.return_url = $(this).find('#return_url').val();
+
+                if (action != 'up_top' || $(self.form).find('button[type="submit"]').hasClass('disabled')) return;
+
+                var button_text = $(self.form).find('button[type="submit"]').html();
+                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').addClass('disabled');
+                $(self.form).find('button[type="submit"]').prop('disabled', true);
+
+                $.ajax({
+                    type: "POST",
+                    url: base_api_url + "/post/promote",
+                    data: { 'post_id': self.post.id },
+                    success: function(response) {
+                        $(self.form).find('button[type="submit"]').html(button_text);
+                        $(self.form).find('button[type="submit"]').removeClass('disabled');
+                        $(self.form).find('button[type="submit"]').removeAttr('disabled');
+                    }
+                });
+            });
+
+        },
+        hidePost: function() {
+            var self = this;
+            $(self.form).on('submit', function(e) {
+                e.preventDefault();
+                var action = $(this).find('#action').val();
+                self.return_url = $(this).find('#return_url').val();
+
+                if (action != 'hidden_post') return;
+                var button_text = $(self.form).find('button[type="submit"]').html();
+                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').prop('disabled', true);
+                $(self.form).find('button[type="submit"]').addClass('disabled');
+
+                if (self.is_request) return;
+                self.is_request = true;
+
+                $.ajax({
+                    type: "POST",
+                    url: base_api_url + "/post/hidden",
+                    data: { 'post_id': self.post.id, 'reason': $(self.form).find('input[name="reason_hidden"]:checked').val() },
+                    success: function(response) {
+                        $(self.form).find('button[type="submit"]').html(button_text);
+                        $(self.form).find('button[type="submit"]').removeClass('disabled');
+                        $(self.form).find('button[type="submit"]').removeAttr('disabled');
+                        self.is_request = false;
+                    }
+                });
+            });
+
+            $('.js-choose-reason').on('click', function(e) {
+                $(self.form).find('button[type="submit"]').removeAttr('disabled').removeClass('disabled');
+            });
+        },
+        deletePost: function() {
+            var self = this;
+            $(self.form).on('submit', function(e) {
+                e.preventDefault();
+                var action = $(this).find('#action').val();
+                self.return_url = $(this).find('#return_url').val();
+                if (action != 'delete_post') return;
+
+                var button_text = $(self.form).find('button[type="submit"]').html();
+                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').prop('disabled', true);
+                $(self.form).find('button[type="submit"]').addClass('disabled');
+
+                $.ajax({
+                    type: "POST",
+                    url: base_api_url + "/post/delete",
+                    data: { 'post_id': self.post.id },
+                    success: function(response) {
+                        $(self.form).find('button[type="submit"]').html(button_text);
+                    }
+                });
+            });
+        },
+        rePost: function() {
+            var self = this;
+            $(self.form).on('submit', function(e) {
+                e.preventDefault();
+
+                var action = $(this).find('#action').val();
+                if (action != 're_new') return;
+
+                if (self.payment_method == 'account' && self.amount > account_balance_number) {
+                    Swal.fire('Lá»—i', "Báº¡n khĂ´ng Ä‘á»§ tiá»n Ä‘á»ƒ Ä‘Äƒng láº¡i tin", 'error');
+                    $(self.form).find('button[type="submit"]').addClass('disabled');
+                    $(self.form).find('button[type="submit"]').prop('disabled', true);
+                    return;
+                }
+
+                if ($(self.form).find('button[type="submit"]').hasClass('disabled')) return;
+
+                self.return_url = $(this).find('#return_url').val();
+
+                var button_text = $(self.form).find('button[type="submit"]').html();
+                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').prop('disabled', true);
+                $(self.form).find('button[type="submit"]').addClass('disabled');
+
+                var formData = new FormData($(self.form)[0]);
+                formData.append('action', action);
+                formData.append('package_id', self.package.id);
+                formData.append('total_day_vip', self.total_time);
+                formData.append('package_type', self.package_type);
+                formData.append('label', self.use_label);
+                formData.append('total_time', self.total_time);
+                formData.append('payment_method', self.payment_method);
+
+                $.ajax({
+                    type: "POST",
+                    url: base_api_url + "/post/recreate",
+                    // data: {action:action,
+                    // 	post_id:self.post.id,
+                    // 	package_id:self.package.id,
+                    // 	total_day_vip:self.total_time,
+                    //     package_type:self.package_type,
+                    //     label:self.use_label,
+                    //     total_time:self.total_time,
+                    //     payment_method:self.payment_method
+                    // },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $(self.form).find('button[type="submit"]').html(button_text);
+                    }
+                });
+
+            });
+        },
+        upgradePost: function() {
+            var self = this;
+            $(self.form).on('submit', function(e) {
+                e.preventDefault();
+
+                var action = $(this).find('#action').val();
+                if (action != 'upgrade') return;
+
+                if (self.payment_method == 'account' && self.amount > account_balance_number) {
+                    Swal.fire('Lá»—i', "Báº¡n khĂ´ng Ä‘á»§ tiá»n Ä‘á»ƒ Gia háº¡n láº¡i tin", 'error');
+                    $(self.form).find('button[type="submit"]').addClass('disabled');
+                    $(self.form).find('button[type="submit"]').prop('disabled', true);
+                    return;
+                }
+
+                if ($(self.form).find('button[type="submit"]').hasClass('disabled')) return;
+
+                if (self.is_request) return;
+                self.is_request = true;
+
+                self.return_url = $(this).find('#return_url').val();
+
+                var button_text = $(self.form).find('button[type="submit"]').html();
+                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').prop('disabled', true);
+                $(self.form).find('button[type="submit"]').addClass('disabled');
+
+                $.ajax({
+                    type: "POST",
+                    url: base_api_url + "/post/upgrade",
+                    data: {
+                        action: action,
+                        post_id: self.post.id,
+                        package_id: self.package.id,
+                        total_day_vip: self.total_time,
+                        package_type: self.package_type,
+                        label: self.use_label,
+                        total_time: self.total_time,
+                        payment_method: self.payment_method
+                    },
+                    success: function(response) {
+                        $(self.form).find('button[type="submit"]').html(button_text);
+                        $(self.form).find('button[type="submit"]').removeClass('disabled');
+                        $(self.form).find('button[type="submit"]').removeAttr('disabled');
+                        self.is_request = false;
+                    }
+                });
+
+            });
+        },
+        rePostVip: function() {
+            var self = this;
+
+            $(self.form).on('submit', function(e) {
+                e.preventDefault();
+
+                if (self.payment_method == 'account' && self.amount > account_balance_number) {
+                    $(self.form).find('button[type="submit"]').addClass('disabled');
+                    $(self.form).find('button[type="submit"]').prop('disabled', true);
+                    return;
+                }
+
+                var action = $(this).find('#action').val();
+                self.return_url = $(this).find('#return_url').val();
+                if (action != 're_new_vip') return;
+                var button_text = $(self.form).find('button[type="submit"]').html();
+                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+
+
+                if (self.is_request) return;
+                self.is_request = true;
+
+                $.ajax({
+                    type: "POST",
+                    url: base_api_url + "/post/extend",
+                    data: {
+                        action: action,
+                        post_id: self.post.id,
+                        package_id: self.package.id,
+                        total_day_vip: self.total_time,
+                        package_type: self.package_type,
+                        label: self.use_label,
+                        total_time: self.total_time,
+                        payment_method: self.payment_method
+                    },
+                    success: function(response) {
+                        $(self.form).find('button[type="submit"]').html(button_text);
+                        $(self.form).find('button[type="submit"]').removeClass('disabled');
+                        $(self.form).find('button[type="submit"]').removeAttr('disabled');
+                        self.is_request = false;
+                    }
+                });
+
+            });
+        },
+        rePay: function() {
+            var self = this;
+
+            $(self.form).on('submit', function(e) {
+                e.preventDefault();
+
+                if (self.payment_method == 'account' && self.amount > account_balance_number) {
+                    $(self.form).find('button[type="submit"]').addClass('disabled');
+                    $(self.form).find('button[type="submit"]').prop('disabled', true);
+                    return;
+                }
+
+                var action = $(this).find('#action').val();
+                self.return_url = $(this).find('#return_url').val();
+                if (action != 're_pay') return;
+                var button_text = $(self.form).find('button[type="submit"]').html();
+                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').addClass('disabled');
+                $(self.form).find('button[type="submit"]').prop('disabled', true);
+
+                if (self.is_request) return;
+                self.is_request = true;
+
+                $.ajax({
+                    type: "POST",
+                    url: base_api_url + "/post/repay",
+                    data: {
+                        action: action,
+                        post_id: self.post.id,
+                        package_id: self.package.id,
+                        total_day_vip: self.total_time,
+                        package_type: self.package_type,
+                        label: self.use_label,
+                        total_time: self.total_time,
+                        payment_method: self.payment_method
+                    },
+                    success: function(response) {
+                        $(self.form).find('button[type="submit"]').html(button_text);
+                        $(self.form).find('button[type="submit"]').removeClass('disabled');
+                        $(self.form).find('button[type="submit"]').removeAttr('disabled');
+                        self.is_request = false;
+                    }
+                });
+
+            });
+        },
+        switchPost: function() {
+            var self = this;
+
+            $(self.form).on('submit', function(e) {
+                e.preventDefault();
+
+                var action = $(this).find('#action').val();
+                var estate_switch_id = $(this).find('#estate_switch_id').val();
+                self.return_url = $(this).find('#return_url').val();
+
+                if (action != 'switch_post') return;
+                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+
+                $.ajax({
+                    type: "POST",
+                    url: base_api_url + "/post/switch",
+                    data: {
+                        action: action,
+                        post_id: self.post.id,
+                        estate_switch_id: estate_switch_id
+                    }
+                });
+
+            });
+        },
+        transferPost: function() {
+            var self = this;
+
+            $(self.form).on('submit', function(e) {
+                e.preventDefault();
+
+                var action = $(this).find('#action').val();
+                self.return_url = $(this).find('#return_url').val();
+
+                if (action != 'transfer_post') return;
+                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+
+                $.ajax({
+                    type: "POST",
+                    url: base_api_url + "/post/transfer",
+                    data: {
+                        action: action,
+                        post_id: self.post.id,
+                    }
+                });
+
+            });
+        },
+        addPostLabel: function() {
+            var self = this;
+            $(self.form).on('submit', function(e) {
+                e.preventDefault();
+                var action = $(this).find('#action').val();
+                if (action != 'add_label') return;
+
+                var label = $(this).find('input[name="post_label"]:checked').val();
+                self.return_url = $(this).find('#return_url').val();
+
+                if (!label) {
+                    toastr.error("Báº¡n chÆ°a chá»n nhĂ£n", "Lá»—i");
+                    return;
+                }
+
+                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $.ajax({
+                    type: "POST",
+                    url: base_api_url + "/post/addlabel",
+                    data: { 'post_id': self.post.id, 'label': label, payment_method: self.payment_method }
+                });
+            });
+        },
+        uploadImage: function() {
+            if (typeof Dropzone === 'undefined') return;
+            if ($('.js-dropzone').length == 0) return;
+            // INIT DROPZONE
+            var self = this;
+            var btn_submit = $(".js-form-submit-data").find('button[type="submit"]');
+            var btn_chon_anh = $('.js-btn-chon-anh');
+            var btn_chon_anh_text = btn_chon_anh.html();
+            var dropzoneOptions = {
+                url: "https://static123.com/api/upload",
+                acceptedFiles: ".jpg,.jpeg,.png",
+                maxFilesize: 10,
+                maxFiles: 20,
+                previewsContainer: '#list-photos-dropzone-previews',
+                previewTemplate: $('#tpl').length > 0 ? document.querySelector('#tpl').innerHTML : '',
+                dictRemoveFileConfirmation: "Bạn chắc chán muốn xóa ảnh"
+            };
+
+            var myDropzone = new Dropzone(".js-dropzone", dropzoneOptions);
+
+            var _window_with = $(document).width();
+            var _action = 'click';
+            if (_window_with <= 480) {
+                _action = 'touchstart tap';
+            }
+
+            // var sel = document.getElementById('list-photos-dropzone-previews');
+            // var sortable = Sortable.create(sel, {'delayOnTouchOnly':true, 'delay':200});	
+            // var sortable = Sortable.create(sel);	
+            $('#list-photos-dropzone-previews').sortable();
+            // Bind manual remove
+            $('#list-photos-dropzone-previews').on(_action, '.js-photo-manual .photo_delete', function(event) {
+                var _self = $(this);
+                if (myDropzone.options.dictRemoveFileConfirmation) {
+                    return Dropzone.confirm(myDropzone.options.dictRemoveFileConfirmation, function() {
+                        _self.closest('.js-photo-manual').remove();
+                    });
+                } else {
+                    $(this).closest('.js-photo-manual').remove();
+                }
+            });
+            // $('.js-photo-manual').each(function (index, element) {
+            // 	$(element).on('tap', function(event){
+            // 		event.preventDefault();
+            // 		var _self = $(this);
+            // 		Swal.fire({
+            // 			title: 'ThĂ´ng bĂ¡o',
+            // 			text: myDropzone.options.dictRemoveFileConfirmation,
+            // 			showCancelButton: true,
+            // 			confirmButtonColor: '#3085d6',
+            // 			cancelButtonColor: '#d33',
+            // 			confirmButtonText: 'VĂ¢ng, xĂ³a nĂ³!',
+            // 			cancelButtonText:"KhĂ´ng",
+            // 		}).then((result) => {
+            // 			if (result.value) {
+            // 				_self.closest('.js-photo-manual').remove();
+            // 			}
+            // 		});
+            // 	});
+            // });
+
+            myDropzone.on('sending', function(file, xhr, formData) {
+                formData.append('source', 'phongtro123');
+                formData.append('source_url', window.location.href);
+                btn_submit.addClass('disabled');
+                btn_chon_anh.html('Äang Ä‘Äƒng hĂ¬nh...');
+            });
+
+            myDropzone.on("addedfile", function(file, response) {
+                if ($('.js-photo-manual').length > 20) {
+                    swal('Số lượng ảnh không vượt quá 20', 'error');
+                    myDropzone.removeFile(file);
+                    return;
+                }
+            });
+
+            myDropzone.on("success", function(file, response) {
+                //
+                self.images.push(file);
+                var el_preview = $(file.previewElement);
+                el_preview.append('<input type="hidden" name="image_linked[' + response.id + ']" value="' + response.image_path + '"/>');
+            });
+
+            myDropzone.on("complete", function(file) {
+                btn_submit.removeClass('disabled');
+                btn_chon_anh.html(btn_chon_anh_text);
+            });
+
+        },
+        uploadVideo: function() {
+            if (typeof Dropzone === 'undefined') return;
+            if ($('.js-dropzone-video').length == 0) return;
+            // INIT DROPZONE
+            var self = this;
+            var btn_submit = $(".js-form-submit-data").find('button[type="submit"]');
+            var btn_chon_anh = $('.js-btn-chon-video');
+            var btn_chon_anh_text = btn_chon_anh.html();
+            var btn_submit_text = btn_submit.html();
+            var dropzoneOptions = {
+                url: "https://static123.com/api/upload",
+                maxFiles: 1,
+                maxFilesize: 150,
+                acceptedFiles: ".mov,.mp4",
+                previewsContainer: '#list-videos-dropzone-previews',
+                previewTemplate: $('#tpl-video').length > 0 ? document.querySelector('#tpl-video').innerHTML : '',
+                dictRemoveFileConfirmation: "Báº¡n cháº¯c cháº¯n muá»‘n xĂ³a video nĂ y?"
+            };
+
+            var myDropzone = new Dropzone(".js-dropzone-video", dropzoneOptions);
+
+            // Bind manual remove
+            var _window_with = $(document).width();
+            var _action = 'click';
+            if (_window_with <= 480) {
+                _action = 'touchstart tap';
+            }
+            $('#list-videos-dropzone-previews').on(_action, '.js-video-manual .photo_delete', function(event) {
+                var _self = $(this);
+
+                if (myDropzone.options.dictRemoveFileConfirmation) {
+                    return Dropzone.confirm(myDropzone.options.dictRemoveFileConfirmation, function() {
+                        _self.closest('.js-video-manual').remove();
+                    });
+                } else {
+                    $(this).closest('.js-video-manual').remove();
+                }
+            });
+
+            myDropzone.on('error', function(file) {
+                Swal.fire('Lá»—i', 'Báº¡n chá»‰ Ä‘Æ°á»£c Ä‘Äƒng táº£i 1 video. Vui lĂ²ng xĂ³a Ä‘á»ƒ Ä‘Äƒng láº¡i', 'error');
+                myDropzone.removeFile(file);
+            });
+
+            myDropzone.on('sending', function(file, xhr, formData) {
+                formData.append('source', 'phongtro123');
+                formData.append('source_url', window.location.href);
+                btn_submit.addClass('disabled');
+                btn_chon_anh.html('Äang Ä‘Äƒng video...');
+                btn_submit.html('Äang Ä‘Äƒng video...');
+            });
+
+            myDropzone.on("success", function(file, response) {
+                //
+                var el_preview = $(file.previewElement);
+                el_preview.find('#video > source').attr('src', response.video_url);
+                el_preview.append('<input type="hidden" name="video" value="' + response.video_url + '"/>');
+                document.querySelector('#video').load();
+            });
+
+            myDropzone.on("addedfile", function(file, response) {
+                var _video = $('#video').attr('data-video');
+                if (_video) {
+                    Swal.fire('Lá»—i', 'Báº¡n chá»‰ Ä‘Æ°á»£c Ä‘Äƒng táº£i 1 video. Vui lĂ²ng xĂ³a Ä‘á»ƒ Ä‘Äƒng láº¡i', 'error');
+                    myDropzone.removeFile(file);
+                    return;
+                }
+            });
+
+            myDropzone.on("complete", function(file) {
+                btn_submit.removeClass('disabled');
+                btn_chon_anh.html(btn_chon_anh_text);
+                btn_submit.html(btn_submit_text);
+            });
+
+        },
+        init: function() {
+            this.post = typeof current_post === 'undefined' ? {} : current_post;
+            this.packages = typeof packages === 'undefined' ? [] : packages;
+
+            if (typeof current_package !== 'undefined') {
+                this.package = current_package;
+            } else {
+                var _package_id = $('.js-group-package select[name="package"]').val();
+                var _package = this.findPackageById(_package_id);
+                this.package = _package ? _package : this.packages[0];
+            }
+            if (this.package) {
+                this.label_price = this.package.price_label;
+                if (this.package.price == 0) {
+                    $('.js-group-type-date').addClass('hidden');
+                    $('.js-group-package-type').addClass('hidden');
+                    $('.js-group-type-label').addClass('hidden');
+                    $('.js-group-type-label').find('input[name="post_label"]').val(0);
+                } else {
+                    $('.js-group-type-date').removeClass('hidden');
+                    $('.js-group-package-type').removeClass('hidden');
+                    $('.js-group-type-label').removeClass('hidden');
+                }
+
+                this.package_type = $(this.form).find('select[name="package_type"]').val();
+            }
+
+            this.payment_method = $(this.form).find('input[name="payment_method"]').val();
+
+            this.changePaymentMethod();
+            this.changePackage();
+            this.changePackageTime();
+            this.changePostLabel();
+            this.changeTotalDay();
+            this.calculatorPrice();
+
+            this.hidePost();
+            this.deletePost();
+            this.upPost();
+            this.rePost();
+            this.rePay();
+            this.upgradePost();
+            this.rePostVip();
+            this.addPostLabel();
+            this.transferPost();
+            this.uploadImage();
+            this.uploadVideo();
+        },
+    };
+
+    $(document).ready(function() {
+        manage_post.init();
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="_token"]').attr("content"),
+                "Authorization": 'Bearer ' + localStorage.getItem('access_token')
+            }
+        });
+
+        $(document).ajaxComplete(function(event, xhr, settings) {
+
+            if (!xhr.responseText) return;
+            var response = $.parseJSON(xhr.responseText);
+
+            if (response.code != 200) {
+                if (response.code == 500) {
+                    //toastr.error(response.message, "Lá»—i");
+                    Swal.fire('Lá»—i', response.message, 'error');
+                    return;
+                }
+            }
+
+            if (response.error) {
+                //toastr.error(response.message, "Lá»—i");
+                Swal.fire('Lá»—i', response.message, 'error');
+                $(manage_post.form).find('button[type="submit"]').removeAttr('disabled');
+                $(manage_post.form).find('button[type="submit"]').removeClass('disabled');
+            }
+            if (!response.error) {
+                if (response.action != 'redirect') {
+                    if (response.message) {
+                        //toastr.success(response.message, "ThĂ´ng bĂ¡o");
+                        Swal.fire('ThĂ´ng bĂ¡o', response.message, 'success');
+                    }
+                    setTimeout(function() {
+                        if (manage_post.return_url) {
+                            window.location.href = manage_post.return_url;
+                        }
+                    }, 2000);
+                }
+            }
+        });
+    });
+    </script>
+</body>
+
+</html>

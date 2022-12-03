@@ -12,6 +12,7 @@
 <body>
 	
 
+<button id="refresh">Refresh map</button>
 
 <div id="map" style="height: 500px;">
 	
@@ -25,6 +26,8 @@
 
 <script type="text/javascript">
 
+	$map = document.querySelector('#map')
+
 	var map = L.map('map', {
 		fullscreenControl: {
 	        pseudoFullscreen: true
@@ -37,17 +40,29 @@
 	L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
 	    maxZoom: 18,
 	    subdomains:['mt0','mt1','mt2','mt3']
-	}).addTo(map);;
+	}).addTo(map);
 
 	var current_marker = L.marker([21.0245, 105.8412]).addTo(map);
 	map.on('click', function(e) {
-	  map.removeLayer(current_marker);
+	    map.removeLayer(current_marker);
 	    current_marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
 	    var lat = e.latlng.lat
 	    var lng = e.latlng.lng
 	    console.log(lat, lng)
 	  
 	});
+
+	// map.setView(new L.LatLng(40.737, -73.923), 8);
+
+	document.querySelector('#refresh').addEventListener('click', function() {
+		map.removeLayer(current_marker)
+		map.setView(new L.LatLng(21.0245, 105.9412), 15);
+		current_marker = L.marker([21.0245, 105.9412]).addTo(map);
+
+	})
+
+	// map.off();
+	// map.remove();
 
 </script>
 
