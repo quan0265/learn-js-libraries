@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dropzone, sortable</title>
+	<link rel="stylesheet" href="D://assets/vendor/dropzone/dropzone.min.css">
+	<script type="text/javascript" src="D://assets/js/jquery.min.js"></script>
+	<script type="text/javascript" src="D://assets/vendor/sortable/sortable.min.js"></script>
+	<script type="text/javascript" src="D://assets/vendor/dropzone/dropzone.min.js"></script>
+	<style type="text/css">
+    .sortable {
+        padding: 0;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .sortable li {
+        float: left;
+        width: 120px;
+        height: 120px;
+        overflow: hidden;
+        border: 1px solid red;
+        text-align: center;
+        margin: 5px;
+    }
+
+    li.sortable-placeholder {
+        border: 1px dashed #ccc;
+        background: none;
+    }
+    </style>
+</head>
+<body>
+
+<div action="/upload" class="dropzone" drop-zone="" id="file-dropzone">
+		
+</div>
+<ul class="dz-list sortable dropzone-previews" style="border:1px solid #000">
+</ul>
+<div class="preview" style="display:none;">
+    <li class="dz-item">
+        <div>
+            <div class="dz-preview dz-file-preview">
+                <img data-dz-thumbnail />
+                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                <div class="dz-success-mark"><span>✔</span></div>
+                <div class="dz-error-mark"><span>✘</span></div>
+                <div class="dz-error-message"><span data-dz-errormessage></span></div>
+            </div>
+        </div>
+    </li>
+</div>
+
+<script type="text/javascript">
+Dropzone.autoDiscover = false
+$(document).ready(function() {
+    // $('.sortable').sortable();
+
+    // $('#file-dropzone').dropzone({
+    //     url: "/upload",
+    //     maxFilesize: 100,
+    //     paramName: "uploadfile",
+    //     maxThumbnailFilesize: 99999,
+    //     acceptedFiles: ".jpg,.jpeg,.png",
+    //     previewsContainer: '.dz-list',
+    //     previewTemplate: $('.preview').html(),
+    //     init: function() {
+
+    //     	// $(".list_photos").sortable();
+    //         var $sortable = document.querySelector('.sortable');
+    //         // var sortable = Sortable.create(sel, {'delayOnTouchOnly':true, 'delay':200}); 
+    //         var sortable = Sortable.create($sortable);
+
+    //         this.on('completemultiple', function(file, json) {
+    //             $('.sortable').sortable('enable');
+    //         });
+    //         this.on('success', function(file, json) {
+    //             alert('aa');
+    //         });
+    //         this.on('addedfile', function(file) {});
+    //         this.on('drop', function(file) {
+    //             console.log('File', file)
+    //         });
+    //     }
+    // });
+
+    var dropzoneOptions = { 
+        url: "https://static123.com/api/upload",
+        // url: null,
+        paramName: "file",
+        maxThumbnailFilesize: 1000,
+        uploadMultiple: true,
+        acceptedFiles: ".jpg,.jpeg,.png",
+        maxFiles: 20,
+        maxFilesize:10,
+        previewsContainer: '.dz-list',
+        previewTemplate: $('.preview').html(),
+        dictRemoveFileConfirmation:"Bạn có chắc muốn xóa không?",
+        init: function() {
+			// // $(".list_photos").sortable();
+			var $sortable = document.querySelector('.sortable');
+			// var sortable = Sortable.create($sortable, {'delayOnTouchOnly':true, 'delay':200}); 
+			var sortable = Sortable.create($sortable, {
+				onSort: function(e) {
+					console.log(e)
+				}
+			});
+
+			// this.on('completemultiple', function(file, json) {
+			// $('.sortable').sortable('enable');
+			// });
+			// this.on('success', function(file, json) {
+			// alert('aa');
+			// });
+			// this.on('addedfile', function(file) {});
+			// this.on('drop', function(file) {
+			// console.log('File', file)
+			// });
+        }
+    };
+
+    window.dropzone = new Dropzone("#file-dropzone", dropzoneOptions);
+
+    dropzone.on('sending', function(file, xhr, formData){
+        formData.append('source', 'chothuephongtro');
+        // btn_submit.addClass('disabled');
+        // btn_submit.html('Äang Ä‘Äƒng hĂ¬nh...');
+    });
+
+    dropzone.on("addedfile", function(file, res) {
+        if($('.dz-list .dz-item').length > 2){
+            // swal('Lỗi', 'Bạn chỉ được đăng tải 20 hình ảnh. Vui lòng xóa để đăng lại', 'error');
+            console.log('Bạn chỉ được tải 2 hình ảnh')
+            dropzone.removeFile(file);
+        }
+        return
+    });
+
+    dropzone.on("success", function(file, res) {
+        //
+        self.images.push(file);
+        var el_preview = $(file.previewElement);
+        el_preview.append('<input type="hidden" name="image_linked['+res.id+']" value="'+res.image_path+'"/>');
+    });
+    
+    dropzone.on("complete", function(file) {
+        // btn_submit.removeClass('disabled');
+        // btn_submit.html(btn_submit_title);
+    });
+
+    // Now fake the file upload, since GitHub does not handle file uploads
+// and returns a 404
+
+// Không upload khi chèn file
+// dropzone.uploadFiles = function(files) {
+// 	console.log(files)
+// 	return false
+// }
+
+// dropzone.uploadFiles = function(files) {
+//   var self = this;
+
+//   for (var i = 0; i < files.length; i++) {
+
+//     var file = files[i];
+//     totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+
+//     for (var step = 0; step < totalSteps; step++) {
+//       var duration = timeBetweenSteps * (step + 1);
+//       setTimeout(function(file, totalSteps, step) {
+//         return function() {
+//           file.upload = {
+//             progress: 100 * (step + 1) / totalSteps,
+//             total: file.size,
+//             bytesSent: (step + 1) * file.size / totalSteps
+//           };
+
+//           self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
+//           if (file.upload.progress == 100) {
+//             file.status = Dropzone.SUCCESS;
+//             self.emit("success", file, 'success', null);
+//             self.emit("complete", file);
+//             self.processQueue();
+//             //document.getElementsByClassName("dz-success-mark").style.opacity = "1";
+//           }
+//         };
+//       }(file, totalSteps, step), duration);
+//     }
+//   }
+// }
+
+
+
+});
+
+
+
+</script>
+
+
+
+</body>
+</html>
