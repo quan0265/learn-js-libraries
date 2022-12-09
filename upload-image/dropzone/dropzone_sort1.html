@@ -9,6 +9,13 @@
 	<script type="text/javascript" src="D://assets/vendor/sortable/sortable.min.js"></script>
 	<script type="text/javascript" src="D://assets/vendor/dropzone/dropzone.min.js"></script>
 	<style type="text/css">
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     .sortable {
         padding: 0;
         -webkit-touch-callout: none;
@@ -19,7 +26,7 @@
         user-select: none;
     }
 
-    .sortable li {
+    /*.sortable li {
         float: left;
         width: 120px;
         height: 120px;
@@ -27,79 +34,110 @@
         border: 1px solid red;
         text-align: center;
         margin: 5px;
-    }
+    }*/
 
     li.sortable-placeholder {
         border: 1px dashed #ccc;
         background: none;
     }
+
+    .container {
+        width: 800px;
+        margin: auto;
+    }
+    #dz-file {
+        height: 200px;
+        border: 1px solid;
+        cursor: pointer;
+        padding: 2rem;
+        background: #fff;
+        border: 2px dashed #bbb;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+    }
+    .dz-item {
+        list-style-type: none;
+        display: inline-block;
+        width: 170px;
+        text-align: center;
+        box-shadow: 0px 1px 5px 0 rgb(0 0 0 / 10%);
+        background-color: #fff;
+        padding: 5px;
+        margin-right: 8px;
+        margin-bottom: 16px;
+    }
+    .dz-thumb {
+        height: 100px;
+    }
+    .dz-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .dz-close {
+        color: red;
+        padding: 10px 10px 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    .dz-progress {
+        position: relative;
+    }
+    .dz-upload {
+        display: block;
+        height: 5px;
+        background: #05a84e;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
     </style>
 </head>
 <body>
 
-<div action="/upload" class="dropzone" drop-zone="" id="file-dropzone">
-		
-</div>
-<ul class="dz-list sortable dropzone-previews" style="border:1px solid #000">
-</ul>
-<div class="preview" style="display:none;">
-    <li class="dz-item">
-        <div>
-            <div class="dz-preview dz-file-preview">
+<div class="container">
+    <div class="dropzone1" drop-zone="" id="dz-file">
+        <span>Thêm ảnh</span>
+    </div>
+    <ul class="dz-list sortable">
+    </ul>
+    <div class="dz-template" style="display:none;">
+        <li class="dz-item">
+            <div class="dz-thumb">
                 <img data-dz-thumbnail />
-                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
-                <div class="dz-success-mark"><span>✔</span></div>
-                <div class="dz-error-mark"><span>✘</span></div>
-                <div class="dz-error-message"><span data-dz-errormessage></span></div>
             </div>
-        </div>
-    </li>
+            <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress="" style="width: 100%;"></span></div>
+            <div data-dz-remove class="dz-close">
+                <span>Xóa</span>
+            </div>
+        </li>
+    </div>
 </div>
 
 <script type="text/javascript">
 Dropzone.autoDiscover = false
 $(document).ready(function() {
-    // $('.sortable').sortable();
-
-    // $('#file-dropzone').dropzone({
-    //     url: "/upload",
-    //     maxFilesize: 100,
-    //     paramName: "uploadfile",
-    //     maxThumbnailFilesize: 99999,
-    //     acceptedFiles: ".jpg,.jpeg,.png",
-    //     previewsContainer: '.dz-list',
-    //     previewTemplate: $('.preview').html(),
-    //     init: function() {
-
-    //     	// $(".list_photos").sortable();
-    //         var $sortable = document.querySelector('.sortable');
-    //         // var sortable = Sortable.create(sel, {'delayOnTouchOnly':true, 'delay':200}); 
-    //         var sortable = Sortable.create($sortable);
-
-    //         this.on('completemultiple', function(file, json) {
-    //             $('.sortable').sortable('enable');
-    //         });
-    //         this.on('success', function(file, json) {
-    //             alert('aa');
-    //         });
-    //         this.on('addedfile', function(file) {});
-    //         this.on('drop', function(file) {
-    //             console.log('File', file)
-    //         });
-    //     }
-    // });
 
     var dropzoneOptions = { 
-        url: "https://static123.com/api/upload",
+        url: "/ajax/upload.php",
         // url: null,
         paramName: "file",
-        maxThumbnailFilesize: 1000,
+        // maxThumbnailFilesize: 1000,
+        thumbnailWidth: null,
+        thumbnailHeight: null,
         uploadMultiple: true,
         acceptedFiles: ".jpg,.jpeg,.png",
         maxFiles: 20,
         maxFilesize:10,
         previewsContainer: '.dz-list',
-        previewTemplate: $('.preview').html(),
+        previewTemplate: $('.dz-template').html(),
         dictRemoveFileConfirmation:"Bạn có chắc muốn xóa không?",
         init: function() {
 			// // $(".list_photos").sortable();
@@ -111,47 +149,79 @@ $(document).ready(function() {
 				}
 			});
 
-			// this.on('completemultiple', function(file, json) {
-			// $('.sortable').sortable('enable');
-			// });
-			// this.on('success', function(file, json) {
-			// alert('aa');
-			// });
-			// this.on('addedfile', function(file) {});
-			// this.on('drop', function(file) {
-			// console.log('File', file)
-			// });
+            this.on('sending', function(file, xhr, formData) {
+                formData.append('source', 'chothuephongtro');
+                console.log(file)
+            })
+
+			this.on('completemultiple', function(file, json) {
+    			// $('.sortable').sortable('enable');
+			});
+
+			this.on('addedfile', function(file) {
+                if($('.dz-list .dz-item').length > 2){
+                    // swal('Lỗi', 'Bạn chỉ được đăng tải 20 hình ảnh. Vui lòng xóa để đăng lại', 'error');
+                    console.log('Bạn chỉ được tải 2 hình ảnh')
+                    dropzone.removeFile('sending', file);
+                }
+                return
+            });
+
+            this.on('uploadFiles', function(files) {
+                return false
+            })
+
+			this.on('drop', function(file) {
+    			console.log('File', file)
+			});
+
+            this.on('totaluploadprogress', function(progress) {
+                // Khi chạy ajax
+                console.log(progress)
+            })
+
+            this.on('success', function(file, res) {
+                console.log('success', res)
+                // var el_preview = $(file.previewElement);
+                // el_preview.append('<input type="hidden" name="image_linked[' + response.id + ']" value="' + response.image_path + '"/>');
+            });
+
+            this.on('complete', function(file) {
+                // console.log('complete', file)
+                let $item = file.previewElement
+                console.log(item)
+            });
         }
     };
 
-    window.dropzone = new Dropzone("#file-dropzone", dropzoneOptions);
+    window.dropzone = new Dropzone("#dz-file", dropzoneOptions);
 
-    dropzone.on('sending', function(file, xhr, formData){
-        formData.append('source', 'chothuephongtro');
-        // btn_submit.addClass('disabled');
-        // btn_submit.html('Äang Ä‘Äƒng hĂ¬nh...');
-    });
+    // dropzone.on('sending', function(file, xhr, formData){
+    //     formData.append('source', 'chothuephongtro');
+    //     // btn_submit.addClass('disabled');
+    //     // btn_submit.html('Äang Ä‘Äƒng hĂ¬nh...');
+    // });
 
-    dropzone.on("addedfile", function(file, res) {
-        if($('.dz-list .dz-item').length > 2){
-            // swal('Lỗi', 'Bạn chỉ được đăng tải 20 hình ảnh. Vui lòng xóa để đăng lại', 'error');
-            console.log('Bạn chỉ được tải 2 hình ảnh')
-            dropzone.removeFile(file);
-        }
-        return
-    });
+    // dropzone.on("addedfile", function(file, res) {
+    //     if($('.dz-list .dz-item').length > 2){
+    //         // swal('Lỗi', 'Bạn chỉ được đăng tải 20 hình ảnh. Vui lòng xóa để đăng lại', 'error');
+    //         console.log('Bạn chỉ được tải 2 hình ảnh')
+    //         dropzone.removeFile(file);
+    //     }
+    //     return
+    // });
 
-    dropzone.on("success", function(file, res) {
-        //
-        self.images.push(file);
-        var el_preview = $(file.previewElement);
-        el_preview.append('<input type="hidden" name="image_linked['+res.id+']" value="'+res.image_path+'"/>');
-    });
+    // dropzone.on("success", function(file, res) {
+    //     //
+    //     self.images.push(file);
+    //     var el_preview = $(file.previewElement);
+    //     el_preview.append('<input type="hidden" name="image_linked['+res.id+']" value="'+res.image_path+'"/>');
+    // });
     
-    dropzone.on("complete", function(file) {
-        // btn_submit.removeClass('disabled');
-        // btn_submit.html(btn_submit_title);
-    });
+    // dropzone.on("complete", function(file) {
+    //     // btn_submit.removeClass('disabled');
+    //     // btn_submit.html(btn_submit_title);
+    // });
 
     // Now fake the file upload, since GitHub does not handle file uploads
 // and returns a 404

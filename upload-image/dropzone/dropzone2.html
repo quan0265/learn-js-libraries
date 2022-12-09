@@ -8,35 +8,33 @@
 </head>
 
 <body>
-
-	<div class="form-group row">
+    <div class="form-group row">
         <div class="col-md-12">
             <p>Cập nhật hình ảnh rõ ràng sẽ cho thuê nhanh hơn</p>
             <div class="form-group">
                 <div for="browse_photos" class="browse_photos js-dropzone"><i data-feather="upload" style="width: 50px; height: 50px; display: block; margin: 0 auto; pointer-events: none;"></i><span class="js-btn-chon-anh">Thêm Ảnh</span></div>
             </div>
             <div class="list_photos row dropzone-previews" id="list-photos-dropzone-previews">
-                                                <div class="photo_item col-md-2 col-3 js-photo-manual">
-                        <div class="photo"><img src="https://pt123.cdn.static123.com/images/thumbs/450x300/fit/2022/12/01/sd-9-1667961891-7356_1669885519.jpg"/></div>
-                        <div class="dz-progress"><span class="dz-upload"></span></div>
-                        <div class="bottom clearfix">
-                            <span class="photo_delete" data-dz-remove><i data-feather="trash-2"></i> Xóa</span>
-                        </div> 
-                        <input name="image_linked[4272395]" value="2022/12/01/sd-9-1667961891-7356_1669885519.jpg" type="hidden"/>
+                <div class="photo_item col-md-2 col-3 js-photo-manual">
+                    <div class="photo"><img src="https://pt123.cdn.static123.com/images/thumbs/450x300/fit/2022/12/01/sd-9-1667961891-7356_1669885519.jpg" /></div>
+                    <div class="dz-progress"><span class="dz-upload"></span></div>
+                    <div class="bottom clearfix">
+                        <span class="photo_delete" data-dz-remove><i data-feather="trash-2"></i> Xóa</span>
                     </div>
-                                        </div>
+                    <input name="image_linked[4272395]" value="2022/12/01/sd-9-1667961891-7356_1669885519.jpg" type="hidden" />
+                </div>
+            </div>
             <div id="tpl" style="display:none">
                 <div class="photo_item col-md-2 col-3 js-photo-manual">
                     <div class="photo"><img data-dz-thumbnail /></div>
                     <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
                     <div class="bottom clearfix">
                         <span class="photo_delete" data-dz-remove><i data-feather="trash-2"></i> Xóa</span>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-	
     <!-- xem ví dụ dropzone + sort jquery ui: https://phongtro123.com/quan-ly/sua-tin-dang/611721 -->
     <script type="text/javascript">
     var manage_post = manage_post || {};
@@ -53,10 +51,10 @@
         dl_package_time_type_ck: '.js-time-type-ck',
         dl_package_time_type_so_luong: '.js-time-type-so-luong',
         dl_package_label_price: '.js-package-label-price',
-        constant_day: 'ngĂ y',
-        constant_week: 'tuáº§n',
-        constant_month: 'thĂ¡ng',
-        constant_vnd: 'Ä‘',
+        constant_day: 'ngày',
+        constant_week: 'tuần',
+        constant_month: 'tháng',
+        constant_vnd: 'đ',
         package_type: 'day',
         return_url: '',
         post: {},
@@ -103,8 +101,8 @@
             if ($(this.form).find('#action').val() == 'up_top') {
                 var price_up = this.package.price_up;
                 //price_up = 0;
-                $(this.dl_package_price).html(this.formatNumber(price_up) + ' Ä‘á»“ng');
-                $(this.dl_package_grand_total).html(this.formatNumber(price_up) + ' Ä‘á»“ng');
+                $(this.dl_package_price).html(this.formatNumber(price_up) + ' đồng');
+                $(this.dl_package_grand_total).html(this.formatNumber(price_up) + ' đồng');
                 return;
             }
 
@@ -113,21 +111,21 @@
 
             if (this.package_type == 'day') {
                 $(this.dl_package_price).html(this.formatNumber(this.package.price) + '/' + this.constant_day);
-                $(this.dl_package_time_type).html("ÄÄƒng theo ngĂ y");
+                $(this.dl_package_time_type).html("Đăng theo ngày");
                 // $(this.dl_package_time_type_ck).html("Dang theo ngay");
-                $(this.dl_package_time_type_so_luong).html(this.total_time + ' ngay');
+                $(this.dl_package_time_type_so_luong).html(this.total_time + ' NGAY');
             }
             if (this.package_type == 'week') {
                 $(this.dl_package_price).html(this.formatNumber(this.package.price_week) + '/' + this.constant_week);
-                $(this.dl_package_time_type).html("ÄÄƒng theo tuáº§n");
+                $(this.dl_package_time_type).html("Đăng theo tuần");
                 // $(this.dl_package_time_type_ck).html("Dang theo tuan");
-                $(this.dl_package_time_type_so_luong).html(this.total_time + ' tuan');
+                $(this.dl_package_time_type_so_luong).html(this.total_time + ' TUAN');
             }
             if (this.package_type == 'month') {
                 $(this.dl_package_price).html(this.formatNumber(this.package.price_month) + '/' + this.constant_month);
-                $(this.dl_package_time_type).html("ÄÄƒng theo thĂ¡ng");
+                $(this.dl_package_time_type).html("Đăng theo tháng");
                 // $(this.dl_package_time_type_ck).html("Dang theo thang");
-                $(this.dl_package_time_type_so_luong).html(this.total_time + ' thang');
+                $(this.dl_package_time_type_so_luong).html(this.total_time + ' THANG');
             }
 
             $(this.dl_package_day).html(this.total_day);
@@ -155,8 +153,8 @@
             }
             if (this.package_type == 'day') {
                 // if(typeof this.total_time === 'undefined' || !this.total_time){
-                // 	this.total_time = $(this.form).find('select[name="total_day"]').val();
-                // 	console.log('select', $(this.form).find('select[name="total_day"]').val());
+                //  this.total_time = $(this.form).find('select[name="total_day"]').val();
+                //  console.log('select', $(this.form).find('select[name="total_day"]').val());
                 // }
                 this.amount = this.total_time * this.package.price;
                 this.total_day = this.total_time;
@@ -172,7 +170,7 @@
 
 
             // if(this.use_label > 0){
-            // 	this.total_day = this.total_day || $(this.dl_package_day).attr('data-total-day');
+            //  this.total_day = this.total_day || $(this.dl_package_day).attr('data-total-day');
             //     this.amount += this.label_price * this.total_day;
             // }
 
@@ -236,8 +234,8 @@
             $(self.form).find('select[name="total_week"]').on('change', function() {
                 if (self.package.code == 'normal' && self.package_type == 'week' && $(this).val() == 1) {
                     Swal.fire({
-                        title: 'ThĂ´ng bĂ¡o',
-                        html: 'Báº¡n pháº£i chá»n tá»‘i thiá»ƒu 2 tuáº§n cho gĂ³i tin nĂ y',
+                        title: 'Thông báo',
+                        html: 'Bạn phải chọn tối thiểu 2 tuần cho gói tin này',
                         type: 'info'
                     });
                     $(self.form).find('select[name="total_week"]').val(2).trigger('change');
@@ -337,7 +335,7 @@
                 if (action != 'up_top' || $(self.form).find('button[type="submit"]').hasClass('disabled')) return;
 
                 var button_text = $(self.form).find('button[type="submit"]').html();
-                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').html('Đang xử lí...');
                 $(self.form).find('button[type="submit"]').addClass('disabled');
                 $(self.form).find('button[type="submit"]').prop('disabled', true);
 
@@ -363,7 +361,7 @@
 
                 if (action != 'hidden_post') return;
                 var button_text = $(self.form).find('button[type="submit"]').html();
-                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').html('Đang xử lí...');
                 $(self.form).find('button[type="submit"]').prop('disabled', true);
                 $(self.form).find('button[type="submit"]').addClass('disabled');
 
@@ -396,7 +394,7 @@
                 if (action != 'delete_post') return;
 
                 var button_text = $(self.form).find('button[type="submit"]').html();
-                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').html('Đang xử lí...');
                 $(self.form).find('button[type="submit"]').prop('disabled', true);
                 $(self.form).find('button[type="submit"]').addClass('disabled');
 
@@ -419,7 +417,7 @@
                 if (action != 're_new') return;
 
                 if (self.payment_method == 'account' && self.amount > account_balance_number) {
-                    Swal.fire('Lá»—i', "Báº¡n khĂ´ng Ä‘á»§ tiá»n Ä‘á»ƒ Ä‘Äƒng láº¡i tin", 'error');
+                    Swal.fire('Lỗi', "Bạn không đủ tiền để đăng lại tin", 'error');
                     $(self.form).find('button[type="submit"]').addClass('disabled');
                     $(self.form).find('button[type="submit"]').prop('disabled', true);
                     return;
@@ -430,7 +428,7 @@
                 self.return_url = $(this).find('#return_url').val();
 
                 var button_text = $(self.form).find('button[type="submit"]').html();
-                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').html('Đang xử lí...');
                 $(self.form).find('button[type="submit"]').prop('disabled', true);
                 $(self.form).find('button[type="submit"]').addClass('disabled');
 
@@ -447,9 +445,9 @@
                     type: "POST",
                     url: base_api_url + "/post/recreate",
                     // data: {action:action,
-                    // 	post_id:self.post.id,
-                    // 	package_id:self.package.id,
-                    // 	total_day_vip:self.total_time,
+                    //  post_id:self.post.id,
+                    //  package_id:self.package.id,
+                    //  total_day_vip:self.total_time,
                     //     package_type:self.package_type,
                     //     label:self.use_label,
                     //     total_time:self.total_time,
@@ -474,7 +472,7 @@
                 if (action != 'upgrade') return;
 
                 if (self.payment_method == 'account' && self.amount > account_balance_number) {
-                    Swal.fire('Lá»—i', "Báº¡n khĂ´ng Ä‘á»§ tiá»n Ä‘á»ƒ Gia háº¡n láº¡i tin", 'error');
+                    Swal.fire('Lỗi', "Bạn không đủ tiền để Gia hạn lại tin", 'error');
                     $(self.form).find('button[type="submit"]').addClass('disabled');
                     $(self.form).find('button[type="submit"]').prop('disabled', true);
                     return;
@@ -488,7 +486,7 @@
                 self.return_url = $(this).find('#return_url').val();
 
                 var button_text = $(self.form).find('button[type="submit"]').html();
-                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').html('Đang xử lí...');
                 $(self.form).find('button[type="submit"]').prop('disabled', true);
                 $(self.form).find('button[type="submit"]').addClass('disabled');
 
@@ -531,7 +529,7 @@
                 self.return_url = $(this).find('#return_url').val();
                 if (action != 're_new_vip') return;
                 var button_text = $(self.form).find('button[type="submit"]').html();
-                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').html('Đang xử lí...');
 
 
                 if (self.is_request) return;
@@ -576,7 +574,7 @@
                 self.return_url = $(this).find('#return_url').val();
                 if (action != 're_pay') return;
                 var button_text = $(self.form).find('button[type="submit"]').html();
-                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').html('Đang xử lí...');
                 $(self.form).find('button[type="submit"]').addClass('disabled');
                 $(self.form).find('button[type="submit"]').prop('disabled', true);
 
@@ -617,7 +615,7 @@
                 self.return_url = $(this).find('#return_url').val();
 
                 if (action != 'switch_post') return;
-                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').html('Đang xử lí...');
 
                 $.ajax({
                     type: "POST",
@@ -641,7 +639,7 @@
                 self.return_url = $(this).find('#return_url').val();
 
                 if (action != 'transfer_post') return;
-                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').html('Đang xử lí...');
 
                 $.ajax({
                     type: "POST",
@@ -665,11 +663,11 @@
                 self.return_url = $(this).find('#return_url').val();
 
                 if (!label) {
-                    toastr.error("Báº¡n chÆ°a chá»n nhĂ£n", "Lá»—i");
+                    toastr.error("Bạn chưa chọn nhãn", "Lỗi");
                     return;
                 }
 
-                $(self.form).find('button[type="submit"]').html('Äang xá»­ lĂ­...');
+                $(self.form).find('button[type="submit"]').html('Đang xử lí...');
                 $.ajax({
                     type: "POST",
                     url: base_api_url + "/post/addlabel",
@@ -692,7 +690,7 @@
                 maxFiles: 20,
                 previewsContainer: '#list-photos-dropzone-previews',
                 previewTemplate: $('#tpl').length > 0 ? document.querySelector('#tpl').innerHTML : '',
-                dictRemoveFileConfirmation: "Bạn chắc chán muốn xóa ảnh"
+                dictRemoveFileConfirmation: "Bạn chắc chắn muốn xóa hình ảnh này?"
             };
 
             var myDropzone = new Dropzone(".js-dropzone", dropzoneOptions);
@@ -704,8 +702,8 @@
             }
 
             // var sel = document.getElementById('list-photos-dropzone-previews');
-            // var sortable = Sortable.create(sel, {'delayOnTouchOnly':true, 'delay':200});	
-            // var sortable = Sortable.create(sel);	
+            // var sortable = Sortable.create(sel, {'delayOnTouchOnly':true, 'delay':200}); 
+            // var sortable = Sortable.create(sel); 
             $('#list-photos-dropzone-previews').sortable();
             // Bind manual remove
             $('#list-photos-dropzone-previews').on(_action, '.js-photo-manual .photo_delete', function(event) {
@@ -719,35 +717,35 @@
                 }
             });
             // $('.js-photo-manual').each(function (index, element) {
-            // 	$(element).on('tap', function(event){
-            // 		event.preventDefault();
-            // 		var _self = $(this);
-            // 		Swal.fire({
-            // 			title: 'ThĂ´ng bĂ¡o',
-            // 			text: myDropzone.options.dictRemoveFileConfirmation,
-            // 			showCancelButton: true,
-            // 			confirmButtonColor: '#3085d6',
-            // 			cancelButtonColor: '#d33',
-            // 			confirmButtonText: 'VĂ¢ng, xĂ³a nĂ³!',
-            // 			cancelButtonText:"KhĂ´ng",
-            // 		}).then((result) => {
-            // 			if (result.value) {
-            // 				_self.closest('.js-photo-manual').remove();
-            // 			}
-            // 		});
-            // 	});
+            //  $(element).on('tap', function(event){
+            //      event.preventDefault();
+            //      var _self = $(this);
+            //      Swal.fire({
+            //          title: 'Thông báo',
+            //          text: myDropzone.options.dictRemoveFileConfirmation,
+            //          showCancelButton: true,
+            //          confirmButtonColor: '#3085d6',
+            //          cancelButtonColor: '#d33',
+            //          confirmButtonText: 'Vâng, xóa nó!',
+            //          cancelButtonText:"Không",
+            //      }).then((result) => {
+            //          if (result.value) {
+            //              _self.closest('.js-photo-manual').remove();
+            //          }
+            //      });
+            //  });
             // });
 
             myDropzone.on('sending', function(file, xhr, formData) {
                 formData.append('source', 'phongtro123');
                 formData.append('source_url', window.location.href);
                 btn_submit.addClass('disabled');
-                btn_chon_anh.html('Äang Ä‘Äƒng hĂ¬nh...');
+                btn_chon_anh.html('Đang đăng hình...');
             });
 
             myDropzone.on("addedfile", function(file, response) {
                 if ($('.js-photo-manual').length > 20) {
-                    swal('Số lượng ảnh không vượt quá 20', 'error');
+                    swal('Lỗi', 'Bạn chỉ được đăng tải 20 hình ảnh. Vui lòng xóa để đăng lại', 'error');
                     myDropzone.removeFile(file);
                     return;
                 }
@@ -782,7 +780,7 @@
                 acceptedFiles: ".mov,.mp4",
                 previewsContainer: '#list-videos-dropzone-previews',
                 previewTemplate: $('#tpl-video').length > 0 ? document.querySelector('#tpl-video').innerHTML : '',
-                dictRemoveFileConfirmation: "Báº¡n cháº¯c cháº¯n muá»‘n xĂ³a video nĂ y?"
+                dictRemoveFileConfirmation: "Bạn chắc chắn muốn xóa video này?"
             };
 
             var myDropzone = new Dropzone(".js-dropzone-video", dropzoneOptions);
@@ -806,7 +804,7 @@
             });
 
             myDropzone.on('error', function(file) {
-                Swal.fire('Lá»—i', 'Báº¡n chá»‰ Ä‘Æ°á»£c Ä‘Äƒng táº£i 1 video. Vui lĂ²ng xĂ³a Ä‘á»ƒ Ä‘Äƒng láº¡i', 'error');
+                Swal.fire('Lỗi', 'Bạn chỉ được đăng tải 1 video. Vui lòng xóa để đăng lại', 'error');
                 myDropzone.removeFile(file);
             });
 
@@ -814,8 +812,8 @@
                 formData.append('source', 'phongtro123');
                 formData.append('source_url', window.location.href);
                 btn_submit.addClass('disabled');
-                btn_chon_anh.html('Äang Ä‘Äƒng video...');
-                btn_submit.html('Äang Ä‘Äƒng video...');
+                btn_chon_anh.html('Đang đăng video...');
+                btn_submit.html('Đang đăng video...');
             });
 
             myDropzone.on("success", function(file, response) {
@@ -829,7 +827,7 @@
             myDropzone.on("addedfile", function(file, response) {
                 var _video = $('#video').attr('data-video');
                 if (_video) {
-                    Swal.fire('Lá»—i', 'Báº¡n chá»‰ Ä‘Æ°á»£c Ä‘Äƒng táº£i 1 video. Vui lĂ²ng xĂ³a Ä‘á»ƒ Ä‘Äƒng láº¡i', 'error');
+                    Swal.fire('Lỗi', 'Bạn chỉ được đăng tải 1 video. Vui lòng xóa để đăng lại', 'error');
                     myDropzone.removeFile(file);
                     return;
                 }
@@ -909,23 +907,23 @@
 
             if (response.code != 200) {
                 if (response.code == 500) {
-                    //toastr.error(response.message, "Lá»—i");
-                    Swal.fire('Lá»—i', response.message, 'error');
+                    //toastr.error(response.message, "Lỗi");
+                    Swal.fire('Lỗi', response.message, 'error');
                     return;
                 }
             }
 
             if (response.error) {
-                //toastr.error(response.message, "Lá»—i");
-                Swal.fire('Lá»—i', response.message, 'error');
+                //toastr.error(response.message, "Lỗi");
+                Swal.fire('Lỗi', response.message, 'error');
                 $(manage_post.form).find('button[type="submit"]').removeAttr('disabled');
                 $(manage_post.form).find('button[type="submit"]').removeClass('disabled');
             }
             if (!response.error) {
                 if (response.action != 'redirect') {
                     if (response.message) {
-                        //toastr.success(response.message, "ThĂ´ng bĂ¡o");
-                        Swal.fire('ThĂ´ng bĂ¡o', response.message, 'success');
+                        //toastr.success(response.message, "Thông báo");
+                        Swal.fire('Thông báo', response.message, 'success');
                     }
                     setTimeout(function() {
                         if (manage_post.return_url) {
