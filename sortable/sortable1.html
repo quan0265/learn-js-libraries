@@ -62,10 +62,10 @@
 
 <script type="text/javascript">
 	
-var sort1 = new Sortable(example1, {
+var sort1 = new Sortable(document.querySelector('#example1'), {
     animation: 150,
     ghostClass: 'bg-green',
-    onEnd: function (/**Event*/e) {
+    onSort: function (/**Event*/e) {
 		var itemEl = e.item;  // dragged HTMLElement
 		e.to;    // target list
 		e.from;  // previous list
@@ -76,9 +76,6 @@ var sort1 = new Sortable(example1, {
 		e.clone // the clone element
 		e.pullMode;  // when item is in another sortable: `"clone"` if cloning, `true` if moving
 		console.log(e)
-	},
-	onChange: function() {
-		console.
 	}
 });
 
