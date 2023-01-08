@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search box element</title>
+</head>
+<style>
+	body { font-family: 'Roboto'; background: #fafafa; }
+	.container { margin: 150px auto; }
+	.searchBoxElement{
+		background-color: white;
+		border: 1px solid #aaa;
+		position: absolute;
+		max-height: 150px;
+		overflow-x: hidden;
+		overflow-y: auto;
+		margin: 0;
+		padding: 0;
+		line-height: 23px;
+		list-style: none;
+		z-index: 1;
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+
+	.searchBoxElement span{
+		padding: 0 5px;
+	}
+
+
+	.searchBoxElement li{
+		background-color: white;
+		color: black;
+	}
+
+	.searchBoxElement li:hover{
+		background-color: #50a0ff;
+		color: white;
+	}
+
+	.searchBoxElement li.selected{
+		background-color: #50a0ff;
+		color: white;
+	}
+
+	.refineText{
+		padding: 8px 0 8px 0 !important;
+	}
+</style>
+
+<body>
+    <div class="container">
+        <h1>Select Box With Search Options Example</h1>
+        <div class="select-wrap">
+            <select name="lang" class="js-searchBox" style="width:250px">
+                <option value="">Select A Language</option>
+                <option value="1">Python</option>
+                <option value="2">Java</option>
+                <option value="3">Ruby</option>
+                <option value="4">C/C++</option>
+                <option value="5">C#</option>
+                <option value="6">JavaScript</option>
+                <option value="7">PHP</option>
+                <option value="8">Swift</option>
+                <option value="9">Scala</option>
+                <option value="10">R</option>
+                <option value="11">Go</option>
+                <option value="12">VisualBasic.NET</option>
+                <option value="13">Kotlin</option>
+            </select>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-searchbox.js"></script>
+    <script>
+    $('.js-searchBox').searchBox({ elementWidth: '250' });
+    </script>
+</body>
+
+</html>
