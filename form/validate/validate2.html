@@ -4,36 +4,51 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>valdiate</title>
-	<script rel="stylesheet" src="E:\quantrong\desktop\file-plugin\js\jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="D://assets/vendor/boostraps/bootstrap.min.css">
+    <script type="text/javascript" src="D://assets/vendor/boostraps/bootstrap.bundle.min.js"></script>
+	<script rel="stylesheet" src="D://assets/js/jquery.min.js"></script>
 	<script type="text/javascript" src="validate.js"></script>
 </head>
+
+<style>
+    form {
+        margin-top: 24px;
+    }
+    .form-group {
+        margin-bottom: 16px;
+    }
+</style>
+
 <body>
 
+<div class="container">
+    <form id="validate-form" action="">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" name="email">
+        </div>
 
-<form id="validate-form" action="">
-    <div class="form-group">
-        <label>Email</label>
-        <input type="email" class="form-control" name="email">
-    </div>
-
-	<div class="form-group">
-        <label>First Name </label>
-        <input type="text" class="form-control" name="first_name" minlength="2" required>
-    </div>
-    <div class="form-group">
-        <label>Url</label>
-        <input type="url" class="form-control" name="url" required>
-    </div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="text" class="form-control" name="password" minlength="6" required>
-    </div>
-    <div class="form-group">
-        <label>Confirm Password</label>
-        <input type="text" class="form-control" name="confirm_password" equalTo="#validate-form [name=password]" required>
-    </div>
-    <button type="submit">submit</button>
-</form>
+    	<div class="form-group">
+            <label>First Name </label>
+            <input type="text" class="form-control" name="first_name" minlength="2" required>
+        </div>
+        <div class="form-group">
+            <label>Url</label>
+            <input type="url" class="form-control" name="url" required>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="text" class="form-control" name="password" minlength="6" required>
+        </div>
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="text" class="form-control" name="confirm_password" equalTo="#validate-form [name=password]" required>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">submit</button>
+        </div>
+    </form>
+</div>
 
 <style type="text/css">
     .has-error{
@@ -51,7 +66,7 @@
 </style>
 
 <!-- 
-    - View all method, check validaate file validate.js : defaults :
+    - View all method, check validate file validate.js : defaults :
     messages: {
         required: "This field is required.",
         remote: "Please fix this field.",
@@ -70,7 +85,8 @@
         min: $.validator.format( "Please enter a value greater than or equal to {0}." ),
         step: $.validator.format( "Please enter a multiple of {0}." )
     }
-
+    
+    - errorPlacement: xác định vị trí element lỗi
 
  -->
 
@@ -95,11 +111,14 @@
                 // khi not error
                 $(element).closest(".form-group").removeClass("has-error")
             }, 
-            errorElement: "span", errorClass: "help-block", errorPlacement: function (element, e) {
-                //them element when error
-                e.parent(".input-group").length ? element.insertAfter(e.parent()) : e.parent("label").length ? element.insertBefore(e.parent()) : element.insertAfter(e)
+            errorElement: "span", 
+            errorClass: "help-block",
+            errorPlacement: function (e_error, e) {
 
-                //them elemnt error ben ngoai
+                // Chèn elemnt error sau element
+                e_error.insertAfter(e)
+
+                //Chèn elemnt error ben ngoai
                 // element.insertAfter(e.parent())
 
             },

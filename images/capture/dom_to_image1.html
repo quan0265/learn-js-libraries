@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    form {
+		color: red;
+		width: 300px;
+		background: white;
+	}
+	form input {
+		border: 1px solid black;
+	}
+	form input:focus {
+		outline: none;
+	}
+	iframe {
+		width: 300px;
+		height: 500px;
+	}
+	.box-image {
+		margin-top: 24px;
+	}
+</style>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+	<form>
+		<label>First Name:</label><br>
+		<input id="fname" name="fname" value="Muhammad"><br>
+		<label>Last Name:</label><br>
+		<input type="text" id="lname" name="lname" value="Rauf"><br><br>
+		<input type="submit" value="Submit">
+	</form>
+	<div class="box-image">
+		
+	</div>
+	<script>
+		const form = document.querySelector("form");
+		const div = document.querySelector("div");
+		domtoimage.toJpeg(form)
+			.then((dataUrl) => {
+				const img = new Image();
+				img.src = dataUrl;
+				div.appendChild(img);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	</script>
+</body>
+
+</html>
