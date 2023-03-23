@@ -4,12 +4,154 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Lealeft</title>
+	<!-- <link rel="stylesheet" type="text/css" href="D://assets/vendor/leaflet/leaflet.css"> -->
+	<!-- <script type="text/javascript" src="D://assets/vendor/leaflet/leaflet.js"></script> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet-src.min.js"></script>
 </head>
 <body>
 	
 <!-- Hiển thị ngân hàng, trường học, ... ở gần: https://sosanhnha.com/phong-cao-cap-du-noi-that-ngay-khu-biet-thu-khang-dien-phu-huu-hinh-that-100-1-9-tr-thang-claQPEbar -->
 
+<button id="refresh">Refresh map</button>
 
+<div id="map" style="height: 500px;">
+	
+
+
+
+</div>
+
+<script type="text/javascript">
+
+	// var locations = [
+	// 	  ["LOCATION_1", 11.8166, 122.0942],
+	// 	  ["LOCATION_2", 11.9804, 121.9189],
+	// 	  ["LOCATION_3", 10.7202, 122.5621],
+	// 	  ["LOCATION_4", 11.3889, 122.6277],
+	// 	  ["LOCATION_5", 10.5929, 122.6325]
+	// 	];
+
+	// 	var map = L.map('map').setView([11.206051, 122.447886], 8);
+	// 	mapLink =
+	// 	  '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+	// 	L.tileLayer(
+	// 	  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	// 	    attribution: '&copy; ' + mapLink + ' Contributors',
+	// 	    maxZoom: 18,
+	// 	  }).addTo(map);
+
+	// 	for (var i = 0; i < locations.length; i++) {
+	// 	  marker = new L.marker([locations[i][1], locations[i][2]])
+	// 	    .bindPopup(locations[i][0])
+	// 	    .addTo(map);
+	// 	}
+
+	var lat = 21.07213592529297
+	var lng = 105.81099700927734
+
+	var data_map = {
+		business: ''
+	}
+	data_map.school = [
+		{
+			business: 'school',
+			place_id: 'ChIJa6LNU3xTNDER5_HERFZ1geM',
+			name: 'Viện Hóa Học Môi Trường Quân Sự',
+			address: '2P59+X5R, Đường Cao Tốc 08, An Phú',
+			lat: '21.0099867',
+			lng: '105.7178882',
+			distance_text: '1.7km',
+			time_text: '3 phút'
+		},
+		{
+			business: 'school',
+			place_id: 'ChIJa6LNU3xTNDER5_HERFZ1geM',
+			name: 'Viện Hóa Học Môi Trường Quân Sự',
+			address: '2P59+X5R, Đường Cao Tốc 08, An Phú',
+			lat: '20.9879499',
+			lng: '105.7129558',
+			distance_text: '1.7km',
+			time_text: '3 phút'
+		}
+	]
+
+	// school | secondary_school | supermarket | park | hospital | restaurant
+	function getMarkerIcon(type='school') {
+		let icon_path = 'marker_school.svg'
+		if (type == 'supermarket') {
+			icon_path = 'marker_supermarket.svg'
+		}
+		if (type == 'park') {
+			icon_path = 'marker_park.svg'
+		}
+		if (type == 'hospital') {
+			icon_path = 'marker_hospital.svg'
+		}
+		if (type == 'restaurant') {
+			icon_path = 'marker_restaurant.svg'
+		}
+		return L.icon({
+		    iconUrl: icon_path,
+		    // shadowUrl: 'marker_school.svg',
+		    iconSize:     [30, 95], // size of the icon
+		    iconAnchor:   [15, 94], // point of the icon which will correspond to marker's location
+		    shadowSize:   [50, 64], // size of the shadow
+		    shadowAnchor: [4, 62],  // the same for the shadow
+		    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+		})
+	}
+
+	var mark_icon = getMarkerIcon()
+
+	$map = document.querySelector('#map')
+
+	var map = L.map('map', {
+		fullscreenControl: {
+	        pseudoFullscreen: true
+	    }
+	}).setView([lat, lng], 15);
+
+	// L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+	//     maxZoom: 20,
+	//     subdomains:['mt0','mt1','mt2','mt3']
+	// }).addTo(map);
+	L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+	    maxZoom: 18,
+	    subdomains:['mt0','mt1','mt2','mt3']
+	}).addTo(map);
+
+	var current_markers = []
+	data_map.school.forEach(item => {
+		current_markers.push(L.marker([item.lat, item.lng], {icon: mark_icon}).addTo(map).bindPopup(item.name))
+	})
+
+	// var current_marker = L.marker([21.0245, 105.8412], {icon: mark_icon}).addTo(map).bindPopup("I am a green leaf.");
+	// var current_marker1 = L.marker([21.0285, 105.8412], {icon: mark_icon}).addTo(map).bindPopup(`<span class="text-danger"> sfdk skaf kdsk</span>`);
+
+	// map.on('click', function(e) {
+	//     map.removeLayer(current_marker);
+	//     current_marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+	//     var lat = e.latlng.lat
+	//     var lng = e.latlng.lng
+	//     console.log(lat, lng)
+	  
+	// });
+
+	// map.setView(new L.LatLng(40.737, -73.923), 8);
+
+	// remove marks
+	document.querySelector('#refresh').addEventListener('click', function() {
+		current_markers.forEach(item => map.removeLayer(item))
+		// map.removeLayer(current_marker)
+		map.setView(new L.LatLng(21.0245, 105.9412), 15);
+		current_marker = L.marker([21.0245, 105.9412]).addTo(map);
+	})
+
+	// map.off();
+	// map.remove();
+
+</script>
 
 </body>
 </html>
