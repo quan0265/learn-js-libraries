@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Place nearby</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.min.css">
+<script type="text/javascript" src="D://assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet-src.min.js"></script>
+
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	.map-warpper {
+		width: 800px;
+	}
+</style>
+
+<style>
+	.map-contents::-webkit-scrollbar {
+		width: 4px;
+	}
+	.map-contents::-webkit-scrollbar-track {
+		background: #fff; 
+	}
+	.map-contents::-webkit-scrollbar-thumb {
+		background: #d5d5d5; 
+	}
+	.map-contents::-webkit-scrollbar-thumb:hover {
+		background: #555; 
+	}
+	.map-warpper {
+		border: 1px solid #d4d2d2;
+	    border-radius: 4px;
+	}
+	#map {
+		position: relative;
+		z-index: 0;
+		height: 400px;
+		max-height: 65vh;
+	}
+	.leaflet-control-container .leaflet-top.leaflet-left {
+		left: initial;
+		right: 12px;
+		top: initial;
+	    bottom: 12px;
+	}
+	.leaflet-control-attribution.leaflet-control {
+		display: none;
+	}
+	#map .leaflet-fullscreen {
+		margin-top: 12px;
+		margin-right: 12px;
+	    top: 12px;
+	}
+	#map .leaflet-fullscreen a {
+		font-size: 18px;
+	}
+	#map .leaflet-fullscreen i {
+		display: inline-block;
+		margin-top: 1px;
+	}
+	.map-tabs {
+		display: flex;
+		border-bottom: 1px solid #eaeaea;
+	}
+	.map-tab {
+		font-weight: 600;
+		padding: 12px 14px;
+		border-bottom: 3px solid transparent;
+		cursor: pointer;
+		text-transform: capitalize;
+		position: relative;
+	}
+	.map-tab:hover, .map-tab.active {
+		color: #027A97;
+	}
+	.map-tab:hover::after, .map-tab.active::after {
+		content: '';
+		width: 100%;
+		border-bottom: 3px solid #027A97;
+	    position: absolute;
+	    left: 0;
+	    bottom: -3px;
+	}
+	.map-contents {
+	    overflow-y: auto;
+	    padding-left: 8px;
+	    padding-right: 8px;
+	    /*border: 1px solid #d4d2d2;*/
+	    /*border-radius: 4px;*/
+	    /*margin-top: -1px;*/
+	}
+	.map-content {
+		display: none;
+		max-height: 300px;
+	}
+	.map-content.active {
+		display: block;
+	}
+	.map-item {
+		min-height: 45px;
+		display: flex;
+		align-items: center;
+	    padding: 6px 0px;
+	    border-bottom: 1px solid #eaeaea;
+	    cursor: pointer;
+	}
+	.map-item:hover {
+		color: #027A97;
+	}
+	.map-item:last-child {
+		border-bottom: none;
+	}
+	.map-item-left {
+		flex-grow: 1;
+	}
+	.map-item-name {
+		font-weight: 600;
+	}
+	.map-item-address {
+		font-size: 14px;
+		color: #6c757d;
+	}
+	.map-item-right {
+		font-weight: 600;
+		white-space: nowrap;
+	    margin-left: 4px;
+	}
+</style>
+
+</head>
+<body>
+
+
+<!-- 
+
+	- https://homedy.com/ban-can-ho-ngoc-khanh-plaza/111m2-161m2-tang-cao-view-chung-cu-so-1-pham-huy-thong-ba-dinh-es2182922
+
+ -->
+
+<button id="refresh">Refresh map</button>
+
+<div class="map-warpper" style="display: block;">
+	<div id="map"></div>
+	<!-- Nav tabs -->
+	<!-- school | secondary_school | supermarket | park | hospital | restaurant -->
+	<div class="map-tabs">
+		<div class="map-tab">
+			School
+		</div>
+	</div>
+	<div class="map-contents">
+		<div class="map-content">
+			<div class="map-item">
+				<div class="map-item-left">
+					<div class="map-item-name">name</div>
+					<div class="map-item-address">address</div>
+				</div>
+				<div class="map-item-right">2.5km</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	// var lat = 20.998750686645508
+	// var lng = 105.71778869628906
+	var lat = '21.015427'
+	var lng = '105.724406'
+	var data_map = JSON.parse(`{"school":[],"supermarket":[{"business":"supermarket","place_id":"ChIJR7Y3q1FTNDERMLGQ7--GXsQ","name":"K-Market","address":"","lat":21.01586,"lng":105.7235021,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJAQDA649TNDERPGTtoH3-RZY","name":"Tmart Victory","address":"","lat":21.00915329999999,"lng":105.7223989,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJca5hS9VTNDERVSYe-3hB3h8","name":"C\u1eecA H\u00c0NG M\u1eb8 B\u00c9 T\u00cdT M\u00cdT HOUSE","address":"","lat":21.0081104,"lng":105.7199982,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJLfYBfh1TNDER7bYvHKO3CSE","name":"Chanh Leo Fruits & Flowers","address":"","lat":21.0085137,"lng":105.7301719,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJiZEsYk9TNDER2ylzM1DTnSM","name":"Moon Mart","address":"","lat":21.0083153,"lng":105.7304639,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJvdPd67hTNDERvzxGKt_mUXk","name":"Tu\u1ea5n Khang","address":"","lat":21.0069598,"lng":105.7194221,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJZwrcCYZTNDERX0wa1evaZ4c","name":"Q-Mart","address":"","lat":21.0060943,"lng":105.727443,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJnWbEwidTNDERj8qmClMYTPA","name":"T-Mart","address":"","lat":21.005995,"lng":105.72788,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJ413Uq5FTNDERWStbOXKfOWo","name":"C\u1eeda H\u00e0ng M\u1eb9 V\u00e0 B\u00e9 Baby Mart","address":"","lat":21.0054952,"lng":105.7200978,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJAQAAAJdTNDERlkpsGE_fK20","name":"WinMart","address":"","lat":21.005043,"lng":105.7282333,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJxZAFYtVTNDERetI4Qn6r1Cw","name":"Th\u1ef1c ph\u1ea9m s\u1ea1ch BaBoy FooDS","address":"","lat":21.004979,"lng":105.7283121,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJr6ZQTUVTNDERqFZyJcL0qtU","name":"Civie Mart","address":"","lat":21.00657929999999,"lng":105.7320706,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJnQ5oXHtTNDER9FI2rTotMLg","name":"Sakuko Store","address":"","lat":21.0082709,"lng":105.7372995,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJc8kOQH5TNDERu5Oow3LBRsU","name":"VinMart+","address":"","lat":21.0165457,"lng":105.7396092,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJtV10POhTNDERPA97a5NJjL4","name":"Si\u00eau th\u1ecb th\u00fa c\u01b0ng - Pet Spa","address":"","lat":21.0089397,"lng":105.7379959,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJgRl_1V1TNDERetCy9ovjSGo","name":"Sunny Mart","address":"","lat":21.0074727,"lng":105.7371821,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJ8zdEnNxTNDERbaC5Y5I4vJM","name":"Tomo Tomo Mart SAKURA","address":"","lat":21.0045968,"lng":105.7373757,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJY9jZFQtUNDERyRPu7J_5Vrc","name":"Vinmart+ L\u1ea1i Y\u00ean","address":"","lat":21.0246587,"lng":105.7100777,"distance_text":"","time_text":""},{"business":"supermarket","place_id":"ChIJ-_cLbUpTNDERYeb4hyZM-D8","name":"Oshin Mart","address":"","lat":20.9998128,"lng":105.7168822,"distance_text":"","time_text":""}],"park":[{"business":"park","place_id":"ChIJ_XuIAXFTNDERWXAP1L7D46k","name":"Dashu.jp T\u00f9ng la h\u00e1n Nh\u1eadt B\u1ea3n v\u01b0\u1eddn c\u00e2y Bonsai \u5927\u6a39\u682a\u5f0f\u4f1a\u793e","address":"","lat":21.0159617,"lng":105.719455,"distance_text":"","time_text":""},{"business":"park","place_id":"ChIJ71bEhotTNDER2iZ_yj5xl3Q","name":"H\u1ed3 Splendora","address":"","lat":21.0147159,"lng":105.715006,"distance_text":"","time_text":""},{"business":"park","place_id":"ChIJY5luGYtVNDER6BZ-JtCkX4o","name":"H\u1ed3 Lure V\u01b0\u1eddn Cam","address":"","lat":21.0278092,"lng":105.7270383,"distance_text":"","time_text":""},{"business":"park","place_id":"ChIJDZzNJltTNDERBaPUPxFGpDw","name":"V\u01b0\u1eddn hoa H\u1ea3i Ho\u00e0ng","address":"","lat":21.0045467,"lng":105.7141207,"distance_text":"","time_text":""},{"business":"park","place_id":"ChIJfUBcxktTNDERXsrOctFlWiI","name":"Heart park","address":"","lat":21.00765699999999,"lng":105.738304,"distance_text":"","time_text":""},{"business":"park","place_id":"ChIJGYPhgT5VNDERrx9jQ15iKu4","name":"V\u01b0\u1eddn hoa","address":"","lat":21.0295436,"lng":105.730312,"distance_text":"","time_text":""},{"business":"park","place_id":"ChIJWc_-FWVTNDERseoOSURS-4k","name":"V\u01b0\u1eddn c\u00e2y Ph\u00fac L\u00f9ng","address":"","lat":21.0152618,"lng":105.7427783,"distance_text":"","time_text":""},{"business":"park","place_id":"ChIJdRQZFt5TNDERWlGgJYFB7mM","name":"H\u1ed3 Nam An Kh\u00e1nh","address":"","lat":20.9990997,"lng":105.7181545,"distance_text":"","time_text":""},{"business":"park","place_id":"ChIJIdD85u9TNDEREtv9_3pbrF4","name":"V\u01b0\u1eddn th\u00fa Thi\u00ean \u0111\u01b0\u1eddng B\u1ea3o s\u01a1n","address":"","lat":20.9992013,"lng":105.7309681,"distance_text":"","time_text":""},{"business":"park","place_id":"ChIJU-ZIMXhTNDER-jO2yBi74LI","name":"C\u00f4ng Vi\u00ean An Kh\u00e1nh","address":"","lat":21.0000232,"lng":105.7145801,"distance_text":"","time_text":""}],"hospital":null,"restaurant":null}`)
+</script>
+
+
+
+<script type="text/javascript">
+;(function() {
+
+	var $map = document.querySelector('#map');
+	var $container = $map.closest('.map-warpper');
+	var $map_tabs = $container.querySelector('.map-tabs');
+	var $map_contents = $container.querySelector('.map-contents');
+
+	function calculateDistance(lat1, lon1, lat2, lon2) {
+		function toRadians(degrees) {
+			return degrees * Math.PI / 180;
+		}
+		const R = 6371; // Earth's radius in meters
+		const dLat = toRadians(lat2 - lat1);
+		const dLon = toRadians(lon2 - lon1);
+		const a =
+		Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+		Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+		Math.sin(dLon / 2) * Math.sin(dLon / 2);
+		const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		const distance = R * c; // distance in meters
+		return distance.toFixed(1);
+	}
+	// https://batdongsan.com.vn/du-an-khu-do-thi-moi-hoai-duc/vinhomes-thang-long-pj2516
+	function renderMap() {
+		$map_tabs.innerHTML = '';
+		$map_contents.innerHTML = '';
+		for ( key in data_map) {
+			let map_item = data_map[key]
+			let key_name = ''
+			switch (key) {
+				case 'school': key_name = 'Trường học'; break;
+				case 'supermarket': key_name = 'Siêu thị'; break;
+				case 'park': key_name = 'Công viên'; break;
+				case 'hospital': key_name = 'Bệnh viện'; break;
+				case 'restaurant': key_name = 'Nhà hàng'; break;
+				default: key_name = 'Trường học'; break;
+			}
+			let html_tabs = `<div data-key="${key}" class="map-tab">
+				${key_name}
+			</div>`
+			let html_contents = ``
+			if (map_item && map_item.length > 0) {
+				map_item.forEach((item, index) => {
+					html_contents += `<div data-index="${index}" class="map-item">
+						<div class="map-item-left">
+							<div class="map-item-name">${item.name}</div>
+							<div class="map-item-address">${item.address}</div>
+						</div>
+						<div class="map-item-right">${calculateDistance(lat, lng, item.lat, item.lng)} km</div>
+					</div>`
+				})
+			}
+			if (map_item && map_item.length > 0) {
+				html_contents = `<div class="map-content">
+						${html_contents}
+					</div>`
+				$map_tabs.insertAdjacentHTML('beforeend', html_tabs)
+				$map_contents.insertAdjacentHTML('beforeend', html_contents)
+			}
+		}
+		$map_tabs.querySelector('.map-tab') ? $map_tabs.querySelector('.map-tab').classList.add('active') : ''
+		$map_contents.querySelector('.map-content') ? $map_contents.querySelector('.map-content').classList.add('active') : ''
+	}
+	renderMap()
+
+	// school | secondary_school | supermarket | park | hospital | restaurant
+	function getMarkerIcon(type='school') {
+		let icon_path = 'https://dandautu.vn/public/assets/images/location_school.png'
+		if (type == 'supermarket') {
+			icon_path = 'https://dandautu.vn/public/assets/images/location_supermarket.png'
+		}
+		if (type == 'park') {
+			icon_path = 'https://dandautu.vn/public/assets/images/location_park.png'
+		}
+		if (type == 'hospital') {
+			icon_path = 'https://dandautu.vn/public/assets/images/location_hospital.png'
+		}
+		if (type == 'restaurant') {
+			icon_path = 'https://dandautu.vn/public/assets/images/location_restaurant.png'
+		}
+		return L.icon({
+		    iconUrl: icon_path,
+		    // shadowUrl: 'marker_school.svg',
+		    iconSize:     [40], // size of the icon
+		    iconAnchor:   [40/2, 40], // point of the icon which will correspond to marker's location
+		    shadowSize:   [50], // size of the shadow
+		    shadowAnchor: [4, 62],  // the same for the shadow
+		    popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
+		})
+	}
+
+	var mark_icon = getMarkerIcon()
+	window.map = L.map('map', {
+	    // zoomControl: false,
+		fullscreenControl: {
+	        pseudoFullscreen: true
+	    }
+	}).setView([lat, lng], 13);
+
+	L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+	    maxZoom: 18,
+	    subdomains:['mt0','mt1','mt2','mt3']
+	}).addTo(map);
+
+	var current_markers = []
+	var current_marker = L.marker([lat, lng]).addTo(map)
+
+	function renderMakers(key) {
+		for (marker of current_markers) {
+			map.removeLayer(marker)
+		}
+		current_markers = []
+		data_map[key].forEach(item => {
+			current_markers.push(L.marker([item.lat, item.lng], {icon: getMarkerIcon(key)}).addTo(map).bindPopup(item.name))
+		})
+	}
+
+	var has_data_map = false
+	for (key in data_map) {
+		if (data_map[key] && data_map[key].length > 0) {
+			has_data_map = true
+			renderMakers(key)
+			break;
+		}
+	}
+	if (!has_data_map) {
+		document.querySelector('.map-warpper').style.display = 'none'
+		document.querySelector('.map-title').style.display = 'none'
+		document.querySelector('li.to_map').style.display = 'none'
+	}
+
+	document.querySelectorAll('.map-tab').forEach(function(item, index) {
+		item.addEventListener('click', function(e) {
+			$container.querySelectorAll('.map-tab').forEach(item1 => item1.classList.remove('active'))
+			$container.querySelectorAll('.map-content').forEach(item1 => item1.classList.remove('active'))
+			$container.querySelectorAll('.map-tab')[index].classList.add('active')
+			$container.querySelectorAll('.map-content')[index].classList.add('active')
+			key = item.getAttribute('data-key')
+			renderMakers(key)
+		})
+	})
+
+	// Add a custom button to toggle fullscreen
+	var fullscreenControl = L.Control.extend({
+        options: {
+            position: 'topright'
+        },
+
+        onAdd: function(map) {
+            var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-fullscreen');
+            var link = L.DomUtil.create('a', 'leaflet-bar-part', container);
+            link.title = 'Full screen';
+            link.href = '#';
+            link.innerHTML = '<i class="bi bi-fullscreen"></i>';
+
+            L.DomEvent.on(link, 'click', function(e) {
+                var fullscreenElement = document.querySelector('#map');
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                    $('.leaflet-fullscreen i').removeClass('bi-fullscreen-exit')
+                    $('.leaflet-fullscreen i').addClass('bi-fullscreen')
+                } else {
+                    fullscreenElement.requestFullscreen();
+                    $('.leaflet-fullscreen i').removeClass('bi-fullscreen')
+                    $('.leaflet-fullscreen i').addClass('bi-fullscreen-exit')
+                }
+                map.invalidateSize();
+            });
+
+            return container;
+        }
+    });
+
+	// Add the fullscreen control to the map
+	map.addControl(new fullscreenControl());
+
+	document.querySelector('.map-contents').addEventListener('click', function(e) {
+		if(e.target.closest('.map-item')) {
+			var $map_item = e.target.closest('.map-item')
+			var index = [...$map_item.parentElement.querySelectorAll('.map-item')].findIndex((item) => item === $map_item)
+			current_markers[index].openPopup();
+			map.setView(new L.LatLng(current_markers[index]._latlng.lat, current_markers[index]._latlng.lng));
+		}
+	})
+
+	// set view
+	// map.setView(new L.LatLng(lat, lng), 13)
+})();
+</script>
+
+
+
+
+
+</body>
+</html>
