@@ -3,7 +3,16 @@
 
 <head>
     <title>Upload File Example</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf_viewer.min.css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/cmaps.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/sandbox.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf_viewer.min.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script> -->
+    <!-- <script type="text/javascript" src="D://assets/vendor/pdf/pdf.js"></script> -->
 </head>
 
 <body>
@@ -12,11 +21,29 @@
         <input type="file" id="fileInput" name="fileInput">
         <button type="submit">Upload</button>
     </form>
-    <script>
+
+    <div id="output" style="margin-top: 24px;">
+    	
+    </div>
+<script>
+
+	var $output = document.querySelector('#output')
     var pdfjsLib = window['pdfjs-dist/build/pdf'];
 
+	// var cmapUrl = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/cmaps/';
+	// var cmapPacked = true;
+	// var cmapName = 'UniGB-UTF16-H';
+	// pdfjsLib.CMapReaderFactory.fetch(cmapUrl + cmapName + (cmapPacked ? '.bcmap' : ''), { onProgress: function() {} }).then(function(data) {
+	// 	pdfjsLib.CMapReaderFactory.register(cmapName, data);
+	// }, function(reason) {
+	// 	console.error('Unable to load CMap ' + cmapName + ': ' + reason);
+	// });
+
+
+
     // The workerSrc property shall be specified.
-    // pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+    // pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.worker.js';
+    // pdfjsLib.GlobalWorkerOptions.workerSrc = 'D://assets/vendor/pdf/pdf.worker.js';
 
     // Đăng ký sự kiện khi người dùng gửi form
     document.getElementById('uploadForm').addEventListener('submit', function(event) {
@@ -28,19 +55,26 @@
         reader.onload = function(e) {
             var fileContent = e.target.result;
             console.log('File content:', fileContent);
+            fileContent = new Uint8Array(fileContent)
             // Đọc nội dung của file PDF
             pdfjsLib.getDocument({ data: fileContent }).promise.then(function(pdf) {
                 // Lấy số trang của file PDF
                 var numPages = pdf.numPages;
                 // Đọc nội dung text của trang đầu tiên
-                pdf.getPage(220).then(function(page) {
+                pdf.getPage(20).then(function(page) {
                     page.getTextContent().then(function(textContent) {
                         var text = "";
-                        for (var i = 0; i < textContent.items.length; i++) {
-                            text += textContent.items[i].str + " ";
-                        }
-                        console.log('Text content of page 3:', text);
+                        for (page_item of textContent.items) {
+                        	text_item = page_item.str;
+                        	// text_item = page_item.str.replace(/[^\x20-\x7E]/g, '');
+                        	// text_item = eval(text_item)
+                        	text_item += " ";
 
+                        	text += text_item
+                        }
+
+                        console.log('Text content of page 3:', text);
+                        $output.innerHTML = text
                         console.log(textContent)
 
                         // Ở đây, bạn có thể xử lý nội dung text theo nhu cầu của bạn
