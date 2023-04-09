@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mở file PDF và lấy nội dung trang 1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
+</head>
+
+<body>
+    <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <style type="text/css">
+    #the-canvas {
+        border: 1px solid black;
+        direction: ltr;
+    }
+    </style>
+    <canvas id="the-canvas"></canvas>
+    <script>
+    // If absolute URL from the remote server is provided, configure the CORS
+    // header on that server.
+    var url = 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/examples/learning/helloworld.pdf';
+    var url = 'cai_gi_cung_thang.pdf';
+
+    // Loaded via <script> tag, create shortcut to access PDF.js exports.
+    var pdfjsLib = window['pdfjs-dist/build/pdf'];
+
+    // The workerSrc property shall be specified.
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+    // Asynchronous download of PDF
+    var loadingTask = pdfjsLib.getDocument(url);
+    loadingTask.promise.then(function(pdf) {
+        console.log('PDF loaded');
+
+        // Fetch the first page
+        // var pageNumber = 4;
+        // pdf.getPage(pageNumber).then(function(page) {
+        //   console.log('Page loaded');
+
+        //   console.log(page.getTextContent())
+
+        //   var scale = 1.5;
+        //   var viewport = page.getViewport({scale: scale});
+
+        //   // Prepare canvas using PDF page dimensions
+        //   var canvas = document.getElementById('the-canvas');
+        //   var context = canvas.getContext('2d');
+        //   canvas.height = viewport.height;
+        //   canvas.width = viewport.width;
+
+        //   // Render PDF page into canvas context
+        //   var renderContext = {
+        //     canvasContext: context,
+        //     viewport: viewport
+        //   };
+        //   var renderTask = page.render(renderContext);
+        //   renderTask.promise.then(function () {
+        //     console.log('Page rendered');
+        //   });
+        // });
+
+
+        // Lấy nội dung văn bản của trang đầu tiên
+        pdf.getPage(3)
+            .then(page => {
+                var textContent = page.getTextContent();
+                console.log(page)
+                return textContent;
+            })
+            .then(textContent => {
+                // Hiển thị nội dung văn bản của trang đầu tiên
+                console.log(textContent.items.map(item => item.str).join(' '));
+            })
+            .catch(error => {
+                console.error('Error getting text content:', error);
+            });
+
+    }, function(reason) {
+        // PDF loading error
+        console.error(reason);
+    });
+    </script>
+</body>
+
+</html>

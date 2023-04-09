@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload File Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
+</head>
+
+<body>
+    <h1>Upload File Example</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput" name="fileInput">
+        <button type="submit">Upload</button>
+    </form>
+    <script>
+    var pdfjsLib = window['pdfjs-dist/build/pdf'];
+
+    // The workerSrc property shall be specified.
+    // pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+    // Đăng ký sự kiện khi người dùng gửi form
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Lấy dữ liệu từ file input
+        var file = document.getElementById('fileInput').files[0];
+        // Tạo đối tượng FileReader để đọc nội dung của file
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var fileContent = e.target.result;
+            console.log('File content:', fileContent);
+            // Đọc nội dung của file PDF
+            pdfjsLib.getDocument({ data: fileContent }).promise.then(function(pdf) {
+                // Lấy số trang của file PDF
+                var numPages = pdf.numPages;
+                // Đọc nội dung text của trang đầu tiên
+                pdf.getPage(220).then(function(page) {
+                    page.getTextContent().then(function(textContent) {
+                        var text = "";
+                        for (var i = 0; i < textContent.items.length; i++) {
+                            text += textContent.items[i].str + " ";
+                        }
+                        console.log('Text content of page 3:', text);
+
+                        console.log(textContent)
+
+                        // Ở đây, bạn có thể xử lý nội dung text theo nhu cầu của bạn
+                    });
+                });
+            });
+        };
+        // Đọc nội dung của file dưới dạng ArrayBuffer
+        reader.readAsArrayBuffer(file);
+        // reader.readAsText(file);
+        // reader.readAsDataURL(file);
+        // reader.readAsBinaryString(file);
+    });
+    </script>
+</body>
+
+</html>
