@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+
+    <!-- <script type="text/javascript" src="https://www.calculat.org/aaa/js/mathjax/es5/tex-svg.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg-full.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/startup.min.js" integrity="sha512-AT1RabAYSoVisV8foPybIfum/q/0WIfUIwqCsZviDc7K3seuWDSokKGGab0OJci4aRve9Dk4IEQYpU57YxC+MQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js" integrity="sha512-T8xxpazDtODy3WOP/c6hvQI2O9UPdARlDWE0CvH1Cfqc0TXZF6GZcEKL7tIR8VbfS/7s/J6C+VOqrD6hIo++vQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js" integrity="sha512-4MXl9OmsJPCU3LySQiKq4baSCSNFha8CBJL7NVSmN+WJJNLhJUycJgGdxJlxAY2ih8jhP9juGYq2ThUihYBKIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+</head>
+
+<body>
+    <figure>$$ \begin{aligned} S &= \pi r^2 \\ \\ C &= 2 \cdot \pi r \end{aligned} $$</figure>
+    <script type="text/javascript">
+    window.MathJax = {
+
+        menuSettings: {
+		    context: "Browser"
+		},
+        messageStyle: "none",
+        tex2jax: {
+            inlineMath: [
+                ["\\(", "\\)"]
+            ],
+            displayMath: [
+                ["\\[", "\\]"]
+            ],
+            processEscapes: true,
+            skipTags: ["script", "noscript", "style", "textarea", "pre"],
+            ignoreClass: "mjx-no",
+            processClass: "mathcode"
+        },
+        options: {
+        	enableMenu: false,
+            skipHtmlTags: {
+                "[-]": ["mjx-block", "mjx-math"]
+            }
+        }
+    };
+    </script>
+</body>
+
+</html>

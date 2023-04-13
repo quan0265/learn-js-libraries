@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MathML"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<body>
+    <p>Bạn có thể sử dụng MathJax để hiển thị các công thức toán học như sau:</p>
+    <p>\[f(x) = \int_{-\infty}^\infty \hat f(\xi)\,e^{2 \pi i \xi x} d\xi\]</p>
+    <figure>\\(x^2+2x+1=0\\)</figure>
+<mjx-assistive-mml display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow data-mjx-texclass="ORD"><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mi mathvariant="normal">∞</mi></msubsup><mrow data-mjx-texclass="ORD"><mover><mi>f</mi><mo stretchy="false">^</mo></mover></mrow><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo><mstyle scriptlevel="0"><mspace width="0.167em"></mspace></mstyle><msup><mi>e</mi><mrow data-mjx-texclass="ORD"><mn>2</mn><mi>π</mi><mi>i</mi><mi>ξ</mi><mi>x</mi></mrow></msup><mi>d</mi><mi>ξ</mi></math></mjx-assistive-mml>
+
+    <script type="text/javascript" async >
+    MathJax = {
+    	menuSettings: {
+		    context: "Browser"
+		},
+    	showMathMenu: false,
+        showMathMenuMSIE: false,
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            ignoreClass: '.*'
+        },
+        "HTML-CSS": {
+            availableFonts: ["TeX"],
+            showMathMenu: false
+        },
+        "messageStyle": "none"
+    };
+</script>
+
+</body>
+
+</html>
