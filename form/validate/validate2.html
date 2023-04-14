@@ -22,15 +22,18 @@
 <body>
 
 <div class="container">
-    <form id="validate-form" action="" style="max-width: 600px;">
+    <form id="validate-form" action="" style="max-width: 600px;" enctype="multipart/form-data" novalidate="">
         <div class="form-group">
             <label>Email</label>
             <input type="email" class="form-control" name="email">
         </div>
-
     	<div class="form-group">
             <label>First Name </label>
             <input type="text" class="form-control" name="first_name" minlength="2" required>
+        </div>
+        <div class="form-group">
+            <label>File</label>
+            <input type="file" class="form-control" name="image" accept="image/jpg,image/jpeg" required>
         </div>
         <div class="form-group">
             <label>Url</label>
@@ -54,6 +57,15 @@
         		<label>
         			<input type="radio" value="female" name="gender" class="form-check-input">
         			<span>Female</span>
+        		</label>
+        	</div>
+        </div>
+        <div class="form-group">
+        	<label>Check</label>
+        	<div>
+        		<label>
+        			<input type="checkbox" value="1" name="check" class="form-check-input">
+        			<span>Male</span>
         		</label>
         	</div>
         </div>
@@ -137,16 +149,14 @@
             },
             submitHandler: function (form) {
             	console.log($(form).serialize())
-                // $.ajax({
-                //     type: "POST",
-                //     url: "/themes/<?= $dir_theme ?>/ajax/checkout-review.php",
-                //     data: $(form).serialize(),
-                //     success: function (smg) {
-                //         $('main.main').html(smg);
-                //         $('#scroll-top').click();
-                //     }
-                // });
-                console.log(222);
+                $.ajax({
+                    url: "http://localhost/api/test.php",
+                    method: "POST",
+                    data: $(form).serialize(),
+                    success: function (res) {
+                    	console.log(res)
+                    }
+                });
                 // Không submit form
                 return false;
             }
