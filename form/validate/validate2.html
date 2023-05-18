@@ -22,40 +22,41 @@
 <body>
 
 <div class="container">
-    <form id="validate-form" action="" style="max-width: 600px;" enctype="multipart/form-data" novalidate="">
+    <form id="validate-form" class="form_edit" action="" style="max-width: 600px;" enctype="multipart/form-data" novalidate="">
         <div class="form-group">
             <label>Email</label>
             <input type="email" class="form-control" name="email">
         </div>
     	<div class="form-group">
             <label>First Name </label>
-            <input type="text" class="form-control" name="first_name" minlength="2" required>
+            <input type="text" class="form-control" name="first_name" minlength="2" required1>
         </div>
         <div class="form-group">
             <label>File</label>
-            <input type="file" class="form-control" name="image" accept="image/jpg,image/jpeg" required>
+            <input type="file" class="form-control" name="image" accept="image/jpg,image/jpeg" required1>
         </div>
         <div class="form-group">
             <label>Url</label>
-            <input type="url" class="form-control" name="url" required>
+            <input type="url" class="form-control" name="url" required1>
         </div>
         <div class="form-group">
             <label>Password</label>
-            <input type="text" class="form-control" name="password" minlength="6" required>
+            <input type="text" class="form-control" name="password" minlength="6" required1>
         </div>
         <div class="form-group">
             <label>Confirm Password</label>
-            <input type="text" class="form-control" name="confirm_password" equalTo="#validate-form [name=password]" required>
+            <input type="text" class="form-control" name="confirm_password" equalTo="#validate-form [name=password]" required1>
         </div>
         <div class="form-group">
         	<label>Gender</label>
         	<div>
         		<label>
-        			<input type="radio" value="male" name="gender" class="form-check-input">
+        			<input type="radio" value="male" name="gender" required="" class="form-check-input">
+
         			<span>Male</span>
         		</label>
         		<label>
-        			<input type="radio" value="female" name="gender" class="form-check-input">
+        			<input type="radio" value="female" name="gender" required="" class="form-check-input">
         			<span>Female</span>
         		</label>
         	</div>
@@ -119,6 +120,11 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		// var formData = new FormData(document.querySelector('.form_edit'))
+		// formData.append('a', 2)
+  //   	for (let [key, value] of formData.entries()) {
+		//  	console.log(`Key: ${key}, Value: ${value}`);
+		// }
         $("#validate-form").validate({
 
             messages: {
@@ -139,9 +145,15 @@
             errorElement: "span", 
             errorClass: "help-block",
             errorPlacement: function (e_error, e) {
+            	if ($(e).attr('type') !== 'radio') {
+	                e_error.insertAfter(e)
+            	}
+            	else {
+            		e_error.appendTo($(e).closest('.form-group'))
+            	}
 
                 // Chèn elemnt error sau element
-                e_error.insertAfter(e)
+                // e_error.insertAfter(e)
 
                 //Chèn elemnt error ben ngoai
                 // element.insertAfter(e.parent())
@@ -149,10 +161,18 @@
             },
             submitHandler: function (form) {
             	console.log($(form).serialize())
+            	// var formData = new FormData(form)
+            	var formData = new FormData(document.querySelector('.form_edit'))
+            	for (let [key, value] of formData.entries()) {
+				 	console.log(`Key: ${key}, Value: ${value}`);
+				}
+				formData.append('a', 2)
                 $.ajax({
                     url: "http://localhost/api/test.php",
-                    method: "POST",
-                    data: $(form).serialize(),
+                    method: "post",
+		            processData: false,
+		            contentType: false,
+                    data: formData,
                     success: function (res) {
                     	console.log(res)
                     }

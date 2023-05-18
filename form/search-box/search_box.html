@@ -7,6 +7,11 @@
     <title>search box element</title>
 </head>
 <style>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
 	body { font-family: 'Roboto'; background: #fafafa; }
 	.container { margin: 150px auto; }
 	.searchBoxElement{
@@ -53,26 +58,33 @@
 <body>
     <div class="container">
         <h1>Select Box With Search Options Example</h1>
-        <div class="select-wrap">
-            <select name="lang" class="js-searchBox" style="width:250px">
-                <option value="">Select A Language</option>
-                <option value="1">Python</option>
-                <option value="2">Java</option>
-                <option value="3">Ruby</option>
-                <option value="4">C/C++</option>
-                <option value="5">C#</option>
-                <option value="6">JavaScript</option>
-                <option value="7">PHP</option>
-                <option value="8">Swift</option>
-                <option value="9">Scala</option>
-                <option value="10">R</option>
-                <option value="11">Go</option>
-                <option value="12">VisualBasic.NET</option>
-                <option value="13">Kotlin</option>
-            </select>
-        </div>
+        <form action="">
+	        <div class="select-wrap">
+	            <select name="lang" class="js-searchBox" style="width:250px">
+	                <option value="">Select A Language</option>
+	                <option value="1">Python</option>
+	                <option value="2">Java</option>
+	                <option value="3">Ruby</option>
+	                <option value="4">C/C++</option>
+	                <option value="5">C#</option>
+	                <option value="6">JavaScript</option>
+	                <option value="7">PHP</option>
+	                <option value="8">Swift</option>
+	                <option value="9">Scala</option>
+	                <option value="10">R</option>
+	                <option value="11">Go</option>
+	                <option value="12">VisualBasic.NET</option>
+	                <option value="13">Kotlin</option>
+	                <option>Hoa quả</option>
+	            </select>
+	        </div>
+	        <div style="margin-top: 12px;">
+		        <button type="reset">Reset</button>
+		        <button type="submit">Submit</button>
+	        </div>
+        </form>
     </div>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="D://assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="jquery-searchbox.js"></script>
 <script>
 	$('.js-searchBox').searchBox({ elementWidth: '250' });
