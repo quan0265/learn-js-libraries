@@ -23,12 +23,12 @@
 
     // Load the opf
     // var book = ePub(url || "https://s3.amazonaws.com/moby-dick/moby-dick.epub");
-    var book = ePub(url || "https://s3.amazonaws.com/epubjs/books/alice.epub");
-    // var book = ePub(url || "D://assets/file/book.epub");
+    // var book = ePub(url || "https://s3.amazonaws.com/epubjs/books/alice.epub");
+    var book = ePub("alice.epub");
     var rendition = book.renderTo("viewer", {
         width: "100%",
         height: 600,
-        spread: "always"
+        spread: "always",
     });
 
     rendition.display(currentSectionIndex);
