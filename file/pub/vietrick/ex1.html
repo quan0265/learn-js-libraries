@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="vi" xml:lang="vi">
+
+<head>
+    <title>ePub Reader online</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Công cụ đọc ebook epub online, hỗ trợ format .epub" />
+    <link rel="profile" href="https://gmpg.org/xfn/11" />
+    <link rel="alternate" type="application/rss+xml" title="Vietrick RSS Feed" href="https://www.vietrick.com/feed" />
+    <link rel="alternate" type="application/atom+xml" title="Vietrick Atom Feed" href="https://www.vietrick.com/feed/atom" />
+    <meta name="author" content="Vietrick" />
+    <meta name="copyright" content="Vietrick">
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#273da3">
+    <meta name="msapplication-TileColor" content="#212121">
+    <meta name="theme-color" content="#013fcb">
+    <meta property="og:title" content="ePub Reader online">
+    <meta property="og:description" content="Công cụ đọc ebook epub online, hỗ trợ format .epub">
+    <meta property="og:url" content="https://www.vietrick.com/apps/epub-reader/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.vietrick.com/apps/assets/vietrick-utility.png">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="315">
+    <meta property="og:image:alt" content="Developed by Lê Hòa at VIETRICK">
+    <meta property="og:site_name" content="Vietrick">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="fb:admins" content="100001884088975">
+    <meta property="fb:app_id" content="478543156094708">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="ePub Reader online">
+    <meta name="twitter:title" content="Công cụ đọc ebook epub online, hỗ trợ format .epub">
+    <meta name="twitter:description" content="Bộ công cụ tiện ích phát triển bởi Lê Hòa tại VIETRICK.">
+    <meta name="twitter:image:src" content="https://www.vietrick.com/apps/assets/vietrick-utility.png">
+    <meta name="twitter:creator" content="@vietrickdotcom">
+    <meta name="twitter:url" content="https://www.vietrick.com/apps/epub-reader/">
+    <link href="https://cdn.jsdelivr.net" rel="preconnect" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preload" href="https://www.vietrick.com/apps/assets//css/argon.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://www.vietrick.com/apps/assets/css/argon.min.css"></noscript>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@graph": [{ "@type": "Organization", "@id": "https://www.vietrick.com/#organization", "name": "Vietrick", "url": "https://www.vietrick.com/", "sameAs": ["https://www.facebook.com/vietrickdotcom", "https://www.instagram.com/vietrickdotcom", "https://twitter.com/vietrickdotcom", "https://www.youtube.com/channel/UCnegD-bI-d2CfzCP1llUjEw"], "logo": { "@type": "ImageObject", "@id": "https://www.vietrick.com/#logo", "inLanguage": "vi-VN", "url": "https://www.vietrick.com/wp-content/uploads/2019/12/mstile-144x144-1.png", "width": 144, "height": 144, "caption": "Vietrick" }, "image": { "@id": "https://www.vietrick.com/#logo" } }, { "@type": "WebSite", "@id": "https://www.vietrick.com/#website", "url": "https://www.vietrick.com/", "name": "Vietrick", "description": "Chia sẻ thủ thuật và công nghệ", "publisher": { "@id": "https://www.vietrick.com/#organization" }, "potentialAction": [{ "@type": "SearchAction", "target": "https://www.vietrick.com/?s={search_term_string}", "query-input": "required name=search_term_string" }], "inLanguage": "vi-VN" }] }
+    </script>
+    <style type="text/css">
+    /*-- QuickSans Font --*/
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkKEo58m-wi40.woff2) format('woff2');
+        unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkKEo58i-wi40.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkKEo58a-wg.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkP8o58m-wi40.woff2) format('woff2');
+        unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkP8o58i-wi40.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkP8o58a-wg.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkM0o58m-wi40.woff2) format('woff2');
+        unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkM0o58i-wi40.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkM0o58a-wg.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkCEv58m-wi40.woff2) format('woff2');
+        unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkCEv58i-wi40.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkCEv58a-wg.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkBgv58m-wi40.woff2) format('woff2');
+        unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkBgv58i-wi40.woff2) format('woff2');
+        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
+    }
+
+    @font-face {
+        font-family: Quicksand;
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/quicksand/v21/6xK-dSZaM9iE8KbpRA_LJ3z8mH9BOJvgkBgv58a-wg.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+    }
+
+    .entry-title {
+        font-weight: 700;
+        font-size: 28px;
+        color: #1d1d1f;
+    }
+
+    #post-body h2,
+    #post-body h3,
+    #post-body h4,
+    #post-body h5 {
+        display: block;
+        width: 100%;
+        float: left;
+        font-weight: 700;
+        margin: 2rem 0 0 0;
+        color: #1d1d1f;
+    }
+
+    #post-body,
+    #post-body p {
+        font-size: 16px;
+        color: #1d1d1f;
+        font-family: 'Quicksand', Arial, sans-serif;
+        font-weight: 400;
+    }
+
+    #post-body p {
+        margin: 1rem 0
+    }
+
+    #post-body p+p {
+        margin-top: 0
+    }
+
+    #post-body p+h2 {
+        margin-top: 1rem
+    }
+
+    .faq_item {
+        margin-bottom: 2rem;
+    }
+
+    .faq_item h2 {
+        margin-top: 0 !important;
+    }
+
+    .getlink-form button {
+        padding-left: 0;
+        padding-right: 0
+    }
+
+    @media (min-width: 576px) {
+        .content-wrapper .row:first-child {
+            min-height: 187.33px;
+        }
+
+    }
+
+    @media (max-width: 575px) {
+        .content-wrapper .row:first-child {
+            min-height: 238px;
+        }
+    }
+    </style>
+    <script data-ad-client="ca-pub-3778523089348908" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "ePub Reader online",
+        "operatingSystem": "Windows , macOS, Linux",
+        "applicationCategory": "Utilities",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.94",
+            "ratingCount": "411"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    <style>
+        @charset 'UTF-8';:root{--blue:#5e72e4;--indigo:#5603ad;--purple:#8965e0;--pink:#f3a4b5;--red:#f5365c;--orange:#fb6340;--yellow:#ffd600;--green:#2dce89;--teal:#11cdef;--cyan:#2bffc6;--white:#fff;--gray:#8898aa;--gray-dark:#32325d;--light:#ced4da;--lighter:#e9ecef;--primary:#5e72e4;--secondary:#f7fafc;--success:#2dce89;--info:#11cdef;--warning:#fb6340;--danger:#f5365c;--light:#adb5bd;--dark:#212529;--default:#172b4d;--white:#fff;--neutral:#fff;--darker:black;--breakpoint-xs:0;--breakpoint-sm:576px;--breakpoint-md:768px;--breakpoint-lg:992px;--breakpoint-xl:1200px;--font-family-sans-serif:Open Sans,sans-serif;--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace}*,::after,::before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%}nav{display:block}body{font-family:'Segoe UI','Verdana',Arial,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;margin:0;text-align:left;color:#525f7f;background-color:#f8f9fe}hr{overflow:visible;box-sizing:content-box;height:0}h1,h2{margin-top:0;margin-bottom:.5rem}p{margin-top:0;margin-bottom:1rem}ol,ul{margin-top:0;margin-bottom:1rem}strong{font-weight:bolder}a{text-decoration:none;color:#5e72e4;background-color:transparent}a:not([href]){text-decoration:none;color:inherit}code{font-family:SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace;font-size:1em}img{vertical-align:middle;border-style:none}svg{overflow:hidden;vertical-align:middle}button{border-radius:0}button,input{font-family:inherit;font-size:inherit;line-height:inherit;margin:0}button,input{overflow:visible}button{text-transform:none}[type=button],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,button::-moz-focus-inner{padding:0;border-style:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}h1,h2{font-family:inherit;font-weight:600;line-height:1.5;margin-bottom:.5rem;color:#32325d}h1{font-size:1.625rem}@media (max-width:1200px){h1{font-size:calc(1.2875rem + .45vw)}}h2{font-size:1.25rem}hr{margin-top:2rem;margin-bottom:2rem;border:0;border-top:1px solid rgba(0,0,0,.1)}code{font-size:87.5%;word-wrap:break-word;color:#f3a4b5}.container-fluid,.container-xl{width:100%;margin-right:auto;margin-left:auto;padding-right:15px;padding-left:15px}@media (min-width:1200px){.container-xl{max-width:1140px}}.row{display:flex;margin-right:-15px;margin-left:-15px;flex-wrap:wrap}.col,.col-6,.col-lg-6{position:relative;width:100%;padding-right:15px;padding-left:15px}.col{max-width:100%;flex-basis:0;flex-grow:1}.col-6{max-width:50%;flex:0 0 50%}@media (min-width:992px){.col-lg-6{max-width:50%;flex:0 0 50%}}.collapse:not(.show){display:none}.dropdown{position:relative}.dropdown-menu{font-size:1rem;position:absolute;z-index:1000;top:100%;left:0;display:none;float:left;min-width:10rem;margin:.125rem 0 0;padding:.5rem 0;list-style:none;text-align:left;color:#525f7f;border:0 solid rgba(0,0,0,.15);border-radius:.4375rem;background-color:#fff;background-clip:padding-box;box-shadow:0 50px 100px rgba(50,50,93,.1),0 15px 35px rgba(50,50,93,.15),0 5px 15px rgba(0,0,0,.1)}.dropdown-item{font-weight:400;display:block;clear:both;width:100%;padding:.5rem 1rem;text-align:inherit;white-space:nowrap;color:#212529;border:0;background-color:transparent}.nav-link{display:block;padding:.25rem .75rem}.navbar{position:relative;display:flex;padding:1rem 1rem;flex-wrap:wrap;align-items:center;justify-content:space-between}.navbar .container-fluid,.navbar .container-xl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between}.navbar-brand{font-size:1.25rem;line-height:inherit;display:inline-block;margin-right:1rem;padding-top:.0625rem;padding-bottom:.0625rem;white-space:nowrap}.navbar-nav{display:flex;flex-direction:column;margin-bottom:0;padding-left:0;list-style:none}.navbar-nav .nav-link{padding-right:0;padding-left:0}.navbar-nav .dropdown-menu{position:static;float:none}.navbar-collapse{flex-basis:100%;flex-grow:1;align-items:center}.navbar-toggler{font-size:1.25rem;line-height:1;padding:.25rem .75rem;border:1px solid transparent;border-radius:.25rem;background-color:transparent}.navbar-toggler-icon{display:inline-block;width:1.5em;height:1.5em;content:'';vertical-align:middle;background:no-repeat center center;background-size:100% 100%}@media (max-width:991.98px){.navbar-expand-lg>.container-fluid,.navbar-expand-lg>.container-xl{padding-right:0;padding-left:0}}@media (min-width:992px){.navbar-expand-lg{flex-flow:row nowrap;justify-content:flex-start}.navbar-expand-lg .navbar-nav{flex-direction:row}.navbar-expand-lg .navbar-nav .dropdown-menu{position:absolute}.navbar-expand-lg .navbar-nav .nav-link{padding-right:1rem;padding-left:1rem}.navbar-expand-lg>.container-fluid,.navbar-expand-lg>.container-xl{flex-wrap:nowrap}.navbar-expand-lg .navbar-collapse{display:flex!important;flex-basis:auto}.navbar-expand-lg .navbar-toggler{display:none}}.navbar-light .navbar-brand{color:rgba(0,0,0,.9)}.navbar-light .navbar-nav .nav-link{color:rgba(0,0,0,.6)}.navbar-light .navbar-toggler{color:rgba(0,0,0,.6);border-color:transparent}.navbar-light .navbar-toggler-icon{background-image:url('data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'30\' height=\'30\' viewBox=\'0 0 30 30\'%3e%3cpath stroke=\'rgba(0, 0, 0, 0.6)\' stroke-linecap=\'round\' stroke-miterlimit=\'10\' stroke-width=\'2\' d=\'M4 7h22M4 15h22M4 23h22\'/%3e%3c/svg%3e')}.card{position:relative;display:flex;flex-direction:column;min-width:0;word-wrap:break-word;border:1px solid rgba(0,0,0,.05);border-radius:.375rem;background-color:#fff;background-clip:border-box}.card-body{min-height:1px;padding:1.5rem;flex:1 1 auto}.card-header{margin-bottom:0;padding:1.25rem 1.5rem;border-bottom:1px solid rgba(0,0,0,.05);background-color:#fff}.card-header:first-child{border-radius:calc(.375rem - 1px) calc(.375rem - 1px) 0 0}.breadcrumb{display:flex;margin-bottom:1rem;padding:.5rem 1rem;list-style:none;border-radius:.375rem;background-color:#f6f9fc;flex-wrap:wrap}.breadcrumb-item+.breadcrumb-item{padding-left:.5rem}.breadcrumb-item+.breadcrumb-item::before{display:inline-block;padding-right:.5rem;content:'-';color:#8898aa}.breadcrumb-item.active{color:#8898aa}.progress{font-size:.75rem;display:flex;overflow:hidden;height:1rem;border-radius:.375rem;background-color:#e9ecef;box-shadow:inset 0 .1rem .1rem rgba(0,0,0,.1)}.bg-secondary{background-color:#f7fafc!important}.d-none{display:none!important}@media (min-width:576px){.d-sm-inline-block{display:inline-block!important}}@media (min-width:992px){.d-lg-none{display:none!important}}.align-items-center{align-items:center!important}@media (min-width:992px){.align-items-lg-center{align-items:center!important}}.shadow-lg{box-shadow:0 0 33px rgba(16,14,23,.33)!important}.mb-0{margin-bottom:0!important}.mr-1{margin-right:.25rem!important}.mb-1{margin-bottom:.25rem!important}.mb-3{margin-bottom:1rem!important}.mb--8{margin-bottom:-8rem!important}.pt-0{padding-top:0!important}.pb-4{padding-bottom:1.5rem!important}.pt-6{padding-top:4.5rem!important}.pb-8{padding-bottom:8rem!important}.mr-auto{margin-right:auto!important}@media (min-width:992px){.ml-lg-auto{margin-left:auto!important}}.text-primary{color:#5e72e4!important}.text-success{color:#2dce89!important}.text-info{color:#11cdef!important}.text-warning{color:#fb6340!important}.text-danger{color:#f5365c!important}.breadcrumb-item{font-size:.875rem}.breadcrumb-dark{background-color:#172b4d}.breadcrumb-dark .breadcrumb-item{font-weight:600}.breadcrumb-dark .breadcrumb-item a{color:#f6f9fc}.breadcrumb-dark .breadcrumb-item+.breadcrumb-item::before{color:#adb5bd}.breadcrumb-dark .breadcrumb-item.active{color:#dee2e6}.breadcrumb-links{margin:0;padding:0;background:0 0}.card{margin-bottom:30px;border:0;box-shadow:0 0 2rem 0 rgba(136,152,170,.15)}.main-content{position:relative}@media (min-width:768px){.main-content .container-fluid,.main-content .container-xl{padding-right:30px!important;padding-left:30px!important}}.dropdown{display:inline-block}.dropdown-menu{min-width:12rem}.dropdown-menu .dropdown-item{font-size:.875rem;padding:.5rem 1rem}.dropdown-menu .dropdown-item>svg{font-size:1rem;margin-right:1rem;vertical-align:-17%}.header{position:relative}.navbar-horizontal .navbar-nav .nav-link{font-size:.875rem;font-weight:500;letter-spacing:0;text-transform:normal}.navbar-horizontal .navbar-nav .nav-link .nav-link-inner--text{margin-left:.25rem}.navbar-horizontal .navbar-brand{font-size:.875rem;font-size:.875rem;font-weight:600;letter-spacing:.05px;text-transform:uppercase}.navbar-horizontal .navbar-brand img{height:30px}@media (min-width:992px){.navbar-horizontal .navbar-nav .nav-item{margin-right:.5rem}.navbar-horizontal .navbar-nav .nav-link{padding-top:1rem;padding-bottom:1rem;border-radius:.375rem}.navbar-horizontal .navbar-nav .nav-link i{margin-right:.625rem}.navbar-horizontal .navbar-nav .nav-link-icon{font-size:1rem;padding-right:.5rem!important;padding-left:.5rem!important;border-radius:.375rem}.navbar-horizontal .navbar-nav .nav-link-icon i{margin-right:0}.navbar-horizontal .navbar-nav .dropdown-menu{margin:0;opacity:0}.navbar-horizontal .navbar-nav .dropdown-menu:before{position:absolute;z-index:-5;bottom:100%;left:20px;display:block;width:16px;height:16px;content:'';transform:rotate(-45deg) translateY(1rem);border-radius:.25rem;background:#fff;box-shadow:none}.navbar-horizontal .navbar-nav.navbar-nav-hover .dropdown-menu{display:block;transform:translate(0,10px) perspective(200px) rotateX(-2deg);opacity:0}}.navbar-horizontal.navbar-transparent{position:absolute;z-index:100;top:0;width:100%;border:0;background-color:transparent;box-shadow:none}.navbar-horizontal.navbar-transparent .navbar-brand{color:#fff}.navbar-horizontal.navbar-transparent .navbar-toggler{color:#fff}.navbar-horizontal.navbar-transparent .navbar-toggler-icon{background-image:url('data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'30\' height=\'30\' viewBox=\'0 0 30 30\'><path stroke=\'rgba(255, 255, 255, 0.95)\' stroke-linecap=\'round\' stroke-miterlimit=\'10\' stroke-width=\'2\' d=\'M4 7h22M4 15h22M4 23h22\'/></svg>')}@media (min-width:768px){.navbar-horizontal.navbar-transparent .navbar-nav .nav-link{color:rgba(255,255,255,.95)}.navbar-horizontal.navbar-transparent .navbar-brand{color:rgba(255,255,255,.95)}}.navbar-horizontal .navbar-collapse-header{display:none}@media (max-width:991.98px){.navbar-horizontal .navbar-nav .nav-link{padding:.625rem 0;color:#172b4d!important}.navbar-horizontal .navbar-nav .dropdown-menu{min-width:auto;box-shadow:none}.navbar-horizontal .navbar-collapse{position:absolute;z-index:1050;top:0;right:0;left:0;overflow-y:auto;width:calc(100% - 1.4rem);height:auto!important;margin:.7rem;opacity:0}.navbar-horizontal .navbar-collapse .navbar-toggler{position:relative;display:inline-block;width:20px;height:20px;padding:0}.navbar-horizontal .navbar-collapse .navbar-toggler span{position:absolute;display:block;width:100%;height:2px;opacity:1;border-radius:2px;background:#283448}.navbar-horizontal .navbar-collapse .navbar-toggler :nth-child(1){transform:rotate(135deg)}.navbar-horizontal .navbar-collapse .navbar-toggler :nth-child(2){transform:rotate(-135deg)}.navbar-horizontal .navbar-collapse .navbar-collapse-header{display:block;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid rgba(0,0,0,.1)}.navbar-horizontal .navbar-collapse .collapse-brand img{height:36px}.navbar-horizontal .navbar-collapse .collapse-close{text-align:right}}.navbar .dropdown-menu{margin:0;opacity:0}.navbar-collapse-header{display:none}.nav-link{color:#525f7f}.progress{overflow:hidden;height:8px;margin-bottom:1rem;border-radius:.25rem;background-color:#e9ecef;box-shadow:inset 0 1px 2px rgba(0,0,0,.1)}.separator{position:absolute;top:auto;right:0;left:0;overflow:hidden;width:100%;height:150px;transform:translateZ(0)}.separator svg{position:absolute}.separator-bottom{top:auto;bottom:0}.separator-bottom svg{bottom:0}.separator-skew{height:60px}@media (min-width:1200px){.separator-skew{height:70px}}p{font-size:1rem;font-weight:300;line-height:1.7}.description{font-size:.875rem}.bg-gradient-primary{background:linear-gradient(87deg,#5e72e4 0,#825ee4 100%)!important}.bg-gradient-primary{background:linear-gradient(87deg,#5e72e4 0,#825ee4 100%)!important}.fill-secondary{fill:#f7fafc}.text-purple{color:#8965e0!important}.text-red{color:#f5365c!important}.text-yellow{color:#ffd600!important}@font-face{font-family:'FontAwesome';font-display:fallback;src:url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.eot?v=4.7.0');src:url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'),url('https://cdn.jsdelivr.net/gh/vietrick/apps@3c7d897/assets/fonts/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'),url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'),url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');font-weight:normal;font-style:normal}.fa{display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.fa-twitter-square:before{content:"\f081"}.fa-facebook-square:before{content:"\f082"}.fa-github:before{content:"\f09b"}.fa-instagram:before{content:"\f16d"}.header{background:linear-gradient(87deg,#013fcb 0,#003d88 100%)!important}html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}a{background-color:transparent}strong{font-weight:bolder}code{font-family:monospace,monospace;font-size:1em}img{border-style:none}button,input{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button{text-transform:none}[type=button],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}*{box-sizing:border-box}.app{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-align-items:stretch;align-items:stretch;-webkit-justify-content:flex-start;justify-content:flex-start;position:relative;top:0;left:0;right:0;bottom:0;font-family:'Open Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;font-size:14px}.app button{display:inline-block;font-size:inherit;color:inherit;background:transparent;border:none;border-radius:5px;outline:0;text-align:inherit;margin:0;padding:0;line-height:1;font-weight:inherit;text-decoration:none;vertical-align:middle}.app button::-moz-focus-inner{border:0;padding:0}.app .bar{-webkit-flex:0 0 auto;flex:0 0 auto;display:-webkit-flex;display:flex;-webkit-flex-direction:row;flex-direction:row;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;height:44px;line-height:44px;padding:0 10px}.app .bar>div{-webkit-flex:0 0 auto;flex:0 0 auto}.app .bar .title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0px;flex:1;text-align:center}.app .book{-webkit-flex:1;flex:1;display:-webkit-flex;display:flex;-webkit-flex-direction:row;flex-direction:row;-webkit-align-items:stretch;align-items:stretch;-webkit-justify-content:stretch;justify-content:stretch}.app .book>div{-webkit-flex:1;flex:1;height:100%;width:100%}.app .book .empty-wrapper{display:-webkit-flex;display:flex;-webkit-flex-direction:row;flex-direction:row;-webkit-align-items:flex-start;align-items:flex-start;-webkit-justify-content:center;justify-content:center}.app .book .empty-wrapper .empty{display:block;-webkit-flex:0 0 auto;flex:0 0 auto;text-align:center}.app .book .empty-wrapper .empty .app-name{display:block;font-size:40px;font-weight:300;margin-bottom:20px}.app .book .empty-wrapper .empty .message{display:block;max-width:400px;margin:0 auto}.app .dictionary-wrapper{display:-webkit-flex;display:flex;-webkit-flex-direction:row;flex-direction:row;-webkit-align-items:stretch;align-items:stretch;-webkit-justify-content:center;justify-content:center;position:fixed;bottom:16px;left:16px;right:16px;height:200px;max-height:50%;min-height:150px;z-index:500}.app .dictionary-wrapper .dictionary{flex:0 0 auto}.app .dictionary{background:#fff;color:#000;box-shadow:0px 0px 4px 0px rgba(0,0,0,.15);border:1px solid #ddd;border-radius:4px;width:100%;max-width:450px;overflow-y:auto;overflow-x:hidden}.app .sidebar{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-align-items:stretch;align-items:stretch;-webkit-justify-content:flex-start;justify-content:flex-start;position:fixed;top:0;right:0;bottom:0;width:90%;max-width:300px;background:#fff;color:#000;z-index:1001;box-shadow:0px 0px 8px 0px rgba(0,0,0,.2);font-family:'Open Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif}.app .sidebar-wrapper{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.54);z-index:1000;will-change:background-color}.app .sidebar-wrapper,.app .sidebar-wrapper .sidebar{will-change:transform,box-shadow}.app .sidebar-wrapper.out{background:rgba(0,0,0,0)}.app .sidebar-wrapper.out .sidebar{-webkit-transform:translateX(100%);transform:translateX(100%);box-shadow:none}.app .sidebar .tab-list{-webkit-flex:0 0 auto;flex:0 0 auto;display:-webkit-flex;display:flex;-webkit-flex-direction:row;flex-direction:row;-webkit-justify-content:flex-start;justify-content:flex-start;-webkit-align-items:flex-end;align-items:flex-end;border-bottom:1px solid #ddd;background:#fff;box-shadow:0px 0px 4px 0px rgba(0,0,0,.15);z-index:1000}.app .sidebar .tab-list .item,.app .sidebar .tab-list .item:visited{-webkit-flex:1;flex:1;display:block;color:inherit;text-align:center;text-decoration:none;outline:0;line-height:50px;border-bottom:2px solid transparent}.app .sidebar .tab-container{-webkit-flex:1;flex:1;display:block;overflow-x:hidden;overflow-y:auto;background:#f5f5f4}.app .sidebar .toc-list{display:block}.app .sidebar .search-bar{display:-webkit-flex;display:flex;-webkit-flex-direction:row;flex-direction:row;-webkit-align-items:stretch;align-items:stretch;-webkit-justify-content:flex-start;justify-content:flex-start;background:#fff;margin:8px;border-radius:4px;box-shadow:0px 0px 8px 0px rgba(0,0,0,.15);border:1px solid #ddd}.app .sidebar .search-bar .search-box{-webkit-flex:1;flex:1;padding:0;margin:0;color:inherit;background:transparent;border:0;box-shadow:none;font-size:inherit;min-width:50px;padding:4px;border-top-left-radius:inherit;border-bottom-left-radius:inherit;outline:0}.app .sidebar .search-bar .search-button{-webkit-flex:0 0 auto;flex:0 0 auto;padding:0;margin:0;border:0;box-shadow:none;font-size:inherit;padding:4px;border-top-right-radius:inherit;border-bottom-right-radius:inherit;outline:0;border-left:1px solid #ddd;width:32px;text-align:center}.app .sidebar .search-results{display:block}.app .sidebar .info{display:block}.app .sidebar .info .cover-wrapper{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:flex-start;justify-content:flex-start;margin:24px auto;width:80%;border-radius:4px;box-shadow:0px 0px 8px 0px rgba(0,0,0,.15)}.app .sidebar .info .cover-wrapper .cover{flex:0 0 auto;-webkit-flex:0 0 auto;display:block;width:100%;border-radius:inherit}.app .sidebar .info .title{display:block;text-align:center;font-size:18px;margin-top:8px;font-weight:bold}.app .sidebar .info .series-info{display:block;text-align:center;font-size:16px;margin-top:4px}.app .sidebar .info .author{display:block;text-align:center;font-size:14px;margin-top:4px}.app .sidebar .info .description{display:block;text-align:justify;margin:12px auto;padding-top:12px;border-top:1px solid #ccc;max-width:80%;width:100%;line-height:1.6}.app .sidebar .setting{display:block;padding:8px 12px;border-bottom:1px solid #ccc}.app .sidebar .setting .setting-label{display:block;font-weight:700;margin-bottom:8px}.app .sidebar .settings .setting-content{display:block}.app .sidebar .settings .chips{display:block}.app .sidebar .settings .chips .chip{display:inline-block;vertical-align:middle;border-radius:8px;border:1px solid rgba(0,0,0,0.15);text-align:center;margin:4px;padding:4px 8px}.app .sidebar,.app .sidebar-wrapper{-webkit-user-drag:none}.app .error{display:block;background:#fff;position:fixed;top:0;left:0;right:0;bottom:0;z-index:2000;padding:28px 32px}.app .error .error-title{display:block;margin-bottom:16px;color:red;font-weight:300;font-size:32px;line-height:1}.app .error .error-description,.app .error .error-info{display:block;margin-bottom:8px;font-weight:300;font-size:16px;line-height:1.4}.app .error .error-dump{display:block;background:rgba(0,0,0,0.1);margin-top:16px;padding:8px;border-radius:5px;font-family:monospace;word-wrap:break-word;word-break:break-all;font-size:12px}@media only screen and (max-width:950px){.app .bar{height:36px;line-height:36px;padding:0 4px}}@media only screen and (max-width:450px){.app .bar .title{display:none!important}}.app .hidden{display:none!important}#reader-container{padding:0;border-radius:6px;overflow:hidden}.setting-content.progress.chips{height:unset;background:unset;box-shadow:unset;background:unset}.book-outer .book,.ads-wrap{width:50%;float:left}.book-ads{display:block;position:relative;width:300px;height:250px;border-radius:6px}.book .empty{min-height:214px;min-width:218px;width:100%}.app .book .empty-wrapper .empty .app-name{display:block;font-size:40px;font-weight:300;margin-bottom:20px}#step1,#step2,#step3,div[itemprop=step]{padding-left:1rem;margin-bottom:0.5rem}.hstep{font-weight:bold}.hstep:before{content:attr(data-step) ". "}.content-wrapper .row:first-child{min-height:368px}@media only screen and (max-width:630px){.book-outer .book,.ads-wrap{width:100%;float:unset}.book-outer .book-ads{margin:0 auto}}
+	</style>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://www.vietrick.com/apps/epub-reader/libs/normalize.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://www.vietrick.com/apps/epub-reader/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vietrick/apps@master/epub-reader/libs/normalize.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vietrick/apps@latest/epub-reader/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i&display=swap">
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    </noscript>
+</head>
+
+<body class="bg-secondary">
+    <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
+        <div class="container-fluid container-xl">
+            <a class="navbar-brand mb-3" href="https://www.vietrick.com/apps/">
+                <img alt="Vietrick Logo" width="120" height="30" src="https://www.vietrick.com/apps/assets/img/logo_vietrick_transparent.min.svg">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+                <div class="navbar-collapse-header">
+                    <div class="row">
+                        <div class="col-6 collapse-brand">
+                            <a href="https://www.vietrick.com/apps/">
+                                <img width="144" height="36" class="lazyload" data-src="https://www.vietrick.com/apps/assets/img/logo_vietrick_color.min.svg">
+                            </a>
+                        </div>
+                        <div class="col-6 collapse-close">
+                            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <ul class="navbar-nav navbar-nav-hover mr-auto">
+                    <li class="nav-item">
+                        <a href="https://www.vietrick.com/" class="nav-link">
+                            <span class="nav-link-inner--text">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-toggle="dropdown" role="button">
+                            <svg width="1.25rem" height="1.25rem" aria-hidden="true" viewBox="0 0 16 16" class="bi bi-box-seam" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
+                            </svg>
+                            <span class="nav-link-inner--text">Tiện ích</span>
+                            <svg width="0.75rem" height="0.75rem" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="https://www.vietrick.com/apps/test-keyboard/">
+                                <svg width="1.25rem" height="1.25rem" aria-hidden="true" viewBox="0 0 16 16" class="bi bi-keyboard-fill text-warning mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M0 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6zm13 .25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5zM2.25 8a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 3 8.75v-.5A.25.25 0 0 0 2.75 8h-.5zM4 8.25A.25.25 0 0 1 4.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 4 8.75v-.5zM6.25 8a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 7 8.75v-.5A.25.25 0 0 0 6.75 8h-.5zM8 8.25A.25.25 0 0 1 8.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 8 8.75v-.5zM13.25 8a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-.5zm0 2a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-.5zm-3-2a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h1.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-1.5zm.75 2.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5zM11.25 6a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-.5zM9 6.25A.25.25 0 0 1 9.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 9 6.75v-.5zM7.25 6a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 8 6.75v-.5A.25.25 0 0 0 7.75 6h-.5zM5 6.25A.25.25 0 0 1 5.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 5 6.75v-.5zM2.25 6a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h1.5A.25.25 0 0 0 4 6.75v-.5A.25.25 0 0 0 3.75 6h-1.5zM2 10.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5zM4.25 10a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h5.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-5.5z" />
+                                </svg>
+                                Keyboard tester
+                            </a>
+                            <a class="dropdown-item" href="https://www.vietrick.com/apps/js-decrypt/">
+                                <svg width="1.25rem" height="1.25rem" viewBox="0 0 16 16" class="bi bi-file-earmark-binary-fill text-yellow mr-1" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M2 3a2 2 0 0 1 2-2h5.293a1 1 0 0 1 .707.293L13.707 5a1 1 0 0 1 .293.707V13a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3zm7 2V2l4 4h-3a1 1 0 0 1-1-1zm-1.95 5.885c0 1.415-.548 2.206-1.524 2.206C4.548 13.09 4 12.3 4 10.885c0-1.412.548-2.203 1.526-2.203.976 0 1.524.79 1.524 2.203zM5.526 9.273c-.542 0-.832.563-.832 1.612 0 .088.003.173.006.252l1.56-1.143c-.126-.474-.375-.72-.733-.72zm-.732 2.508c.126.472.372.718.732.718.54 0 .83-.563.83-1.614 0-.085-.003-.17-.006-.25l-1.556 1.146zm6.061.624V13h-3v-.595h1.181V9.5h-.05l-1.136.747v-.688l1.19-.786h.69v3.633h1.125z" />
+                                </svg>
+                                JS Decryption
+                            </a>
+                            <a class="dropdown-item" href="https://www.vietrick.com/apps/epub-reader/">
+                                <svg style="color:#8965e0" xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" fill="currentColor" class="bi bi-file-post text-purple mr-1" viewBox="0 0 16 16">
+                                    <path d="M4 3.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-8z" />
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
+                                </svg>
+                                ePUB Reader
+                            </a>
+                            <a class="dropdown-item" href="https://www.vietrick.com/apps/git2jsdelivr/">
+                                <svg width="1.25rem" height="1.25rem" fill="currentColor" class="bi bi-hdd-network-fill text-orange mr-1" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <title />
+                                    <path d="M11.851 0L.811 4.02l1.56 14.7L11.85 24l9.6-5.28 1.74-14.76zm.062 4.622a6.668 6.75 0 0 1 2.666.572 12.507 12.507 0 0 0-2.59 1.95c-.045-.02-.092-.031-.138-.045a1.181 1.181 0 0 0-.346-.056c-.071 0-.141.01-.21.021a8.91 8.91 0 0 1-.615-2.318 6.668 6.75 0 0 1 1.171-.122 6.668 6.75 0 0 1 .062-.002zm-1.99.312a9.763 9.763 0 0 0 .69 2.504 1.213 1.213 0 0 0-.328.825 1.202 1.202 0 0 0 .18.63c-.937 1.294-1.656 2.803-1.905 4.31-.01.056-.013.11-.02.166-.282.09-.515.284-.656.54-.987-.333-1.885-.968-2.615-2.022a6.668 6.75 0 0 1-.026-.515 6.668 6.75 0 0 1 4.68-6.438zm5.507.709a6.668 6.75 0 0 1 2.53 2.9c-.377.953-1.049 1.892-1.893 2.727a1.242 1.242 0 0 0-.644-.184 1.243 1.243 0 0 0-.768.27c-.462-.354-.91-.737-1.318-1.168-.333-.35-.637-.73-.921-1.123.19-.215.31-.494.31-.802 0-.212-.061-.41-.159-.586 1.058-1.008 2.112-1.67 2.863-2.034zm-3.925 1.982a.624.624 0 0 1 .346.114.624.624 0 0 1 .292.524.624.624 0 0 1-.292.524.626.626 0 0 1-.346.113.634.634 0 0 1-.638-.637c0-.355.283-.638.638-.638zm-.441 1.771a1.205 1.205 0 0 0 .675.062c.036.05.075.097.112.148a11.438 11.438 0 0 0 .921 1.119 12.103 12.103 0 0 0 1.446 1.277c-.032.11-.054.224-.054.342a1.236 1.236 0 0 0 .066.38 9.91 9.91 0 0 1-2.118 1.042c-.087.029-.173.052-.261.078a7.735 7.735 0 0 1-1.87.332 1.15 1.15 0 0 0-.66-.773c.004-.024.005-.049.01-.073.219-1.333.873-2.73 1.733-3.934zm7.272.19a6.668 6.75 0 0 1 .245 1.786 6.668 6.75 0 0 1-.259 1.856 9.993 9.993 0 0 1-1.666-.63 1.243 1.243 0 0 0-.065-.713 9.434 9.434 0 0 0 1.745-2.3zm-2.913 2.101c.367 0 .657.291.657.658s-.291.657-.657.657c-.367 0-.658-.29-.658-.657s.29-.658.658-.658zm.837 1.59a10.79 10.79 0 0 0 1.802.688 6.668 6.75 0 0 1-6.149 4.157 6.668 6.75 0 0 1-.062-.004 6.668 6.75 0 0 1-.042 0c-.087-.042-.168-.08-.266-.129-.312-.154-.667-.352-.846-.5a3.796 3.796 0 0 1-1.294-2.03c.21-.111.38-.284.487-.495a8.428 8.428 0 0 0 1.96-.306 9.11 9.11 0 0 0 .513-.154 11.083 11.083 0 0 0 2.341-1.13c.205.143.452.23.719.23a1.248 1.248 0 0 0 .837-.328zm-10.707.116a5.761 5.761 0 0 0 2.212 1.298 1.146 1.146 0 0 0 .857.87 4.602 4.602 0 0 0 1.24 2.222 6.668 6.75 0 0 1-4.31-4.39zm3.327.464c.331 0 .595.263.595.596s-.264.595-.595.595a.59.59 0 0 1-.596-.595.591.591 0 0 1 .596-.596z" /></svg>
+                                GitHub to jsDelivr
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-toggle="dropdown" role="button">
+                            <svg width="1.25rem" height="1.25rem" aria-hidden="true" viewBox="0 0 16 16" class="bi bi-link-45deg" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
+                                <path d="M5.712 6.96l.167-.167a1.99 1.99 0 0 1 .896-.518 1.99 1.99 0 0 1 .518-.896l.167-.167A3.004 3.004 0 0 0 6 5.499c-.22.46-.316.963-.288 1.46z" />
+                                <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z" />
+                                <path d="M10 9.5a2.99 2.99 0 0 0 .288-1.46l-.167.167a1.99 1.99 0 0 1-.896.518 1.99 1.99 0 0 1-.518.896l-.167.167A3.004 3.004 0 0 0 10 9.501z" />
+                            </svg>
+                            <span class="nav-link-inner--text">Get Link</span>
+                            <svg width="0.75rem" height="0.75rem" aria-hidden="true" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="https://www.vietrick.com/apps/get-link-nct/">
+                                <svg width="1.25rem" height="1.25rem" aria-hidden="true" viewBox="0 0 16 16" class="bi bi-music-note-beamed text-primary mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13c0-1.104 1.12-2 2.5-2s2.5.896 2.5 2zm9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2z" />
+                                    <path fill-rule="evenodd" d="M14 11V2h1v9h-1zM6 3v10H5V3h1z" />
+                                    <path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4V2.905z" />
+                                </svg>
+                                Nhaccuatui
+                            </a>
+                            <a class="dropdown-item" href="https://www.vietrick.com/apps/get-link-nhac-vn/">
+                                <svg width="1.25rem" height="1.25rem" aria-hidden="true" viewBox="0 0 16 16" class="bi bi-file-music-fill text-success mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M4 1h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H4z" />
+                                    <path d="M9 11.5c0 .828-.895 1.5-2 1.5s-2-.672-2-1.5.895-1.5 2-1.5 2 .672 2 1.5z" />
+                                    <path fill-rule="evenodd" d="M9 5v6.5H8V5h1z" />
+                                    <path d="M8 4.754a1 1 0 0 1 .725-.961l1.5-.429a1 1 0 0 1 1.275.962V6L8 7V4.754z" />
+                                </svg>
+                                nhac.vn
+                            </a>
+                            <a class="dropdown-item" href="https://www.vietrick.com/apps/get-link-keeng/">
+                                <svg width="1.25rem" height="1.25rem" aria-hidden="true" viewBox="0 0 935.000000 1280.000000" class="bi bi-file-music-fill text-warning mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" stroke="none">
+                                        <path d="M1393 12611 l-1393 -186 0 -6212 0 -6213 98 0 c68 1 514 56 1502 188
+									l1405 188 5 1823 5 1823 270 -354 c149 -194 841 -1099 1539 -2010 l1269 -1658
+									54 0 c37 0 221 42 566 130 282 71 690 175 907 230 217 56 536 137 708 180 171
+									44 455 116 630 161 174 44 334 85 355 90 l38 10 -3 104 -3 103 -1065 1288
+									c-586 708 -1354 1636 -1706 2062 l-642 776 277 330 c152 182 817 977 1476
+									1766 660 789 1241 1484 1292 1545 51 60 89 112 85 116 -4 3 -113 38 -242 77
+									-129 39 -404 123 -610 186 -206 63 -486 148 -621 190 -135 41 -563 172 -951
+									290 -388 119 -709 216 -714 216 -5 -1 -661 -837 -1459 -1859 l-1450 -1858 -3
+									3333 -2 3334 -113 -1 c-84 -1 -462 -48 -1504 -188z" />
+                                    </g>
+                                </svg>
+                                Keeng.vn
+                            </a>
+                            <a class="dropdown-item" href="https://www.vietrick.com/apps/#">
+                                <svg width="1.25rem" height="1.25rem" aria-hidden="true" class="text-red mr-1" fill="currentColor" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <title>YouTube</title>
+                                    <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" />
+                                </svg>
+                                Youtube
+                            </a>
+                            <a class="dropdown-item" href="https://www.vietrick.com/apps/#">
+                                <svg width="1.25rem" height="1.25rem" aria-hidden="true" class="text-primary mr-1" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <title>Facebook icon</title>
+                                    <path d="M23.9981 11.9991C23.9981 5.37216 18.626 0 11.9991 0C5.37216 0 0 5.37216 0 11.9991C0 17.9882 4.38789 22.9522 10.1242 23.8524V15.4676H7.07758V11.9991H10.1242V9.35553C10.1242 6.34826 11.9156 4.68714 14.6564 4.68714C15.9692 4.68714 17.3424 4.92149 17.3424 4.92149V7.87439H15.8294C14.3388 7.87439 13.8739 8.79933 13.8739 9.74824V11.9991H17.2018L16.6698 15.4676H13.8739V23.8524C19.6103 22.9522 23.9981 17.9882 23.9981 11.9991Z" />
+                                </svg>
+                                Facebook
+                            </a>
+                            <a class="dropdown-item" href="https://www.vietrick.com/apps/#">
+                                <svg width="1.25rem" height="1.25rem" aria-hidden="true" class="text-info mr-1" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <title>Google Drive icon</title>
+                                    <path d="M4.433 22.396l4-6.929H24l-4 6.929H4.433zm3.566-6.929l-3.998 6.929L0 15.467 7.785 1.98l3.999 6.931-3.785 6.556zm15.784-.375h-7.999L7.999 1.605h8.002l7.785 13.486h-.003z" />
+                                </svg>
+                                Google Drive PDF
+                            </a>
+                            <a class="dropdown-item" href="https://www.vietrick.com/apps/instagram-downloader">
+                                <svg width="1.25rem" height="1.25rem" aria-hidden="true" class="text-danger mr-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <title>Instagram icon</title>
+                                    <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
+                                </svg>
+                                Instagram
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <hr class="d-lg-none" />
+                <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+                    <li class="nav-item">
+                        <a rel="noopener" class="nav-link nav-link-icon" href="https://www.facebook.com/vietrickdotcom" target="_blank" data-toggle="tooltip" data-original-title="Like us on Facebook">
+                            <i class="fa fa-facebook-square"></i>
+                            <span class="nav-link-inner--text d-lg-none">Facebook</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a rel="noopener" class="nav-link nav-link-icon" href="https://www.instagram.com/vietrickdotcom" target="_blank" data-toggle="tooltip" data-original-title="Follow us on Instagram">
+                            <i class="fa fa-instagram"></i>
+                            <span class="nav-link-inner--text d-lg-none">Instagram</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a rel="noopener" class="nav-link nav-link-icon" href="https://twitter.com/vietrickdotcom" target="_blank" data-toggle="tooltip" data-original-title="Follow us on Twitter">
+                            <i class="fa fa-twitter-square"></i>
+                            <span class="nav-link-inner--text d-lg-none">Twitter</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a rel="noopener" class="nav-link nav-link-icon" href="https://github.com/vietrick/apps" target="_blank" data-toggle="tooltip" data-original-title="Star us on Github">
+                            <i class="fa fa-github"></i>
+                            <span class="nav-link-inner--text d-lg-none">Github</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="main-content">
+        <div class="header bg-gradient-primary pt-6 pb-8 mb--8">
+            <div class="container-fluid container-xl">
+                <div class="header-body">
+                    <div class="row align-items-center pb-4">
+                        <div class="col-lg-6">
+                            <nav aria-label="breadcrumb" class="d-none d-sm-inline-block">
+                                <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item">
+                                        <a itemprop="item" href="/"><span itemprop="name">
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-fill mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                                                    <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+                                                </svg>
+                                                Vietrick</span></a>
+                                        <meta itemprop="position" content="1" />
+                                    </li>
+                                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item">
+                                        <a itemscope itemtype="https://schema.org/WebPage" itemprop="item" itemid="https://www.vietrick.com/apps/" href="https://www.vietrick.com/apps/"><span itemprop="name">Apps</span></a>
+                                        <meta itemprop="position" content="2" />
+                                    </li>
+                                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item active" aria-current="page">
+                                        <span itemprop="name">ePub Reader</span>
+                                        <meta itemprop="position" content="3" />
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="separator separator-bottom separator-skew zindex-100">
+                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <polygon class="fill-secondary" points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+        </div>
+        <div class="container-fluid container-xl content-wrapper">
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow-lg">
+                        <div id="reader-container" class="card-body">
+                            <div class="app">
+                                <div class="dictionary-wrapper hidden">
+                                    <div class="dictionary"></div>
+                                </div>
+                                <div class="sidebar-wrapper out">
+                                    <div class="sidebar">
+                                        <div class="tab-list">
+                                            <a data-tab="toc" class="item">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list-ol" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z" />
+                                                    <path d="M1.713 11.865v-.474H2c.217 0 .363-.137.363-.317 0-.185-.158-.31-.361-.31-.223 0-.367.152-.373.31h-.59c.016-.467.373-.787.986-.787.588-.002.954.291.957.703a.595.595 0 0 1-.492.594v.033a.615.615 0 0 1 .569.631c.003.533-.502.8-1.051.8-.656 0-1-.37-1.008-.794h.582c.008.178.186.306.422.309.254 0 .424-.145.422-.35-.002-.195-.155-.348-.414-.348h-.3zm-.004-4.699h-.604v-.035c0-.408.295-.844.958-.844.583 0 .96.326.96.756 0 .389-.257.617-.476.848l-.537.572v.03h1.054V9H1.143v-.395l.957-.99c.138-.142.293-.304.293-.508 0-.18-.147-.32-.342-.32a.33.33 0 0 0-.342.338v.041zM2.564 5h-.635V2.924h-.031l-.598.42v-.567l.629-.443h.635V5z" />
+                                                </svg>
+                                            </a>
+                                            <a data-tab="search" class="item">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                                </svg>
+                                            </a>
+                                            <a data-tab="info" class="item">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                </svg>
+                                            </a>
+                                            <a data-tab="settings" class="item">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                                                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="tab-container">
+                                            <div class="tab" data-tab="toc">
+                                                <div class="toc-list"></div>
+                                            </div>
+                                            <div class="tab search" data-tab="search">
+                                                <div class="search-bar">
+                                                    <input type="text" autocomplete="off" placeholder="Search book..." class="search-box">
+                                                    <button class="search-button">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <div class="search-results"></div>
+                                            </div>
+                                            <div class="tab info" data-tab="info">
+                                                <div class="cover-wrapper">
+                                                    <img src alt class="cover">
+                                                </div>
+                                                <div class="title"></div>
+                                                <div class="series-info">
+                                                    <span class="series-name"></span>
+                                                    <span class="divider"> - </span>
+                                                    <span class="series-index"></span>
+                                                </div>
+                                                <div class="author"></div>
+                                                <div class="description"></div>
+                                            </div>
+                                            <div class="tab settings" data-tab="settings">
+                                                <div class="setting">
+                                                    <div class="setting-label">Themes</div>
+                                                    <div class="setting-content theme chips" data-chips="theme">
+                                                        <div class="theme chip" style="background: #fff; color: #000;" data-default="true" data-value="#fff;#000">A</div>
+                                                        <div class="theme chip" style="background: #000; color: #fff;" data-value="#000;#fff">A</div>
+                                                        <div class="theme chip" style="background: #333; color: #eee;" data-value="#333;#eee">A</div>
+                                                        <div class="theme chip" style="background: #f5deb3; color: #000;" data-value="#f5deb3;#000">A</div>
+                                                        <div class="theme chip" style="background: #111; color: #f5deb3;" data-value="#111;#f5deb3">A</div>
+                                                        <div class="theme chip" style="background: #111b21; color: #e8e8e8;" data-value="#111b21;#e8e8e8">A</div>
+                                                    </div>
+                                                </div>
+                                                <div class="setting">
+                                                    <div class="setting-label">Font</div>
+                                                    <div class="setting-content font chips" data-chips="font">
+                                                        <div class="font chip" style="font-family: 'Arial', Arimo, Liberation Sans, sans-serif;" data-value="'Arial', Arimo, Liberation Sans, sans-serif">Arial</div>
+                                                        <div class="font chip" style="font-family: 'Lato', sans-serif;" data-value="'Lato', sans-serif">Lato</div>
+                                                        <div class="font chip" style="font-family: 'Times New Roman', Tinos, Liberation Serif, Times, serif;" data-value="'Times New Roman', Tinos, Liberation Serif, Times, serif" data-default="true">Times New Roman</div>
+                                                        <div class="font chip" style="font-family: 'Merriweather', serif;" data-value="'Merriweather', serif">Merriweather</div>
+                                                    </div>
+                                                </div>
+                                                <div class="setting">
+                                                    <div class="setting-label">Font Size</div>
+                                                    <div class="setting-content font-size chips" data-chips="font-size">
+                                                        <div class="size chip" style="font-size: 8pt" data-value="8pt">8</div>
+                                                        <div class="size chip" style="font-size: 9pt" data-value="9pt">9</div>
+                                                        <div class="size chip" style="font-size: 10pt" data-value="10pt">10</div>
+                                                        <div class="size chip" style="font-size: 11pt" data-default="true" data-value="11pt">11</div>
+                                                        <div class="size chip" style="font-size: 12pt" data-value="12pt">12</div>
+                                                        <div class="size chip" style="font-size: 14pt" data-value="14pt">14</div>
+                                                        <div class="size chip" style="font-size: 16pt" data-value="16pt">16</div>
+                                                        <div class="size chip" style="font-size: 18pt" data-value="18pt">18</div>
+                                                    </div>
+                                                </div>
+                                                <div class="setting">
+                                                    <div class="setting-label">Line Spacing</div>
+                                                    <div class="setting-content line-spacing chips" data-chips="line-spacing">
+                                                        <div class="size chip" data-value="1">1</div>
+                                                        <div class="size chip" data-value="1.2">1.2</div>
+                                                        <div class="size chip" data-value="1.4">1.4</div>
+                                                        <div class="size chip" data-default="true" data-value="1.6">1.6</div>
+                                                        <div class="size chip" data-value="1.8">1.8</div>
+                                                        <div class="size chip" data-value="2">2</div>
+                                                        <div class="size chip" data-value="2.3">2.3</div>
+                                                        <div class="size chip" data-value="2.6">2.6</div>
+                                                        <div class="size chip" data-value="3">3</div>
+                                                    </div>
+                                                </div>
+                                                <div class="setting">
+                                                    <div class="setting-label">Margin</div>
+                                                    <div class="setting-content margin chips" data-chips="margin">
+                                                        <div class="size chip" data-value="0">0</div>
+                                                        <div class="size chip" data-value="1px">1px</div>
+                                                        <div class="size chip" data-value="2px">2px</div>
+                                                        <div class="size chip" data-value="3px">3px</div>
+                                                        <div class="size chip" data-value="4px">4px</div>
+                                                        <div class="size chip" data-default="true" data-value="5px">5px</div>
+                                                        <div class="size chip" data-value="7px">7px</div>
+                                                        <div class="size chip" data-value="9px">9px</div>
+                                                        <div class="size chip" data-value="12px">12px</div>
+                                                        <div class="size chip" data-value="15px">15px</div>
+                                                    </div>
+                                                </div>
+                                                <div class="setting">
+                                                    <div class="setting-label">Progress Display</div>
+                                                    <div class="setting-content progress chips" data-chips="progress">
+                                                        <div class="chip" data-value="location" data-default="true">Location</div>
+                                                        <div class="chip" data-value="percentage" data-default="true">Percentage</div>
+                                                        <div class="chip" data-value="chapter" data-default="true">Chapter</div>
+                                                        <div class="chip" data-value="bar" data-default="true">Bar</div>
+                                                        <div class="chip" data-value="none" data-default="true">None</div>
+                                                    </div>
+                                                </div>
+                                                <div class="setting">
+                                                    <div class="setting-label">Fullscreen</div>
+                                                    <div class="setting-content">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrows-fullscreen" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
+                                                        </svg>
+                                                        <a href="javascript:ePubViewer.doFullscreen();">Fullscreen</a>
+                                                    </div>
+                                                </div>
+                                                <div class="setting">
+                                                    <div class="setting-label">Reset</div>
+                                                    <div class="setting-content">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
+                                                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
+                                                        </svg>
+                                                        <a href="javascript:void(0);" onclick="if(confirm('Are you sure?')){localStorage.clear();window.location.reload();}">Reset All</a>
+                                                    </div>
+                                                </div>
+                                                <div class="setting">
+                                                    <div class="setting-label">About</div>
+                                                    <div class="setting-content">
+                                                        ePubViewer v3.1.0
+                                                        <br /> Copyright 2019
+                                                        <a href="#">Patrick Gaskin</a>
+                                                        <br /> This app requires Microsoft Edge 15+, Mozilla Firefox 50+, Chrome 50+, or Safari 10+.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="error hidden">
+                                    <div class="error-title"></div>
+                                    <div class="error-description"></div>
+                                    <div class="error-info"></div>
+                                    <div class="error-dump"></div>
+                                </div>
+                                <div class="bar">
+                                    <div class="left">
+                                        <button class="open">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="title">
+                                        <span class="book-title"></span>
+                                        <span class="divider"> - </span>
+                                        <span class="book-author"></span>
+                                    </div>
+                                    <div class="right">
+                                        <button class="sidebar-button hidden" onclick="ePubViewer.doSidebar()">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-menu-app" viewBox="0 0 16 16">
+                                                <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h2A1.5 1.5 0 0 1 5 1.5v2A1.5 1.5 0 0 1 3.5 5h-2A1.5 1.5 0 0 1 0 3.5v-2zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-2zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="book-outer">
+                                    <div class="book">
+                                        <div class="empty-wrapper">
+                                            <div class="empty">
+                                                <div class="app-name">ePUB Reader</div>
+                                                <div class="message">
+                                                    <p>Read ePUB eBooks online</p>
+                                                    Unknown error. If this message does not disappear in a few seconds, try using a different browser (Chrome or Firefox), and
+                                                    if the issue still persists,
+                                                    <a rel="nofollow" href="https://github.com/vietrick/ePubViewer">report it here</a>.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ads-wrap">
+                                        <div class="book-ads">
+                                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3778523089348908" data-ad-slot="9527769993"></ins>
+                                            <script>
+                                            (adsbygoogle = window.adsbygoogle || []).push({});
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bar">
+                                    <div class="left">
+                                        <button class="prev hidden">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="loc"></div>
+                                    <div class="right">
+                                        <button class="next hidden">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="py-5" id="footer-main">
+        <div class="container">
+            <div class="row align-items-center justify-content-xl-between">
+                <div class="col-xl-6">
+                    <div class="copyright text-center text-xl-left text-muted">
+                        &copy; 2021 <a href="https://www.vietrick.com" class="font-weight-bold ml-1" target="_blank">Vietrick</a>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+                        <li class="nav-item">
+                            <a href="https://www.vietrick.com/about" class="nav-link" target="_blank">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://www.vietrick.com/privacy" class="nav-link" target="_blank">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://www.vietrick.com/disclaimer" class="nav-link" target="_blank">Disclaimer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://www.vietrick.com/contact" class="nav-link" target="_blank">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script async="async" src="https://www.vietrick.com/apps/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer="defer">
+    var darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    handleDarkmode(darkModeMediaQuery);
+
+    function handleDarkmode(e) {
+        var darkModeOn = e.matches; // true if dark mode is enabled
+        var favicon = document.querySelector('link[rel="shortcut icon"]'); // get favicon-192.png element
+        var favicon32 = document.querySelector('link[sizes="32x32"]'); // get favicon.ico element
+        var favicon16 = document.querySelector('link[sizes="16x16"]'); // get favicon.ico element
+        if (!favicon || !favicon32) {
+            return; // where are our favicon elements???
+        }
+        // replace icons with dark/light themes as appropriate
+        if (darkModeOn) {
+            favicon.href = '/favicon-dark.ico';
+            favicon32.href = '/favicon-dark-32x32.png';
+            favicon16.href = '/favicon-dark-16x16.png';
+        } else {
+            favicon.href = '/favicon.ico';
+            favicon32.href = '/favicon-32x32.png';
+            favicon16.href = '/favicon-16x16.png';
+        }
+    }
+    darkModeMediaQuery.addListener(handleDarkmode);
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VSVCK7N9L3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-VSVCK7N9L3');
+    </script>
+    <script>
+    function isIE(userAgent) {
+        userAgent = userAgent || navigator.userAgent;
+        return userAgent.indexOf("MSIE ") > -1 || userAgent.indexOf("Trident/") > -1;
+    }
+    if (isIE()) alert("ePub Reader does not support Internet Explorer. Please use Chrome or Firefox.");
+    </script>
+    <script>
+    if ('serviceWorker' in navigator) window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then(reg => {
+            reg.onupdatefound = () => {
+                const installingWorker = reg.installing;
+                installingWorker.onstatechange = () => {
+                    if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        location.reload();
+                    }
+                };
+            };
+        })
+    });
+    try {
+        window.caches.keys().then(keys => console.log("caches: " + keys.join(", "))).catch(err => console.log("error checking cache version"));
+    } catch (err) {}
+    </script>
+    <script defer src="https://www.vietrick.com/apps/epub-reader/polyfills/babel-polyfill.min.js"></script>
+    <script src="https://www.vietrick.com/apps/epub-reader/polyfills/fetch.js"></script>
+    <script defer src="https://www.vietrick.com/apps/epub-reader/polyfills/pep.min.js"></script>
+    <script defer src="https://www.vietrick.com/apps/epub-reader/libs/sanitize-html.min.js"></script>
+    <script defer src="https://www.vietrick.com/apps/epub-reader/libs/jszip.min.js"></script>
+    <script defer src="https://www.vietrick.com/apps/epub-reader/libs/epub.min.js"></script>
+    <script src="https://www.vietrick.com/apps/epub-reader/script.min.js"></script>
+</body>
+
+</html>

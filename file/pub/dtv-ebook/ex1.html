@@ -13,21 +13,21 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="https://www.dtv-ebook.com/templates/default/epub/css/normalize.css">
-    <link rel="stylesheet" href="https://www.dtv-ebook.com/templates/default/epub/css/main.css">
-    <link rel="stylesheet" href="https://www.dtv-ebook.com/templates/default/epub/css/popup.css">
+    <link rel="stylesheet" href="epub/css/normalize.css">
+    <link rel="stylesheet" href="epub/css/main.css">
+    <link rel="stylesheet" href="epub/css/popup.css">
     <!-- <script src="https://www.dtv-ebook.com/templates/default/epub/js/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script> -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://www.dtv-ebook.com/templates/default/epub/js/localforage.js"></script>
+    <script src="epub/js/localforage.js"></script>
     <!-- Full Screen -->
-    <script src="https://www.dtv-ebook.com/templates/default/epub/js/screenfull.min.js"></script>
-    <script src="https://www.dtv-ebook.com/templates/default/epub/js/libs/zip.min.js"></script>
+    <script src="epub/js/screenfull.min.js"></script>
+    <script src="epub/js/libs/zip.min.js"></script>
     <!-- Render -->
-    <script src="https://www.dtv-ebook.com/templates/default/epub/js/epub.js"></script>
+    <script src="epub/js/epub.js"></script>
     <!-- Hooks -->
-    <script src="https://www.dtv-ebook.com/templates/default/epub/js/hooks.js"></script>
+    <script src="epub/js/hooks.js"></script>
     <!-- Reader -->
-    <script src="https://www.dtv-ebook.com/templates/default/epub/js/reader.js"></script>
+    <script src="epub/js/reader.js"></script>
     <script>
         "use strict";
 
@@ -40,12 +40,12 @@
                 return false;
             }
             jQuery( window ).resize(function() {
-                CenterBtnBuyit();
+                // CenterBtnBuyit();
             });
             document.onreadystatechange = function () {
               if (document.readyState == "complete") {
 
-                  CenterBtnBuyit();
+                  // CenterBtnBuyit();
 
                 localforage.config({
                     name: 'DTV-EBOOK Reader V1'
@@ -65,8 +65,9 @@
                 }
                 if ( typeof iBId !== 'undefined' && iBId > -1 ) {
 
-                    window.reader = ePubReader("https://s3.amazonaws.com/epubjs/books/alice.epub",{
-                    });
+                    window.reader = ePubReader("https://s3.amazonaws.com/epubjs/books/alice.epub",{});
+
+                    // window.reader = ePubReader("https://www.dtv-ebook.com/images/files_2/2020/99-truyen-cuoi-xa-stress-thieu-nhi-nguyen-gia.epub",{});
                 }
                 
                 jQuery('#copywrite').html('<blockquote><p>Đang xử lý…</p></blockquote>');
