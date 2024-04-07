@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor.js Example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest/dist/editor.min.css">
+</head>
+<body>
+    <div id="editorjs"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script type="module">
+        import Header from 'https://dev.jspm.io/@editorjs/header'
+        import List from 'https://dev.jspm.io/@editorjs/list'
+        import Image from 'https://dev.jspm.io/@editorjs/image'
+
+        const editor = new EditorJS({
+            holder: 'editorjs',
+            autofocus: true,
+            tools: {
+                header: {
+                    class: Header,
+                    inlineToolbar: true
+                },
+                list: {
+                    class: List,
+                    inlineToolbar: true
+                },
+                paragraph: {
+                    inlineToolbar: true
+                },
+                image: {
+                    class: Image,
+                    inlineToolbar: true
+                },
+                text: {
+                    class: Text,
+                    config: {
+                        tunes: ['color', 'fontSize']
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
