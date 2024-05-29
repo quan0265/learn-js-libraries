@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Splide.js Example</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css"
+        />
+    </head>
+    <body>
+        <div id="splide" class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">Slide 1</li>
+                    <li class="splide__slide">Slide 2</li>
+                    <li class="splide__slide">Slide 3</li>
+                </ul>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                new Splide("#splide", {
+                    type: "loop",
+                    perPage: 2,
+                    autoplay: true,
+                    // gap: '20px',
+                    pagination: true,
+                    arrows: true,
+                    breakpoints: {
+                        1024: {
+                            perPage: 2,
+                        },
+                        768: {
+                            perPage: 1,
+                            gap: '0px',
+                        }
+                    }
+                }).mount();
+            });
+        </script>
+    </body>
+</html>
