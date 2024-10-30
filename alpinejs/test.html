@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD with Alpine.js</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .note { margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <div x-data="noteApp()">
+        <h1>Notes</h1>
+        <input type="text" x-model="newNote" placeholder="Add a new note" />
+        <button @click="addNote">Add Note</button>
+    
+        <div class="notes">
+            <template x-for="(note, index) in notes" :key="index">
+                <div class="note">
+                    <span x-text="note"></span>
+                    <button @click="editNote(index)">Edit</button>
+                    <button @click="deleteNote(index)">Delete</button>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <div x-data="{ count: 0 }">
+        <button @click="count++">Increase</button>
+        <span x-text="count"></span>
+    </div>
+
+
+    <script>
+        function noteApp() {
+            return {
+                newNote: '',
+                notes: [],
+                addNote() {
+                    if (this.newNote.trim() === '') return;
+                    this.notes.push(this.newNote);
+                    this.newNote = '';
+                },
+                editNote(index) {
+                    this.newNote = this.notes[index];
+                    this.deleteNote(index);
+                },
+                deleteNote(index) {
+                    this.notes.splice(index, 1);
+                }
+            };
+        }
+    </script>
+
+</body>
+</html>
